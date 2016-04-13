@@ -1,0 +1,76 @@
+<div class="container">
+
+    <div class="page-header">
+        <h1>Update Project</h1>
+    </div>
+
+    <form class="form-horizontal" name="editProjectForm">
+        <fieldset>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Edit Project<span class="fa fa-edit pull-right bigicon"></span></h4>
+                    </div>
+                    <div class="panel-body text-center">
+                        <div class="form-group">
+                            <label for="edit-project-name" class="col-md-2 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="text" name="projectName" class="form-control" id="edit-project-name"
+                                       data-ng-model="currentProject.Name" data-ng-required="required" placeholder="Project Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-project-description" class="col-md-2 control-label">Description</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" id="edit-project-description"
+                                          data-ng-model="currentProject.Description" data-ng-required="required"
+                                          placeholder="Project Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="project-edit-project-key" class="col-md-2 control-label">Project Key</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="project-edit-project-key"
+                                       data-ng-model="currentProject.ProjectKey" data-ng-required="required" placeholder="Project Key">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-project-leader" class="col-md-2 control-label">Leader</label>
+                            <div class="col-md-9">
+                                <select name="leadId" data-ng-model="currentProject.Lead.Id" id="edit-project-leader"
+                                        class="form-control" required="required">
+                                    <option value="currentProject.Lead.Id" selected="selected">{{currentProject.Lead.Name}}</option>
+                                    <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-project-priorities" class="col-md-2 control-label">Priorities</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="edit-project-priorities"
+                                       data-ng-model="currentProject.Priorities" data-ng-required="required" placeholder="Priorities">
+                                <p class="text-left small">(separated by comma)</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-project-labels" class="col-md-2 control-label">Labels</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="edit-project-labels"
+                                       data-ng-model="currentProject.Labels" data-ng-required="required" placeholder="Labels">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-2">
+                                <button id="button-add-project"
+                                        data-ng-disabled="editProjectForm.$invalid ||
+                                        editProjectForm.projectName.$invalid"
+                                        data-ng-click="editProject(currentProject)"
+                                        class="btn btn-primary">Update Project</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

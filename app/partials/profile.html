@@ -1,0 +1,32 @@
+<div class="page-header">
+    <h1>Profile</h1>
+</div>
+
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-10 col-md-2 thumbnail">
+                    <img ng-if="currentLoggedInUser.ProfileImage" data-ng-src="currentLoggedInUser.ProfileImage" alt="profile-image" class="profile-image">
+                    <img ng-if="!currentLoggedInUser.ProfileImage" data-ng-src="../img/default-no-profile-pic.jpg" alt="profile-image" class="profile-image">
+                </div>
+                <div class="col-md-3">
+                    Username: {{currentLoggedInUser.Username}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Navigation box for logged in normal users (not admins) -->
+        <div ng-if="authService.isAuthenticated()" class="col-md-2 box">
+            <h2>Navigation</h2>
+            <ul class="sidebar-menu">
+                <li><a href="#/profile/password">Edit Password</a></li>
+            </ul>
+        </div>
+        <!-- Navigation box for logged in admins -->
+        <!-- TODO: Implement Admin menu-->
+        <div class="col-md-10"></div>
+    </div>
+</div>

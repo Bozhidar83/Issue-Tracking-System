@@ -1,0 +1,120 @@
+body {
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+footer {
+    position: fixed;
+    height: 40px;
+    bottom: 0;
+    width: 100%;
+}
+
+.error {
+    color: red;
+}
+
+#app-header {
+    text-align: center;
+}
+
+a {
+    cursor: pointer;
+}
+
+#username-info {
+    cursor: auto;
+}
+
+#button-login, #button-register, #button-edit-password, #button-add-project {
+    width: 100%;
+}
+
+/*Profile sidebar*/
+.box {
+    /*width: 100%;*/
+    display: block;
+    background: #A9D18E;
+    border: #507E32 1px solid;
+    margin: 15px 0;
+    padding: 10px;
+    box-shadow: rgba(80, 126, 50, 0.5) 0.5px 0.5px 3px;
+}
+
+.box h1 {
+    margin: 0 0 10px 0;
+    font-size: 18pt;
+    font-weight: bold;
+    color: black;
+    text-shadow: rgba(255, 255, 255, 0.5) 0.3px 0.3px 1px;
+}
+
+.box h2 {
+    margin: 0 0 10px 0;
+    font-size: 16pt;
+    font-weight: bold;
+    color: black;
+    text-shadow: rgba(255, 255, 255, 0.5) 0.3px 0.3px 1px;
+}
+
+ul.sidebar-menu {
+    padding: 0px 5px;
+}
+
+ul.sidebar-menu li {
+    list-style-type: none;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0);
+    padding: 2px;
+    color: #1c381c;
+}
+
+ul.sidebar-menu li:hover {
+    background: #c64abc; ;
+}
+
+ul.sidebar-menu li.special {
+    font-style: italic;
+}
+
+ul.sidebar-menu li.selected {
+    background: #DAA600;
+    border: 1px solid #7F6000;
+}
+
+ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
+    outline: none;
+    display: block;
+    text-decoration: none;
+    color: #1c381c;
+}
+
+/*Profile Image*/
+.profile-image img {
+    width: 100%;
+}
+
+/*Dashboard projects panel*/
+.panel-body.dashboard {
+    padding: 0;
+}
+.panel-body.dashboard a {
+    display: block;
+    width: 100%;
+    padding: 15px;
+}
+
+.panel-body.dashboard a:hover {
+    background-color: #7f9905;
+}
+
+/* Projects page*/
+.table.table-bordered.all-projects thead tr th:nth-child(3) {
+    /*Implement 'Back to Top'*/
+    word-wrap: break-word;
+}
+
+
+
+/* Test login-register icons*/
+

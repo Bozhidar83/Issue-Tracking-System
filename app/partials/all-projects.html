@@ -1,16 +1,14 @@
 <div class="container">
-
     <div class="page-header">
         <h1>Projects</h1>
     </div>
-
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="text-center">Issue Tracking System Projects <span class="fa fa-edit pull-right bigicon"></span></h4>
             </div>
             <div class="panel-body text-center">
-                <table class="table table-bordered table-striped table-responsive all-projects">
+                <table id="all-projects" class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th class="col-md-2">Project Name</th>
@@ -24,7 +22,7 @@
                         <tr data-ng-repeat="project in allProjects">
                             <td>{{project.Name}}</td>
                             <td>{{project.ProjectKey}}</td>
-                            <td>{{project.Description}}</td>
+                            <td class="all-projects-description">{{project.Description}}</td>
                             <td>{{project.Lead.Username}}</td>
                             <td>
                                 <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>

@@ -38,7 +38,7 @@ a {
     border: #507E32 1px solid;
     margin: 15px 0;
     padding: 10px;
-    box-shadow: rgba(80, 126, 50, 0.5) 0.5px 0.5px 3px;
+    box-shadow: rgba(80, 126, 50, 0.5) 1px 1px 3px;
 }
 
 .box h1 {
@@ -46,7 +46,7 @@ a {
     font-size: 18pt;
     font-weight: bold;
     color: black;
-    text-shadow: rgba(255, 255, 255, 0.5) 0.3px 0.3px 1px;
+    text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 1px;
 }
 
 .box h2 {
@@ -54,11 +54,11 @@ a {
     font-size: 16pt;
     font-weight: bold;
     color: black;
-    text-shadow: rgba(255, 255, 255, 0.5) 0.3px 0.3px 1px;
+    text-shadow: rgba(255, 255, 255, 0.5) 1px 1px 1px;
 }
 
 ul.sidebar-menu {
-    padding: 0px 5px;
+    padding: 0 5px;
 }
 
 ul.sidebar-menu li {
@@ -109,12 +109,13 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 }
 
 /* Projects page*/
-.table.table-bordered.all-projects thead tr th:nth-child(3) {
-    /*Implement 'Back to Top'*/
+#all-projects thead {
+    background-color: greenyellow;
+}
+.all-projects-description {
+    word-break: break-all;
     word-wrap: break-word;
 }
-
-
 
 /* Test login-register icons*/
 

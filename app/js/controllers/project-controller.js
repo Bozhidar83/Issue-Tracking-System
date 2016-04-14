@@ -73,6 +73,7 @@
                                 }
                             }
                             project.Labels = labelsAsString;
+                            project.LabelsAsArray = labels;
                             
                             var priorities = project.Priorities;
                             var prioritiesAsString = '';

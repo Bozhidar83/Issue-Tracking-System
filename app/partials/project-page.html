@@ -1,0 +1,74 @@
+<div class="page-header">
+    <h1 class="alert-warning">{{currentProject.Name}}</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <div class="page-header"><h3>Project Info</h3></div>
+            <div class="panel panel-default">
+                <div class="panel-body project-page">
+                    <div class="row">
+                        <label for="project-page-name">Name: </label>
+                        <span id="project-page-name">{{currentProject.Name}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="project-page-name">Project Key: </label>
+                        <span id="project-page-project-key">{{currentProject.ProjectKey}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="project-page-description">Description: </label>
+                        <span id="project-page-description">{{currentProject.Description}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="project-page-name">Leader: </label>
+                        <span id="project-page-leader">{{currentProject.Lead.Username}}</span>
+                    </div>
+                    <div class="row">
+                        <label>Labels: </label>
+                        <span class="project-page-labels label label-info"
+                              data-ng-if="currentProject.LabelsAsArray"
+                              ng-repeat="label in currentProject.LabelsAsArray">{{label.Name}}&nbsp;</span>
+                        <span data-ng-if="!currentProject.Labels">No labels available</span>
+                    </div>
+                    <div class="row">
+                        <label for="project-page-priorities">Priorities: </label>
+                        <span id="project-page-priorities">{{currentProject.Priorities}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
+            <a href="#/projects/{{currentProject.Id}}/edit" class="btn btn-primary">Edit</a>
+            <a href="#/projects/{{currentProject.Id}}/add-issue" data-ng-click="open('lg')" class="btn btn-primary">Add Issue</a>
+        </div>
+    </div>
+    <div class="col-md-7 col-md-offset-1">
+        <div class="page-header"><h3>Project Issues</h3></div>
+        <div>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Due Date</th>
+                    <th>Assignee</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- TODO: Implement logic for issues-->
+                <tr data-ng-repeat="issue in userRelatedIssues.Issues">
+                    <td>
+                        <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                    </td>
+                    <td>{{issue.Description}}</td>
+                    <td>
+                        <a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a>
+                    </td>
+                    <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -35,6 +35,10 @@
                 templateUrl: 'partials/edit-project.html',
                 controller: 'ProjectController'
             })
+            .when('/projects/:id', {
+                templateUrl: 'partials/project-page.html',
+                controller: 'ProjectController'
+            })
             .otherwise({redirectTo: '/'});
     }
 
@@ -56,7 +60,6 @@
 
         if (authService.isAuthenticated()) {
             // For keep user info while visiting different pages of the app
-            //var cookie = $cookies.get('authentication');
             $http.defaults.headers.common.Authorization = TOKEN_TYPE + $cookies.get('authentication');
             authService.identity()
                 .then(function (userData) {

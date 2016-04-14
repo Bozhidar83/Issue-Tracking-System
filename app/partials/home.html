@@ -1,4 +1,2 @@
-<div>{{hi}}</div>
-<div>{{hi}}</div>
-<div>{{hi}}</div>
-<div>{{hi}}</div>
+<div class="container" data-ng-if="!authService.isAuthenticated()" data-ng-include="'partials/home-visitors.html'"></div>
+<div class="container" data-ng-if="authService.isAuthenticated()" data-ng-include="'partials/dashboard.html'"></div>

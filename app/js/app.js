@@ -4,7 +4,7 @@
     function config($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: 'partials/dashboard.html',
+                templateUrl: 'partials/home.html',
                 controller: 'HomeController'
             })
             .when('/register', {
@@ -63,6 +63,7 @@
             $http.defaults.headers.common.Authorization = TOKEN_TYPE + $cookies.get('authentication');
             authService.identity()
                 .then(function (userData) {
+                    // Can display 'Welcome back' message
                     //notifyService.showInfo('Welcome back, ' + userData.Username + '!');
             });
         }

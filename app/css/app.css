@@ -26,7 +26,7 @@ a {
     cursor: auto;
 }
 
-#button-login, #button-register, #button-edit-password, #button-add-project {
+#button-login, #button-register, #button-edit-password, #button-add-project, #button-add-issue {
     width: 100%;
 }
 

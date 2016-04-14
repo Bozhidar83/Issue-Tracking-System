@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Add Issue</h1>
+    </div>
+    <form class="form-horizontal" name="addNewIssueForm">
+        <fieldset>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">New Issue<span class="fa fa-edit pull-right bigicon"></span></h4>
+                    </div>
+                    <div class="panel-body text-center">
+                        <div class="form-group">
+                            <label for="issue-title" class="col-md-2 control-label">Title</label>
+                            <div class="col-md-9">
+                                <input type="text" name="issueTitle" class="form-control" id="issue-title" data-ng-model="issue.Title" data-ng-required="required" placeholder="Issue Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-description" class="col-md-2 control-label">Description</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="issueDescription" id="issue-description" data-ng-model="issue.Description" data-ng-required="required" placeholder="Issue Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="available-projects" class="col-md-2 control-label">Project</label>
+                            <div class="col-md-9">
+                                <select name="issueProject" data-ng-model="issue.ProjectId" id="available-projects" class="form-control" required="required">
+                                    <option value="" selected="selected">-- Select Project --</option>
+                                    <option value="{{project.Id}}" data-ng-repeat="project in allProjects">{{project.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-assignee" class="col-md-2 control-label">Assignee</label>
+                            <div class="col-md-9">
+                                <select name="assigneeId" data-ng-model="issue.AssigneeId" id="issue-assignee" class="form-control" required="required">
+                                    <option value="" selected="selected">-- Select Assignee --</option>
+                                    <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-priority" class="col-md-2 control-label">Priority</label>
+                            <div class="col-md-9">
+                                <select name="priorityId" data-ng-model="issue.PriorityId" id="issue-priority" class="form-control" required="required">
+                                    <option value="" selected="selected">-- Available Priorities --</option>
+                                    <option value="{{priority.Id}}" data-ng-repeat="priority in currentProject.Priorities">{{priority.Name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-duedate" class="col-md-2 control-label">Due Date</label>
+                            <div class="col-md-9">
+                                <input type="date" name="issueDueDate" class="form-control" id="issue-duedate" data-ng-model="issue.DueDate" data-ng-required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="issue-labels" class="col-md-2 control-label">Labels</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="issue-labels" data-ng-model="issue.Labels" data-ng-required="required" placeholder="Labels">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-2">
+                                <button id="button-add-issue"
+                                        data-ng-disabled="addNewIssueForm.$invalid ||
+                                        addNewIssueForm.$dirty &&
+                                        (addNewIssueForm.issueTitle.$pristine || addNewIssueForm.issueDescription.$pristine ||
+                                        addNewIssueForm.issueProject.$pristine ||
+                                        addNewIssueForm.assigneeId.$pristine ||
+                                        addNewIssueForm.priorityId.$pristine ||
+                                        addNewIssueForm.issueDueDate.$pristine)"
+                                        data-ng-click="createNewIssue(issue)"
+                                        class="btn btn-primary">Create Issue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

@@ -6,11 +6,18 @@
             '$scope',
             '$location',
             'authService',
+            'userProfileService',
             'identity',
             'notifyService',
-            function AppController($scope, $location, authService, identity, notifyService) {
+            function AppController($scope, $location, authService, userProfileService, identity, notifyService) {
                 // Put the authService in the $scope to make it accessible from all screens
                 $scope.authService = authService;
+
+                // To choose from drop down when create new project or add new issue
+                userProfileService.getAllUsers()
+                    .then(function(users) {
+                        $scope.allUsers = users;
+                    });
 
                 waitForLogin();
 

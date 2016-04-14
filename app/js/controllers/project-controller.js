@@ -16,12 +16,6 @@
                         $scope.allProjects = projects;
                     });
 
-                // To choose from drop down when create new project
-                userProfileService.getAllUsers()
-                    .then(function(users) {
-                        $scope.allUsers = users;
-                    });
-
                 $scope.createNewProject = function(project) {
                     //debugger;
                     // Set priorities in accepted from back-end form

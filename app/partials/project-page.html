@@ -1,11 +1,10 @@
 <div class="page-header">
     <h1 class="alert-warning">{{currentProject.Name}}</h1>
 </div>
-
 <div class="row">
     <div class="col-md-4">
         <div class="row">
-            <div class="page-header"><h3>Project Info</h3></div>
+            <div class="page-header"><h3 class="text-center">Project Info</h3></div>
             <div class="panel panel-default">
                 <div class="panel-body project-page">
                     <div class="row">
@@ -40,12 +39,13 @@
         </div>
         <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
             <a href="#/projects/{{currentProject.Id}}/edit" class="btn btn-primary">Edit</a>
-            <a href="#/projects/{{currentProject.Id}}/add-issue" data-ng-click="open('lg')" class="btn btn-primary">Add Issue</a>
+            <a href="#/projects/{{currentProject.Id}}/add-issue" data-ng-click="open()" class="btn btn-primary">Add Issue</a>
         </div>
     </div>
     <div class="col-md-7 col-md-offset-1">
-        <div class="page-header"><h3>Project Issues</h3></div>
-        <div>
+        <div class="page-header"><h3 class="text-center">Project Issues</h3></div>
+        <div class="text-center" data-ng-if="!currentProject.Issues.length">No issues added to the project.</div>
+        <div data-ng-if="currentProject.Issues.length">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -56,16 +56,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <!-- TODO: Implement logic for issues-->
-                <tr data-ng-repeat="issue in userRelatedIssues.Issues">
+                <tr data-ng-repeat="issue in currentProject.Issues">
                     <td>
                         <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                     </td>
                     <td>{{issue.Description}}</td>
-                    <td>
-                        <a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a>
-                    </td>
                     <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{issue.Assignee.Username}}</td>
                 </tr>
                 </tbody>
             </table>

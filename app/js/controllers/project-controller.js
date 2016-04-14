@@ -16,6 +16,7 @@
                         $scope.allProjects = projects;
                     });
 
+                // To choose from drop down when create new project
                 userProfileService.getAllUsers()
                     .then(function(users) {
                         $scope.allUsers = users;
@@ -23,7 +24,7 @@
 
                 $scope.createNewProject = function(project) {
                     //debugger;
-                    // set priorities
+                    // Set priorities in accepted from back-end form
                     var priorities = project.Priorities.split(',');
                     project.priorities = [];
                     delete project.Priorities;
@@ -34,7 +35,7 @@
                         };
                     }
 
-                    // set labels
+                    // Set labels in accepted from back-end form
                     if (project.Labels) {
                         var labels = project.Labels.split(',');
                         delete project.Labels;
@@ -87,6 +88,13 @@
                             }
                             project.Priorities = prioritiesAsString;
 
+                            // Get project issues
+                            project.Issues = [];
+                            projectsService.getProjectIssuesById(project.Id)
+                                .then(function(projectIssues) {
+                                    project.Issues = projectIssues;
+                                });
+                            //debugger;
                             $scope.currentProject = project;
                         });
                 }

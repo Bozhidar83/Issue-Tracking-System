@@ -11,11 +11,6 @@
             'userProfileService',
             'notifyService',
             function ProjectController($scope, $location, $routeParams, $uibModal, projectsService, userProfileService, notifyService) {
-                projectsService.getAllProjects()
-                    .then(function(projects) {
-                        $scope.allProjects = projects;
-                    });
-
                 $scope.createNewProject = function(project) {
                     //debugger;
                     // Set priorities in accepted from back-end form

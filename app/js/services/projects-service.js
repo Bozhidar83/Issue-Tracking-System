@@ -11,6 +11,7 @@
                 function getUserRelatedIssues() {
                     //debugger;
                     var deferred = $q.defer();
+                    // TODO: Implement more flexible ordering and paging behavior
                     $http.get(BASE_URL + 'issues/me?orderBy=Project.Name desc, IssueKey&pageSize=20&pageNumber=1')
                         .then(function(response) {
                             //console.log(response);

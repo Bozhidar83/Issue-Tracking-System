@@ -1,0 +1,72 @@
+<div class="page-header">
+    <h1 class="alert-success">{{currentIssue.Title}}</h1>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <div class="row">
+            <div class="page-header"><h3 class="text-center">Issue Info</h3></div>
+            <div class="panel panel-default">
+                <div class="panel-body issue-page">
+                    <div class="row">
+                        <label for="issue-page-title">Title: </label>
+                        <span id="issue-page-title">{{currentIssue.Title}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-description">Description: </label>
+                        <span id="issue-page-description">{{currentIssue.Description}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-issue-key">Issue Key: </label>
+                        <span id="issue-page-issue-key">{{currentIssue.IssueKey}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-assignee">Assignee: </label>
+                        <span id="issue-page-assignee">{{currentIssue.Assignee.Username}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-priority">Priority: </label>
+                        <span id="issue-page-priority">{{currentIssue.Priority.Name}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-duedate">Due Date: </label>
+                        <span id="issue-page-duedate">{{currentIssue.DueDate | date: 'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-author">Author: </label>
+                        <span id="issue-page-author">{{currentIssue.Author.Username}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-project">Project: </label>
+                        <span id="issue-page-project">{{currentIssue.Project.Name}}</span>
+                    </div>
+                    <div class="row">
+                        <label for="issue-page-status">Status: </label>
+                        <span id="issue-page-status">{{currentIssue.Status.Name}}</span>
+                    </div>
+                    <div class="row">
+                        <label>Labels: </label>
+                        <span class="issue-page-labels label label-info"
+                              data-ng-if="currentIssue.Labels.length"
+                              data-ng-repeat="label in currentIssue.Labels">{{label.Name}}&nbsp;</span>
+                        <span data-ng-if="!currentIssue.Labels.length">No labels available</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TODO: Add check for project leader (same privileges as admin about issue)-->
+        <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
+            <a href="#/issues/{{currentIssue.Id}}/edit" class="btn btn-primary">Edit</a>
+        </div>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        <div class="page-header"><h3 class="text-center">Available Statuses</h3></div>
+        <!-- TODO: Change look of available statuses -->
+        <ul>
+            <li data-ng-repeat="status in currentIssue.AvailableStatuses">
+                <span>-----{{status.Name}}</span>
+                <!-- TODO: Add check for project leader (same privileges as admin about issue)-->
+                <button data-ng-if="currentLoggedInUser.isAdmin" class="btn btn-primary">Change</button>
+            </li>
+        </ul>
+    </div>
+</div>

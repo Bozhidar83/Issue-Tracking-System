@@ -20,8 +20,22 @@
                     return deferred.promise;
                 }
 
+                function getIssueById(id) {
+                    var deferred = $q.defer();
+                    //debugger;
+                    $http.get(BASE_URL + 'issues/' + id)
+                        .then(function(response) {
+                            //debugger;
+                            deferred.resolve(response.data);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+                    return deferred.promise;
+                }
+
                 return {
-                    createIssue: createIssue
+                    createIssue: createIssue,
+                    getIssueById: getIssueById
                 }
             }
         ])

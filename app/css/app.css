@@ -27,7 +27,8 @@ a {
 }
 
 #button-login, #button-register, #button-edit-password,
-#button-add-project, #button-add-issue, #button-make-admin {
+#button-add-project, #button-add-issue, #button-make-admin,
+#button-edit-issue {
     width: 100%;
 }
 

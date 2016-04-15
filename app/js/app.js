@@ -47,6 +47,10 @@
                 templateUrl: 'partials/issue-page.html',
                 controller: 'IssueController'
             })
+            .when('/issues/:id/edit', {
+                templateUrl: 'partials/edit-issue.html',
+                controller: 'IssueController'
+            })
             .otherwise({redirectTo: '/'});
     }
 

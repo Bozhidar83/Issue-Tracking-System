@@ -29,9 +29,44 @@
                     })
                 };
 
+                $scope.editIssueForm = function(issue) {
+                    // TODO:
+                };
+
                 issuesService.getIssueById($routeParams.id)
                     .then(function(issue) {
-                        $scope.currentIssue = issue;
+                        // Get issue's project priorities
+                        issue.AvailablePriorities = [];
+                        projectsService.getProjectById(issue.Project.Id)
+                            .then(function(issueProject) {
+                                //debugger;
+                                // Set available priorities from issues's project and remove current issue priority
+                                issue.AvailablePriorities = issueProject.Priorities.filter(function(priority) {
+                                    return priority.Name != issue.Priority.Name;
+                                });
+                                //issue.AvailablePriorities.splice(0, 0, issue.Priority);
+                                issue.AvailablePriorities.push(issue.Priority);
+
+                                // Parse issue due date
+                                issue.DueDate = new Date(issue.DueDate);
+
+                                // Convert issue labels in form, suitable for editing
+                                issue.LabelsAsString = '';
+                                for (var i = 0; i < issue.Labels.length; i++) {
+                                    if (i < issue.Labels.length - 1) {
+                                        issue.LabelsAsString += issue.Labels[i].Name + ',';
+                                    } else {
+                                        issue.LabelsAsString += issue.Labels[i].Name;
+                                    }
+                                }
+
+                                // Just for test purposes
+                                //issue.OldPriority = issue.Priority;
+
+
+                                $scope.currentIssue = issue;
+                                debugger;
+                            });
                     }, function(error) {
                         // TODO: Global error handling
                         debugger;

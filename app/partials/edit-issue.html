@@ -1,0 +1,113 @@
+<div class="container">
+    <div class="page-header">
+        <h1>Edit Issue</h1>
+    </div>
+    <form class="form-horizontal" name="editIssueForm">
+        <fieldset>
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="text-center">Edit Issue<span class="fa fa-edit pull-right bigicon"></span></h4>
+                    </div>
+                    <div class="panel-body text-center">
+                        <div class="form-group">
+                            <label for="edit-issue-title" class="col-md-2 control-label">Title</label>
+                            <div class="col-md-9">
+                                <input type="text" name="issueTitle" class="form-control" id="edit-issue-title"
+                                       data-ng-model="currentIssue.Title" data-ng-required="required" placeholder="Issue Title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-issue-description" class="col-md-2 control-label">Description</label>
+                            <div class="col-md-9">
+                                <textarea class="form-control" name="issueDescription" id="edit-issue-description"
+                                          data-ng-model="currentIssue.Description" data-ng-required="required"
+                                          placeholder="Issue Description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-issue-available-projects" class="col-md-2 control-label">Project</label>
+                            <div class="col-md-9">
+                                <select name="issueProject" data-ng-model="currentIssue.Project" id="edit-issue-available-projects"
+                                        class="form-control" data-ng-disabled="'disabled'" required="required">
+                                    <option value="{{currentIssue.Project.Id}}" selected="selected">{{currentIssue.Project.Name}}</option>
+                                    <!--<option value="{{project.Id}}" data-ng-repeat="project in allProjects">{{project.Name}}</option>-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-issue-assignee" class="col-md-2 control-label">Assignee</label>
+                            <div class="col-md-9">
+                                <select name="assigneeId" data-ng-model="currentIssue.Assignee.Id" id="edit-issue-assignee"
+                                        class="form-control" required="required">
+                                    <option value="currentIssue.Assignee.Id" selected="selected">{{currentIssue.Assignee.Username}}</option>
+                                    <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edit-issue-priority" class="col-md-2 control-label">Priority</label>
+                            <div class="col-md-9">
+                                <!-- TODO: Fix BUGGY behavior of issue priorities!-->
+                                <!--<!--data-ng-model="currentIssue.PriorityId" id="edit-issue-priority" class="form-control"-->
+                                <select
+                                        data-ng-options="item as item.Name for item in currentIssue.AvailablePriorities track by item.Id"
+                                        data-ng-model="currentIssue.PriorityId" id="edit-issue-priority" class="form-control"
+                                        required="required">
+                                    <!--<option value="currentIssue.Priority.Id" selected="selected">{{currentIssue.Priority.Name}}</option>
+                                    <option value="{{priority.Id}}" data-ng-repeat="priority in currentIssue.AvailablePriorities">{{priority.Name}}</option>-->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group">
+                            <label for="edit-issue-priority" class="col-md-2 control-label">Priority</label>
+                            <div class="col-md-9">
+                                &lt;!&ndash; TODO: Fix BUGGY behavior of issue priorities!&ndash;&gt;
+                                <select name="priorityId" data-ng-model="currentIssue.Priority.Id" id="edit-issue-priority" class="form-control"
+                                        required="required">
+                                    <option value="currentIssue.OldPriority.Id" selected="selected">{{currentIssue.OldPriority.Name}}</option>
+                                    <option value="{{priority.Id}}" data-ng-repeat="priority in currentIssue.AvailablePriorities">{{priority.Name}}</option>
+                                </select>
+                                <span>{{currentIssue.OldPriority.Name}}</span><br>
+                                <span>{{currentIssue.OldPriority.Id}}</span>
+                            </div>
+                        </div>-->
+
+                        <!---->
+                        <!---->
+                        <div class="form-group">
+                            <label for="edit-issue-duedate" class="col-md-2 control-label">Due Date</label>
+                            <div class="col-md-9">
+                                <input type="date" name="issueDueDate" class="form-control" id="edit-issue-duedate"
+                                       data-ng-model="currentIssue.DueDate" data-ng-required="required">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-issue-labels" class="col-md-2 control-label">Labels</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" id="edit-issue-labels" data-ng-model="currentIssue.LabelsAsString"
+                                       data-ng-required="required" placeholder="Labels">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-2">
+                                <button id="button-edit-issue"
+                                        data-ng-disabled="editIssueForm.$invalid ||
+                                        editIssueForm.$dirty &&
+                                        (editIssueForm.issueTitle.$pristine || editIssueForm.issueDescription.$pristine ||
+                                        editIssueForm.issueProject.$pristine ||
+                                        editIssueForm.assigneeId.$pristine ||
+                                        editIssueForm.priorityId.$pristine ||
+                                        editIssueForm.issueDueDate.$pristine)"
+                                        data-ng-click="editIssue(currentIssue)"
+                                        class="btn btn-primary">Edit Issue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

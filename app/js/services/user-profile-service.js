@@ -33,9 +33,25 @@
                     return deferred.promise;
                 }
 
+                function makeAdmin(newAdmin) {
+                    var deferred = $q.defer();
+                    //debugger;
+                    $http.put(BASE_URL + 'users/makeadmin', newAdmin, {headers:{'ContentType':'application/x-www-form-urlencoded'}})
+                        .then(function(response) {
+                            //debugger;
+                            // This just can return 'true'
+                            deferred.resolve(response);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     editPassword: editPassword,
-                    getAllUsers: getAllUsers
+                    getAllUsers: getAllUsers,
+                    makeAdmin: makeAdmin
                 }
             }
         ])

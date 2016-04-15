@@ -17,6 +17,7 @@
                 // To choose from drop down when create new project or add new issue
                 userProfileService.getAllUsers()
                     .then(function(users) {
+                        //debugger;
                         $scope.allUsers = users;
                     });
 

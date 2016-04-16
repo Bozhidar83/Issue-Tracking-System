@@ -1,11 +1,13 @@
 (function() {
     "use strict";
 
-    function config($routeProvider) {
+    function config($routeProvider, $httpProvider/*, routeResolversProvider*/) {
+        //var routeResolveChecks = routeResolversProvider.$get();
         $routeProvider
             .when('/', {
                 templateUrl: 'partials/home.html',
-                controller: 'HomeController'
+                controller: 'HomeController',
+                //resolve: routeResolveChecks.home
             })
             .when('/register', {
                 templateUrl: 'partials/register.html',
@@ -51,7 +53,10 @@
                 templateUrl: 'partials/edit-issue.html',
                 controller: 'IssueController'
             })
+
             .otherwise({redirectTo: '/'});
+
+        $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }
 
     function run($rootScope, $location, $http, $cookies, authService, notifyService, TOKEN_TYPE) {
@@ -81,8 +86,8 @@
         }
     }
 
-    angular.module('issueTrackingSystemApp', ['ngRoute', 'ngCookies', 'ui.bootstrap'])
-        .config(['$routeProvider', config]);
+    angular.module('issueTrackingSystemApp', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'angularSpinner'])
+        .config(['$routeProvider', '$httpProvider',/*'routeResolversProvider',*/ config]);
 
     angular.module('issueTrackingSystemApp')
         .run(['$rootScope', '$location', '$http', '$cookies', 'authService', 'notifyService', 'TOKEN_TYPE', run]);

@@ -6,12 +6,15 @@
             '$scope',
             '$location',
             '$routeParams',
+            '$timeout',
             '$uibModal',
             'projectsService',
             'userProfileService',
             'notifyService',
-            function ProjectController($scope, $location, $routeParams, $uibModal, projectsService, userProfileService, notifyService) {
+            'usSpinnerService',
+            function ProjectController($scope, $location, $routeParams, $timeout, $uibModal, projectsService, userProfileService, notifyService, usSpinnerService) {
                 $scope.createNewProject = function(project) {
+                    usSpinnerService.spin('spinner-1');
                     //debugger;
                     // Set priorities in accepted from back-end form
                     var priorities = project.Priorities.split(',');
@@ -39,17 +42,23 @@
                     //debugger;
                     projectsService.createProject(project)
                         .then(function(response) {
+                            usSpinnerService.stop('spinner-1');
                             notifyService.showInfo('Project "' + project.Name + '" created successfully');
                             $location.path('#/projects');
                         }, function(error) {
+                            usSpinnerService.stop('spinner-1');
                             notifyService.showError('Project creation failed!' + error);
                         })
                 };
 
                 if ($routeParams.id) {
+                    usSpinnerService.spin('spinner-1');
                     projectsService.getProjectById($routeParams.id)
                         .then(function(project) {
                             //debugger;
+                            // For check spinner
+                            //$timeout(function(){return;}, 5000);
+
                             var labels = project.Labels;
                             var i = 0;
                             if (labels.length > 0 ) {
@@ -84,11 +93,13 @@
                                     project.Issues = projectIssues;
                                 });
                             //debugger;
+                            usSpinnerService.stop('spinner-1');
                             $scope.currentProject = project;
                         });
                 }
 
                 $scope.editProject = function(project) {
+                    usSpinnerService.spin('spinner-1');
                     //debugger;
                     // set priorities
                     var priorities = project.Priorities.split(',');
@@ -121,9 +132,11 @@
                     //debugger;
                     projectsService.updateProject(project, $routeParams.id)
                         .then(function(response) {
+                            usSpinnerService.stop('spinner-1');
                             notifyService.showInfo('Project "' + project.Name + '" edited successfully');
                             $location.path('#/projects');
                         }, function(error) {
+                            usSpinnerService.stop('spinner-1');
                             notifyService.showError('Project cannot be edited!' + error);
                         })
                 };

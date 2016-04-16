@@ -63,7 +63,8 @@
                             <div class="col-md-9 col-md-offset-2">
                                 <button id="button-add-project"
                                         data-ng-disabled="editProjectForm.$invalid ||
-                                        editProjectForm.projectName.$invalid"
+                                        editProjectForm.projectName.$invalid ||
+                                        editProjectForm.$pristine"
                                         data-ng-click="editProject(currentProject)"
                                         class="btn btn-primary">Update Project</button>
                             </div>

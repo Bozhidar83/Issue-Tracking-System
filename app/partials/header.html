@@ -17,8 +17,8 @@
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-if="!authService.isAuthenticated()">
-            <li><a href="#/register">Register</a></li>
-            <li><a href="#/login" >Login</a></li>
+            <li><a href="#/register" class="link hvr-underline-from-left hvr-grow">Register</a></li>
+            <li><a href="#/login" class="link hvr-underline-from-left hvr-grow">Login</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-if="authService.isAuthenticated()">
             <li><a id="username-info" href="#/profile" class="hvr-underline-from-left hvr-grow">{{currentLoggedInUser.Username}}</a></li>

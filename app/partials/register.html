@@ -7,8 +7,10 @@
                 <div class="col-lg-9">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" id="inputEmail" data-ng-model="user.email" data-ng-required="required" placeholder="Email">
+                        <input type="email" class="form-control" name="email" id="inputEmail" data-ng-model="user.email" required="required" placeholder="Email">
                     </div>
+                    <span class="error" data-ng-show="registerForm.$dirty && registerForm.email.$error.required">Email is required!</span>
+                    <span class="error" data-ng-show="registerForm.email.$error.email">Invalid email!</span>
                 </div>
             </div>
             <div class="form-group">
@@ -16,8 +18,11 @@
                 <div class="col-lg-9">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
-                        <input type="password" class="form-control" id="inputPassword" data-ng-model="user.password" data-ng-required="required" minlength="6" maxlength="100" placeholder="Password">
+                        <input type="password" class="form-control" name="password" id="inputPassword" data-ng-model="user.password" required="required" minlength="6" maxlength="100" placeholder="Password">
                     </div>
+                    <span class="error" data-ng-show="registerForm.$dirty && registerForm.password.$error.required">Password is required!</span>
+                    <span class="error" data-ng-show="registerForm.password.$error.minlength">Password must be at least 6 symbols long!</span>
+                    <span class="error" data-ng-show="registerForm.password.$error.maxlength">Password must be at most 100 symbols long!</span>
                 </div>
             </div>
             <div class="form-group">
@@ -25,57 +30,14 @@
                 <div class="col-lg-9">
                     <div class="input-group">
                         <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
-                        <input type="password" class="form-control" id="confirmPassword" data-ng-model="user.confirmPassword" data-ng-required="required" minlength="6" maxlength="100" placeholder="Confirm Password">
+                        <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" data-ng-model="user.confirmPassword" required="required" minlength="6" maxlength="100" placeholder="Confirm Password">
                     </div>
+                    <span class="error" data-ng-show="registerForm.$dirty && registerForm.confirmPassword.$error.required">Password is required!</span>
+                    <span class="error" data-ng-show="registerForm.confirmPassword.$error.minlength">Password must be at least 6 symbols long!</span>
+                    <span class="error" data-ng-show="registerForm.confirmPassword.$error.maxlength">Password must be at most 100 symbols long!</span>
                     <span class="error" data-ng-show="user.password !== user.confirmPassword">Passwords does not match!</span>
                 </div>
             </div>
-            <!--<div class="form-group">
-                    <label for="username" class="col-lg-3 control-label">Username</label>
-                <div class="col-lg-9">
-                    <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" id="username" data-ng-model="user.username" data-ng-required="required" placeholder="Username">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword" class="col-lg-3 control-label">Password</label>
-                <div class="col-lg-9">
-                    <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
-                        <input type="password" class="form-control" id="inputPassword" data-ng-model="user.password" data-ng-required="required" placeholder="Password">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword" class="col-lg-3 control-label">Confirm Password</label>
-                <div class="col-lg-9">
-                    <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
-                        <input type="password" class="form-control" id="confirmPassword" data-ng-model="user.confirmPassword" data-ng-required="required" placeholder="Confirm Password">
-                        <span class="error" data-ng-show="user.password !== user.confirmPassword">Passwords does not match!</span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name" class="col-lg-3 control-label">Name</label>
-                <div class="col-lg-9">
-                    <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" id="name" data-ng-model="user.name" data-ng-required="required" placeholder="Name">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputEmail" class="col-lg-3 control-label">Email</label>
-                <div class="col-lg-9">
-                    <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></div>
-                        <input type="text" class="form-control" id="inputEmail" data-ng-model="user.email" data-ng-required="required" placeholder="Email">
-                    </div>
-                </div>
-            </div>-->
             <div class="form-group">
                 <div class="col-lg-9 col-lg-offset-3">
                     <button id="button-register" data-ng-click="register(user, registerForm)" data-ng-disabled="registerForm.$pristine || registerForm.$invalid || (user.password !== user.confirmPassword)" class="btn btn-primary btn-lg">Register</button>

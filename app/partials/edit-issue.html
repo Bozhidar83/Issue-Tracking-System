@@ -14,15 +14,21 @@
                             <label for="edit-issue-title" class="col-md-2 control-label">Title</label>
                             <div class="col-md-9">
                                 <input type="text" name="issueTitle" class="form-control" id="edit-issue-title"
-                                       data-ng-model="currentIssue.Title" data-ng-required="required" placeholder="Issue Title">
+                                       data-ng-model="currentIssue.Title" required="required" placeholder="Issue Title">
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.issueTitle.$error.required">Issue title is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="edit-issue-description" class="col-md-2 control-label">Description</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" name="issueDescription" id="edit-issue-description"
-                                          data-ng-model="currentIssue.Description" data-ng-required="required"
+                                          data-ng-model="currentIssue.Description" required="required"
                                           placeholder="Issue Description"></textarea>
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.issueDescription.$error.required">Issue description is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -31,7 +37,6 @@
                                 <select name="issueProject" data-ng-model="currentIssue.Project" id="edit-issue-available-projects"
                                         class="form-control" data-ng-disabled="'disabled'" required="required">
                                     <option value="{{currentIssue.Project.Id}}" selected="selected">{{currentIssue.Project.Name}}</option>
-                                    <!--<option value="{{project.Id}}" data-ng-repeat="project in allProjects">{{project.Name}}</option>-->
                                 </select>
                             </div>
                         </div>
@@ -44,6 +49,9 @@
                                     <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
                                 </select>
                             </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.assigneeId.$error.required">Issue assignee is required!</span>
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -51,13 +59,16 @@
                             <div class="col-md-9">
                                 <!-- TODO: Fix BUGGY behavior of issue priorities!-->
                                 <!--<!--data-ng-model="currentIssue.PriorityId" id="edit-issue-priority" class="form-control"-->
-                                <select
+                                <select name="priorityId"
                                         data-ng-options="item as item.Name for item in currentIssue.AvailablePriorities track by item.Id"
                                         data-ng-model="currentIssue.PriorityId" id="edit-issue-priority" class="form-control"
                                         required="required">
                                     <!--<option value="currentIssue.Priority.Id" selected="selected">{{currentIssue.Priority.Name}}</option>
                                     <option value="{{priority.Id}}" data-ng-repeat="priority in currentIssue.AvailablePriorities">{{priority.Name}}</option>-->
                                 </select>
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.priorityId.$error.required">Issue priority is required!</span>
                             </div>
                         </div>
 
@@ -83,6 +94,9 @@
                                 <input type="date" name="issueDueDate" class="form-control" id="edit-issue-duedate"
                                        data-ng-model="currentIssue.DueDate" data-ng-required="required">
                             </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.issueDueDate.$error.required">Issue due date is required!</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="edit-issue-labels" class="col-md-2 control-label">Labels</label>
@@ -96,11 +110,11 @@
                                 <button id="button-edit-issue"
                                         data-ng-disabled="editIssueForm.$invalid ||
                                         editIssueForm.$dirty &&
-                                        (editIssueForm.issueTitle.$pristine || editIssueForm.issueDescription.$pristine ||
-                                        editIssueForm.issueProject.$pristine ||
-                                        editIssueForm.assigneeId.$pristine ||
-                                        editIssueForm.priorityId.$pristine ||
-                                        editIssueForm.issueDueDate.$pristine)"
+                                        (editIssueForm.issueTitle.$invalid ||
+                                        editIssueForm.issueDescription.$invalid ||
+                                        editIssueForm.assigneeId.$invalid ||
+                                        editIssueForm.priorityId.$invalid ||
+                                        editIssueForm.issueDueDate.$invalid)"
                                         data-ng-click="editIssue(currentIssue)"
                                         class="btn btn-primary">Edit Issue</button>
                             </div>

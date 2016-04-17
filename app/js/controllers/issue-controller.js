@@ -70,11 +70,11 @@
 
                                 usSpinnerService.stop('spinner-1');
                                 $scope.currentIssue = issue;
-                                debugger;
+                                //debugger;
                             });
                     }, function(error) {
                         // TODO: Global error handling
-                        debugger;
+                        //debugger;
                     });
 
                 // TODO: FIX POSSIBLE BUG: Weather current project is really selected one ot when select from dropdown to choose correctly

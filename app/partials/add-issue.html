@@ -13,13 +13,19 @@
                         <div class="form-group">
                             <label for="issue-title" class="col-md-2 control-label">Title</label>
                             <div class="col-md-9">
-                                <input type="text" name="issueTitle" class="form-control" id="issue-title" data-ng-model="issue.Title" data-ng-required="required" placeholder="Issue Title">
+                                <input type="text" name="issueTitle" class="form-control" id="issue-title" data-ng-model="issue.Title" required="required" placeholder="Issue Title">
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueTitle.$error.required">Issue title is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="issue-description" class="col-md-2 control-label">Description</label>
                             <div class="col-md-9">
-                                <textarea class="form-control" name="issueDescription" id="issue-description" data-ng-model="issue.Description" data-ng-required="required" placeholder="Issue Description"></textarea>
+                                <textarea class="form-control" name="issueDescription" id="issue-description" data-ng-model="issue.Description" required="required" placeholder="Issue Description"></textarea>
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueDescription.$error.required">Issue description is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -30,6 +36,9 @@
                                     <option value="{{project.Id}}" data-ng-repeat="project in allProjects">{{project.Name}}</option>
                                 </select>
                             </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueProject.$error.required">Issue project is required!</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="issue-assignee" class="col-md-2 control-label">Assignee</label>
@@ -38,6 +47,9 @@
                                     <option value="" selected="selected">-- Select Assignee --</option>
                                     <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
                                 </select>
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.assigneeId.$error.required">Issue assignee is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -48,17 +60,23 @@
                                     <option value="{{priority.Id}}" data-ng-repeat="priority in currentProject.Priorities">{{priority.Name}}</option>
                                 </select>
                             </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.priorityId.$error.required">Issue priority is required!</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="issue-duedate" class="col-md-2 control-label">Due Date</label>
                             <div class="col-md-9">
-                                <input type="date" name="issueDueDate" class="form-control" id="issue-duedate" data-ng-model="issue.DueDate" data-ng-required="required">
+                                <input type="date" name="issueDueDate" class="form-control" id="issue-duedate" data-ng-model="issue.DueDate" required="required">
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueDueDate.$error.required">Issue due date is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="issue-labels" class="col-md-2 control-label">Labels</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="issue-labels" data-ng-model="issue.Labels" data-ng-required="required" placeholder="Labels">
+                                <input type="text" class="form-control" id="issue-labels" data-ng-model="issue.Labels" placeholder="Labels">
                             </div>
                         </div>
                         <div class="form-group">
@@ -66,7 +84,8 @@
                                 <button id="button-add-issue"
                                         data-ng-disabled="addNewIssueForm.$invalid ||
                                         addNewIssueForm.$dirty &&
-                                        (addNewIssueForm.issueTitle.$pristine || addNewIssueForm.issueDescription.$pristine ||
+                                        (addNewIssueForm.issueTitle.$pristine ||
+                                        addNewIssueForm.issueDescription.$pristine ||
                                         addNewIssueForm.issueProject.$pristine ||
                                         addNewIssueForm.assigneeId.$pristine ||
                                         addNewIssueForm.priorityId.$pristine ||

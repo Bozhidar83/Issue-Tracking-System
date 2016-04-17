@@ -8,6 +8,7 @@
             'BASE_URL',
             function ProjectService($http, $q, BASE_URL) {
                 // TODO: Get all issues related to user
+                // TODO: Remove in issues-service
                 function getUserRelatedIssues() {
                     //debugger;
                     var deferred = $q.defer();

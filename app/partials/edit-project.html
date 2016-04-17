@@ -16,22 +16,29 @@
                             <label for="edit-project-name" class="col-md-2 control-label">Name</label>
                             <div class="col-md-9">
                                 <input type="text" name="projectName" class="form-control" id="edit-project-name"
-                                       data-ng-model="currentProject.Name" data-ng-required="required" placeholder="Project Name">
+                                       data-ng-model="currentProject.Name" required="required" placeholder="Project Name">
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editProjectForm.$dirty && editProjectForm.projectName.$error.required">Project name is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="edit-project-description" class="col-md-2 control-label">Description</label>
                             <div class="col-md-9">
-                                <textarea class="form-control" id="edit-project-description"
-                                          data-ng-model="currentProject.Description" data-ng-required="required"
+                                <textarea class="form-control" name="description" id="edit-project-description"
+                                          data-ng-model="currentProject.Description" required="required"
                                           placeholder="Project Description"></textarea>
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editProjectForm.$dirty && editProjectForm.description.$error.required">Project description is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="project-edit-project-key" class="col-md-2 control-label">Project Key</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="project-edit-project-key"
-                                       data-ng-model="currentProject.ProjectKey" data-ng-required="required" placeholder="Project Key">
+                                       data-ng-model="currentProject.ProjectKey" data-ng-disabled="true"
+                                       required="required" placeholder="Project Key">
                             </div>
                         </div>
                         <div class="form-group">
@@ -43,20 +50,26 @@
                                     <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
                                 </select>
                             </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editProjectForm.$dirty && editProjectForm.leadId.$error.required">Leader Id is required!</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="edit-project-priorities" class="col-md-2 control-label">Priorities</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="edit-project-priorities"
-                                       data-ng-model="currentProject.Priorities" data-ng-required="required" placeholder="Priorities">
+                                <input type="text" name="priorities" class="form-control" id="edit-project-priorities"
+                                       data-ng-model="currentProject.Priorities" required="required" placeholder="Priorities">
                                 <p class="text-left small">(separated by comma)</p>
+                            </div>
+                            <div class="col-md-9 col-md-offset-2 text-left">
+                                <span class="error" data-ng-show="editProjectForm.$dirty && editProjectForm.priorities.$error.required">Project priorities are required!</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="edit-project-labels" class="col-md-2 control-label">Labels</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="edit-project-labels"
-                                       data-ng-model="currentProject.Labels" data-ng-required="required" placeholder="Labels">
+                                       data-ng-model="currentProject.Labels" placeholder="Labels">
                             </div>
                         </div>
                         <div class="form-group">

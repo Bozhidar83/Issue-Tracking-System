@@ -21,7 +21,7 @@
                 };
 
                 $scope.makeAdmin = function(newAdmin) {
-                    debugger;
+                    //debugger;
                     userProfileService.makeAdmin(newAdmin)
                         .then(function() {
                             notifyService.showInfo('User role successfully changed to "Admin"')

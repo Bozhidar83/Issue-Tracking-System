@@ -23,6 +23,7 @@
         <ul class="nav navbar-nav navbar-right" ng-if="authService.isAuthenticated()">
             <li><a id="username-info" href="#/profile" class="hvr-underline-from-left hvr-grow">{{currentLoggedInUser.Username}}</a></li>
             <li><a href="#/logout" ng-click="logout()" class="link hvr-underline-from-left hvr-grow">Logout</a></li>
+            <li data-ng-if="currentLoggedInUser.isAdmin" data-ng-class="{true:'admin-label'}[currentLoggedInUser.isAdmin]"><span class="label label-warning">ADMIN</span></li>
         </ul>
     </div>
 </div>

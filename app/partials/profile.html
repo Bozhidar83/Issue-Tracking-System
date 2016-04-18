@@ -33,7 +33,7 @@
                     <legend>Assign Admin Privileges</legend>
                     <div class="form-group">
                         <select name="makeAdmin" id="make-admin" data-ng-model="newAdmin.UserId" class="form-control">
-                            <option value="" selected="selected">Select user</option>
+                            <option value="" selected="selected">--Select user--</option>
                             <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
                         </select>
                     </div>

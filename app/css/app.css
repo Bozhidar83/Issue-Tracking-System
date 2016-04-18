@@ -55,6 +55,11 @@ a#site-logo:hover {
     width: 100%;
 }
 
+/* Header - Admin */
+.admin-label {
+    margin: 12px 0 0 20px;
+}
+
 /*Profile sidebar*/
 .box {
     /*width: 100%;*/

@@ -46,7 +46,6 @@
                     return deferred.promise;
                 }
 
-                // TODO: Get all issues related to user
                 function getUserRelatedIssues(params) {
                     //debugger;
                     var deferred = $q.defer();

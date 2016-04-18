@@ -16,7 +16,6 @@
                     var deferred = $q.defer();
 
                     var data = "grant_type=password&username=" + (userData.username || '') + '&password=' + (userData.password || '');
-                    //var data = 'Username=' + userData.username + '&Password=' + userData.password + '&grant_type=password';
 
                     $http.post(BASE_URL + 'api/Token', data, {headers:{'ContentType':'application/x-www-form-urlencoded'}})
                         .then(function(response) {
@@ -65,10 +64,8 @@
                 function getIdentity() {
                     var deferred = $q.defer();
 
-                    //debugger;
-                    $http.get(BASE_URL + 'users/me') //api/Account/UserInfo
+                    $http.get(BASE_URL + 'users/me')
                         .then(function(identityResponse) {
-                            //debugger;
                             identity.setUser(identityResponse.data);
                             deferred.resolve(identityResponse.data);
                         });
@@ -94,7 +91,7 @@
                         }*/
                     },
 
-                    isAnonymous : function() {
+                    /*isAnonymous : function() {
                         return sessionStorage['currentUser'] == undefined;
                     },
 
@@ -105,21 +102,21 @@
                     isNormalUser : function() {
                         var currentUser = this.getCurrentUser();
                         return (currentUser != undefined) && (!currentUser.isAdmin);
-                    },
+                    },*/
 
                     /*isAdmin : function() {
                         var currentUser = this.getCurrentUser();
                         return (currentUser != undefined) && (!currentUser.isNormalUser);
                     },*/
 
-                    getAuthHeaders : function() {
+                    /*getAuthHeaders : function() {
                         var headers = {};
                         var currentUser = this.getCurrentUser();
                         if (currentUser) {
                             headers['Authorization'] = 'Bearer ' + currentUser.access_token;
                         }
                         return headers;
-                    }
+                    }*/
                 }
             }]
         );

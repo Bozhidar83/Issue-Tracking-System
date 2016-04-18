@@ -8,7 +8,6 @@
         return {
             getUser: function () {
                 if (this.isAuthenticated()) {
-                    //debugger;
                     return $q.resolve(currentUser);
                 }
 
@@ -17,12 +16,7 @@
             isAuthenticated: function () {
                 return Object.getOwnPropertyNames(currentUser).length !== 0;
             },
-            /*isAdmin: function() {
-                // TODO:
-                return currentUser.roles.indexOf('Admin');
-            },*/
             setUser: function (user) {
-                //debugger;
                 currentUser = user;
                 deferred.resolve(user);
             },

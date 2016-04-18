@@ -33,6 +33,14 @@
                     return deferred.promise;
                 }
 
+                /*function getCurrentUser() {
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + '')
+
+                    return deferred.promise;
+                }*/
+
                 function makeAdmin(newAdmin) {
                     var deferred = $q.defer();
                     //debugger;

@@ -95,5 +95,6 @@
     angular.module('issueTrackingSystemApp')
         .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
         .constant('TOKEN_TYPE', 'Bearer ')
-        .constant('PAGE_SIZE', 5);
+        .constant('PAGE_SIZE', 5)
+        .constant('_', window._);
 })();

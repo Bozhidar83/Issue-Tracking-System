@@ -7,12 +7,13 @@
             '$location',
             '$routeParams',
             '$timeout',
-            '$uibModal',
+            /*'$uibModal',*/
             'projectsService',
             'userProfileService',
             'notifyService',
             'usSpinnerService',
-            function ProjectController($scope, $location, $routeParams, $timeout, $uibModal, projectsService, userProfileService, notifyService, usSpinnerService) {
+            'PAGE_SIZE',
+            function ProjectController($scope, $location, $routeParams, $timeout, /*$uibModal,*/ projectsService, userProfileService, notifyService, usSpinnerService, PAGE_SIZE) {
                 $scope.createNewProject = function(project) {
                     usSpinnerService.spin('spinner-1');
                     //debugger;
@@ -140,6 +141,23 @@
                             notifyService.showError('Project cannot be edited!' + error);
                         })
                 };
+
+                // Paging on 'All Projects' page
+                $scope.projectParams = {
+                    'startPage': 1,
+                    'pageSize': PAGE_SIZE //* 2 - 1
+                };
+
+                $scope.getProjects = function() {
+                    projectsService.getProjectsWithPaging($scope.projectParams)
+                        .then(function(data) {
+                            //debugger;
+                            $scope.totalProjects = data.TotalPages * $scope.projectParams.pageSize;
+                            $scope.allProjects = data.Projects;
+                        });
+                };
+
+                $scope.getProjects();
             }
         ]);
 

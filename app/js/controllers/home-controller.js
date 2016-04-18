@@ -5,16 +5,33 @@
         .controller('HomeController', [
             '$scope',
             'projectsService',
-            function HomeController($scope, projectsService) {
-                //debugger;
+            'issuesService',
+            'notifyService',
+            'usSpinnerService',
+            'PAGE_SIZE',
+            function HomeController($scope, projectsService, issuesService, notifyService, usSpinnerService, PAGE_SIZE) {
                 $scope.userRelatedProjects = null;
 
                 // Get all user related issues
-                projectsService.getUserRelatedIssues()
-                    .then(function(userIssues) {
-                        //debugger;
-                        $scope.userRelatedIssues = userIssues;
-                    });
+                $scope.issuesParams = {
+                    'startPage': 1,
+                    'pageSize': PAGE_SIZE
+                };
+                $scope.getUserRelatedIssues = function() {
+                    usSpinnerService.spin('spinner-1');
+                    issuesService.getUserRelatedIssues($scope.issuesParams)
+                        .then(function(userIssues) {
+                            //debugger;
+                            usSpinnerService.stop('spinner-1');
+                            $scope.userRelatedIssues = userIssues;
+                            $scope.allIssues = userIssues.TotalPages * $scope.issuesParams.pageSize;
+                        }, function(error) {
+                            usSpinnerService.stop('spinner-1');
+                            notifyService.showError(error.message);
+                        });
+                };
+
+                $scope.getUserRelatedIssues();
 
                 // Get all user related projects
                 $scope.userProjects = [];

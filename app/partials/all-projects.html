@@ -10,20 +10,20 @@
             <div class="panel-body">
                 <table id="all-projects" class="table table-bordered table-striped">
                     <thead>
-                        <tr class="text-center">
-                            <th class="col-md-2">Project Name</th>
-                            <th class="col-md-2">Project Key</th>
-                            <th class="col-md-4">Description</th>
-                            <th class="col-md-2">Project Leader</th>
-                            <th class="col-md-2">Update/Add Issue</th>
+                        <tr>
+                            <th class="col-md-2 text-center">Project Name</th>
+                            <th class="col-md-2 text-center">Project Key</th>
+                            <th class="col-md-4 text-center">Description</th>
+                            <th class="col-md-2 text-center">Project Leader</th>
+                            <th class="col-md-2 text-center">Update/Add Issue</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="project in allProjects">
-                            <td>{{project.Name}}</td>
-                            <td>{{project.ProjectKey}}</td>
-                            <td class="all-projects-description">{{project.Description}}</td>
-                            <td>{{project.Lead.Username}}</td>
+                            <td><a href="#/projects/{{project.Id}}" title="View project details">{{project.Name}}</a></td>
+                            <td title="Project Key">{{project.ProjectKey}}</td>
+                            <td class="all-projects-description" title="Project Description">{{project.Description}}</td>
+                            <td title="Project Leader">{{project.Lead.Username}}</td>
                             <td>
                                 <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>
                                 <a href="#/projects/{{project.Id}}/add-issue" class="btn btn-primary">Add Issue</a>
@@ -31,7 +31,19 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="text-center">
+                    <pagination
+                            total-items="totalProjects"
+                            ng-model="projectParams.startPage"
+                            items-per-page="projectParams.pageSize"
+                            ng-change="getProjects()"
+                            max-size="9"
+                            boundary-links="true">
+                    </pagination>
+                </div>
             </div>
         </div>
     </div>
+</div>
+<div>
 </div>

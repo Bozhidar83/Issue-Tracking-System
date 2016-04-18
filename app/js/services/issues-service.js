@@ -33,9 +33,39 @@
                     return deferred.promise;
                 }
 
+                function updateIssue(issue, id) {
+                    var deferred = $q.defer();
+
+                    $http.put(BASE_URL + '/' + id, issue, {headers:{'ContentType':'application/x-www-form-urlencoded'}})
+                        .then(function(response) {
+                            deferred.resolve(response);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
+                // TODO: Get all issues related to user
+                function getUserRelatedIssues(params) {
+                    //debugger;
+                    var deferred = $q.defer();
+
+                    $http.get(BASE_URL + 'issues/me?orderBy=DueDate desc, IssueKey&pageSize=' + params.pageSize + '&pageNumber=' + params.startPage)
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     createIssue: createIssue,
-                    getIssueById: getIssueById
+                    getIssueById: getIssueById,
+                    updateIssue: updateIssue,
+                    getUserRelatedIssues: getUserRelatedIssues
                 }
             }
         ])

@@ -29,12 +29,22 @@
                             $location.path('#/projects/' + issue.ProjectId);
                         }, function(error) {
                             usSpinnerService.stop('spinner-1');
-                            notifyService.showError('Issue cannot be created!' + error);
+                            notifyService.showError('Issue cannot be created!' + error.message);
                     })
                 };
 
-                $scope.editIssueForm = function(issue) {
-                    // TODO:
+                $scope.editIssue = function(issue) {
+                    // TODO: Implement full logic
+                    usSpinnerService.spin('spinner-1');
+                    issuesService.updateIssue(issue, $routeParams.id)
+                        .then(function(response) {
+                            usSpinnerService.stop('spinner-1');
+                            notifyService.showInfo('Issue "' + issue.Title + '" edited successfully');
+                            $location.path('#/issues/' + $routeParams.id);
+                        }, function(error) {
+                            usSpinnerService.stop('spinner-1');
+                            notifyService.showError('Issue cannot be edited!' + error.message);
+                        });
                 };
 
                 usSpinnerService.spin('spinner-1');

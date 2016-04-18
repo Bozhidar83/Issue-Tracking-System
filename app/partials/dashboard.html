@@ -8,7 +8,7 @@
             <div class="page-header"><h1>Affiliated Projects</h1></div>
             <div class="panel panel-default">
                 <div class="panel-body dashboard" data-ng-repeat="project in userProjects">
-                    <a href="#/projects/{{project.Id}}">{{project.Name}}</a>
+                    <a href="#/projects/{{project.Id}}" title="View Project Details">{{project.Name}}</a>
                 </div>
             </div>
         </div>
@@ -42,6 +42,12 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="text-center">
+                <pagination total-items="allIssues" ng-model="issuesParams.startPage"
+                            items-per-page="issuesParams.pageSize" ng-change="getUserRelatedIssues()"
+                            max-size="5" boundary-links="true">
+                </pagination>
+            </div>
         </div>
     </div>
 </div>

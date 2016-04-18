@@ -86,7 +86,7 @@
         }
     }
 
-    angular.module('issueTrackingSystemApp', ['ngRoute', 'ngCookies', 'ui.bootstrap', 'angularSpinner'])
+    angular.module('issueTrackingSystemApp', ['ngRoute', 'ngCookies', 'ui.bootstrap.pagination', 'angularSpinner'])
         .config(['$routeProvider', '$httpProvider',/*'routeResolversProvider',*/ config]);
 
     angular.module('issueTrackingSystemApp')
@@ -94,5 +94,6 @@
 
     angular.module('issueTrackingSystemApp')
         .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
-        .constant('TOKEN_TYPE', 'Bearer ');
+        .constant('TOKEN_TYPE', 'Bearer ')
+        .constant('PAGE_SIZE', 5);
 })();

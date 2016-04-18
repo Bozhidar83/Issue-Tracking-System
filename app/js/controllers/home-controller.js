@@ -11,14 +11,12 @@
             'usSpinnerService',
             'PAGE_SIZE',
             function HomeController($scope, projectsService, issuesService, notifyService, authService, usSpinnerService, PAGE_SIZE) {
-                $scope.userRelatedProjects = null;
-
                 // Get all user related issues
                 $scope.issuesParams = {
                     'startPage': 1,
                     'pageSize': PAGE_SIZE
                 };
-                $scope.getUserRelatedIssues = function() {
+                $scope.getAllUserRelatedIssues = function() {
                     usSpinnerService.spin('spinner-1');
                     issuesService.getUserRelatedIssues($scope.issuesParams)
                         .then(function(userIssues) {
@@ -31,7 +29,8 @@
                         });
                 };
 
-                $scope.getUserRelatedIssues();
+                $scope.getAllUserRelatedIssues();
+
 
                 // Get all user related projects
                 $scope.userProjects = [];
@@ -40,14 +39,14 @@
                     'pageSize': PAGE_SIZE
                 };
                 $scope.getUserRelatedProjects = function() {
-                    usSpinnerService.spin('spinner-1');
-                    projectsService.getUserAffiliatedProjects($scope.userProjectsParams)
-                        .then(function(projects) {
-                            usSpinnerService.stop('spinner-1');
-                            $scope.userProjects = projects;
-                        }, function(error) {
-                            usSpinnerService.stop('spinner-1');
-                        });
+                        usSpinnerService.spin('spinner-1');
+                        projectsService.getUserAffiliatedProjects($scope.userProjectsParams)
+                            .then(function(projects) {
+                                usSpinnerService.stop('spinner-1');
+                                $scope.userProjects = projects;
+                            }, function(error) {
+                                usSpinnerService.stop('spinner-1');
+                            });
                     /*projectsService.getProjectsByLeaderId(user.Id, $scope.userProjectsParams)
                         .then(function(projects) {
                             //debugger;

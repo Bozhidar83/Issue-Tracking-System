@@ -64,13 +64,19 @@
                 function getIdentity() {
                     var deferred = $q.defer();
 
-                    $http.get(BASE_URL + 'users/me')
-                        .then(function(identityResponse) {
-                            identity.setUser(identityResponse.data);
-                            deferred.resolve(identityResponse.data);
-                        });
+                    if (isAuthenticated()) {
+                        $http.get(BASE_URL + 'users/me')
+                            .then(function(identityResponse) {
+                                identity.setUser(identityResponse.data);
+                                deferred.resolve(identityResponse.data);
+                            });
+                    }
 
                     return deferred.promise;
+                }
+
+                function isAuthenticated() {
+                    return !!$cookies.get(TOKEN_KEY);
                 }
 
                 return {
@@ -78,9 +84,7 @@
                     register: registerUser,
                     logout: logout,
                     identity: getIdentity,
-                    isAuthenticated: function () {
-                        return !!$cookies.get(TOKEN_KEY);
-                    },
+                    isAuthenticated: isAuthenticated,
 
                     // Old properties
                     getCurrentUser : function() {
@@ -89,34 +93,7 @@
                         if (userObject) {
                             return JSON.parse(userObject);
                         }*/
-                    },
-
-                    /*isAnonymous : function() {
-                        return sessionStorage['currentUser'] == undefined;
-                    },
-
-                    isLoggedIn : function() {
-                        return sessionStorage['currentUser'] != undefined;
-                    },
-
-                    isNormalUser : function() {
-                        var currentUser = this.getCurrentUser();
-                        return (currentUser != undefined) && (!currentUser.isAdmin);
-                    },*/
-
-                    /*isAdmin : function() {
-                        var currentUser = this.getCurrentUser();
-                        return (currentUser != undefined) && (!currentUser.isNormalUser);
-                    },*/
-
-                    /*getAuthHeaders : function() {
-                        var headers = {};
-                        var currentUser = this.getCurrentUser();
-                        if (currentUser) {
-                            headers['Authorization'] = 'Bearer ' + currentUser.access_token;
-                        }
-                        return headers;
-                    }*/
+                    }
                 }
             }]
         );

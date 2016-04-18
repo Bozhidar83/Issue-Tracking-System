@@ -31,9 +31,10 @@
                         <div class="form-group">
                             <label for="available-projects" class="col-md-2 control-label">Project</label>
                             <div class="col-md-9">
-                                <select name="issueProject" data-ng-model="issue.ProjectId" id="available-projects" class="form-control" required="required">
-                                    <option value="" selected="selected">-- Select Project --</option>
-                                    <option value="{{project.Id}}" data-ng-repeat="project in allProjects">{{project.Name}}</option>
+                                <select name="issueProject" data-ng-model="issue.ProjectId"
+                                        ng-options="project as project.Name for project in allProjects"
+                                        ng-change="getPrioritiesForProject(issue.ProjectId)"
+                                        id="available-projects" class="form-control" required="required">
                                 </select>
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
@@ -55,9 +56,13 @@
                         <div class="form-group">
                             <label for="issue-priority" class="col-md-2 control-label">Priority</label>
                             <div class="col-md-9">
-                                <select name="priorityId" data-ng-model="issue.PriorityId" id="issue-priority" class="form-control" required="required">
-                                    <option value="" selected="selected">-- Available Priorities --</option>
-                                    <option value="{{priority.Id}}" data-ng-repeat="priority in currentProject.Priorities">{{priority.Name}}</option>
+                                <!--<select name="priorityId" data-ng-model="issue.PriorityId" id="issue-priority" class="form-control" required="required">
+                                    <option value="" selected="selected">&#45;&#45; Available Priorities &#45;&#45;</option>
+                                    <option value="{{priority.Id}}" data-ng-repeat="priority in currentProject.Priorities track by $index">{{priority.Name}}</option>
+                                </select>-->
+                                <select name="issuePriority" class="form-control inline-input-select" id="issue-priority"
+                                        ng-options="priority as priority.Name for priority in priorities"
+                                        ng-model="issue.priority">
                                 </select>
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">

@@ -130,7 +130,7 @@
 
                                             userRelatedProjectsByAssignedIssues = _.uniqBy(userRelatedProjectsByAssignedIssues, 'Id');
 
-                                            deferred.resolve(_.concat(userProjectsInRoleLeader, userRelatedProjectsByAssignedIssues));
+                                            deferred.resolve(_.uniqBy(_.concat(userProjectsInRoleLeader, userRelatedProjectsByAssignedIssues), 'Id'));
                                         }, function(error) {
                                             deferred.reject(error);
                                         });

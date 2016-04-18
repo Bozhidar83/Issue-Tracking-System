@@ -2,16 +2,15 @@
     "use strict";
 
     angular.module('issueTrackingSystemApp')
-        .directive('paginationDirective', [
+        .directive('affiliatedProjects', [
             function() {
                 return {
                     restrict: 'A',
                     replace: true,
                     scope: {
-                        
+                        userProjects: '=userProjects'
                     },
-                    templateUrl: 'partials/pagination/pagination.html'
-                    //controller: 'AppController'
+                    templateUrl: 'partials/affiliated-projects.html'
                 }
             }
         ])

@@ -15,17 +15,29 @@
                 $scope.authService = authService;
 
                 // To choose from drop down when create new project or add new issue
-                userProfileService.getAllUsers()
-                    .then(function(users) {
-                        //debugger;
-                        $scope.allUsers = users;
-                    });
+                function getAllUsers () {
+                    if (authService.isAuthenticated()) {
+                        userProfileService.getAllUsers()
+                            .then(function(users) {
+                                //debugger;
+                                $scope.allUsers = users;
+                            });
+                    }
+                }
+
+                getAllUsers();
 
                 // Get all projects in the system
-                projectsService.getAllProjects()
-                    .then(function(allProjects) {
-                        $scope.allProjects = allProjects;
-                    });
+                function getAllProjects() {
+                    if (authService.isAuthenticated()) {
+                        projectsService.getAllProjects()
+                            .then(function(allProjects) {
+                                $scope.allProjects = allProjects;
+                            });
+                    }
+                }
+
+                getAllProjects();
 
                 waitForLogin();
 

@@ -57,9 +57,6 @@
                     projectsService.getProjectById($routeParams.id)
                         .then(function(project) {
                             //debugger;
-                            // For check spinner
-                            //$timeout(function(){return;}, 5000);
-
                             var labels = project.Labels;
                             var i = 0;
                             if (labels.length > 0 ) {

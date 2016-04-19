@@ -7,33 +7,13 @@
             'issuesService',
             'projectsService',
             'notifyService',
+            'labelsService',
             'usSpinnerService',
-            function($scope, $location, $routeParams, issuesService, projectsService, notifyService, usSpinnerService) {
-                function getCurrentProject() {
-                    usSpinnerService.spin('spinner-1');
-                    projectsService.getProjectById($routeParams.id)
-                        .then(function(project) {
-                            //debugger;
-                            //console.log($scope.issue.ProjectId);
-                            var priorities = project.Priorities;
-                            var prioritiesAsString = '';
-                            for (i = 0; i < priorities.length; i++) {
-                                if (i < priorities.length - 1) {
-                                    prioritiesAsString += priorities[i].Name + ',';
-                                } else {
-                                    prioritiesAsString += priorities[i].Name;
-                                }
-
-                            }
-                            project.Priorities = prioritiesAsString;
-
-                            //debugger;
-                            usSpinnerService.stop('spinner-1');
-                            $scope.currentProject = project;
-                        });
-                }
-
-                getCurrentProject();
+            function($scope, $location, $routeParams, issuesService, projectsService, notifyService, labelsService, usSpinnerService) {
+                $scope.issue = {
+                    Labels: []
+                };
+                $scope.priorities = [];
 
                 // Get priorities for chosen project
                 $scope.getPrioritiesForProject = function (project) {
@@ -41,23 +21,34 @@
                     $scope.issue.priority = $scope.priorities[0];
                 };
 
-                $scope.createNewIssue = function(issue) {
-                    debugger;
-                    usSpinnerService.spin('spinner-1');
-                    // Set labels in accepted from back-end form
-                    if (issue.Labels) {
-                        var labels = issue.Labels.split(',');
-                        delete issue.Labels;
-                        issue.Labels = [];
-                        for (i = 0; i < labels.length; i++) {
-                            issue.Labels[i] = {
-                                Name: labels[i]
-                            };
-                        }
-                    }
+                $scope.getLabels = function() {
+                    var params = {
+                        filter: $scope.labelToBeAdded ? $scope.labelToBeAdded : ''
+                    };
+                    labelsService.getLabels(params)
+                        .then(function (labelsFromSystem) {
+                            //debugger;
+                            $scope.labels = labelsFromSystem;
+                        });
+                };
 
+                $scope.addLabel = function(label) {
+                    //debugger;
+                    $scope.issue.Labels.push({ Name: label});
+                    $scope.labelToBeAdded = '';
+                    notifyService.showInfo('Label added successfully');
+                };
+
+                $scope.removeLabel = function (label) {
+                    var indexOfLabelForRemove = $scope.issue.Labels.indexOf(label);
+                    $scope.issue.Labels.splice(indexOfLabelForRemove, 1);
+                    notifyService.showInfo('Label removed successfully');
+                };
+
+                $scope.createNewIssue = function(issue) {
+                    usSpinnerService.spin('spinner-1');
                     issue.PriorityId = issue.priority.Id;
-                    issue.ProjectId = issue.ProjectId.Id;
+                    issue.ProjectId = issue.Project.Id;
 
                     issuesService.createIssue(issue)
                         .then(function(response) {
@@ -70,8 +61,8 @@
                     })
                 };
 
+                // EDIT ISSUE
                 $scope.editIssue = function(issue) {
-                    // TODO: Implement full logic
                     usSpinnerService.spin('spinner-1');
                     issuesService.updateIssue(issue, $routeParams.id)
                         .then(function(response) {
@@ -89,37 +80,20 @@
                     issuesService.getIssueById($routeParams.id)
                         .then(function(issue) {
                             //debugger;
+                            $scope.issue = issue;
+                            // Parse issue due date
+                            $scope.issue.DueDate = new Date($scope.issue.DueDate);
+
                             // Get issue's project priorities
-                            issue.AvailablePriorities = [];
                             projectsService.getProjectById(issue.Project.Id)
                                 .then(function(issueProject) {
-                                    //debugger;
-                                    // Set available priorities from issues's project except current issue priority
-                                    issue.AvailablePriorities = issueProject.Priorities.filter(function(priority) {
-                                        return priority.Name != issue.Priority.Name;
-                                    });
-                                    //issue.AvailablePriorities.splice(0, 0, issue.Priority);
-                                    issue.AvailablePriorities.push(issue.Priority);
+                                    $scope.priorities = issueProject.Priorities;
 
-                                    // Parse issue due date
-                                    issue.DueDate = new Date(issue.DueDate);
-
-                                    // Convert issue labels in form, suitable for editing
-                                    issue.LabelsAsString = '';
-                                    for (var i = 0; i < issue.Labels.length; i++) {
-                                        if (i < issue.Labels.length - 1) {
-                                            issue.LabelsAsString += issue.Labels[i].Name + ',';
-                                        } else {
-                                            issue.LabelsAsString += issue.Labels[i].Name;
-                                        }
-                                    }
-
-                                    // Just for test purposes
-                                    //issue.OldPriority = issue.Priority;
+                                    $scope.issue.priority = $scope.priorities.filter(function (priority) {
+                                        return priority.Id === $scope.issue.Priority.Id;
+                                    })[0];
 
                                     usSpinnerService.stop('spinner-1');
-                                    $scope.currentIssue = issue;
-                                    //debugger;
                                 });
                         }, function(error) {
                             // TODO: Global error handling
@@ -127,19 +101,8 @@
                             usSpinnerService.stop('spinner-1');
                         });
                 };
-
+                // TODO: Call function only when editing issue! Not when add new one.
                 $scope.getIssueById();
-
-                // TODO: FIX POSSIBLE BUG: Weather current project is really selected one ot when select from dropdown to choose correctly
-                // Get all priorities for selected project
-                /*if ($routeParams.id) {
-                    usSpinnerService.spin('spinner-1');
-                    projectsService.getProjectById($routeParams.id)
-                        .then(function(project) {
-                            usSpinnerService.stop('spinner-1');
-                            $scope.currentProject = project;
-                        });
-                }*/
             }
         ])
 })();

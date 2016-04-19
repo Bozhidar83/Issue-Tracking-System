@@ -31,10 +31,11 @@
                         <div class="form-group">
                             <label for="available-projects" class="col-md-2 control-label">Project</label>
                             <div class="col-md-9">
-                                <select name="issueProject" data-ng-model="issue.ProjectId"
+                                <select name="issueProject" data-ng-model="issue.Project"
                                         ng-options="project as project.Name for project in allProjects"
-                                        ng-change="getPrioritiesForProject(issue.ProjectId)"
+                                        ng-change="getPrioritiesForProject(issue.Project)"
                                         id="available-projects" class="form-control" required="required">
+                                    <option value="">-- Select Project --</option>
                                 </select>
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
@@ -79,9 +80,35 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="issue-labels" class="col-md-2 control-label">Labels</label>
+                            <label class="col-md-2 control-label" for="addLabel">Add label:</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="issue-labels" data-ng-model="issue.Labels" placeholder="Labels">
+                                <div class="col-md-8">
+                                    <input type="text" id="addLabel" class="form-control" ng-model="labelToBeAdded" ng-change="getLabels()"
+                                           ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-success" ng-click="addLabel(labelToBeAdded)">Add Label</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Labels hint:</label>
+                            <div class="col-md-9" ng-if="labelToBeAdded != ''">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in labels | limitTo: 10 track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Added Labels:</label>
+                            <div class="col-md-9">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in issue.Labels track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                    <a ng-click="removeLabel(label)"><i
+                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">

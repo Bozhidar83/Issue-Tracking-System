@@ -18,6 +18,7 @@
                 };
                 $scope.getAllUserRelatedIssues = function() {
                     usSpinnerService.spin('spinner-1');
+                    //debugger;
                     issuesService.getUserRelatedIssues($scope.issuesParams)
                         .then(function(userIssues) {
                             //debugger;
@@ -30,7 +31,6 @@
                 };
 
                 $scope.getAllUserRelatedIssues();
-
 
                 // Get all user related projects
                 $scope.userProjects = [];
@@ -47,32 +47,6 @@
                             }, function(error) {
                                 usSpinnerService.stop('spinner-1');
                             });
-                    /*projectsService.getProjectsByLeaderId(user.Id, $scope.userProjectsParams)
-                        .then(function(projects) {
-                            //debugger;
-                            var userProjectsInRoleLeader = projects.Projects;
-                            userProjectsInRoleLeader = _.uniqBy(userProjectsInRoleLeader, 'Id');
-
-                            // Get all projects in which current user has assigned issue
-                            var issuesParams = {
-                                'startPage': 1,
-                                'pageSize': MAX_USER_ISSUES
-                            };
-                            //debugger;
-                            issuesService.getUserRelatedIssues(issuesParams)
-                                .then(function(issues) {
-                                    //debugger;
-                                    var userRelatedProjectsByAssignedIssues = issues.Issues.map(function (issue) {
-                                        return issue.Project;
-                                    });
-                                    debugger;
-                                    userRelatedProjectsByAssignedIssues = _.uniqBy(userRelatedProjectsByAssignedIssues, 'Id');
-
-                                    debugger;
-                                    $scope.userProjects = _.concat(userProjectsInRoleLeader, userRelatedProjectsByAssignedIssues);
-                                    debugger;
-                                });
-                        });*/
                 };
 
                 $scope.getUserRelatedProjects();

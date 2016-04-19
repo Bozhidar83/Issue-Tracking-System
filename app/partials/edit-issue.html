@@ -14,7 +14,7 @@
                             <label for="edit-issue-title" class="col-md-2 control-label">Title</label>
                             <div class="col-md-9">
                                 <input type="text" name="issueTitle" class="form-control" id="edit-issue-title"
-                                       data-ng-model="currentIssue.Title" required="required" placeholder="Issue Title">
+                                       data-ng-model="issue.Title" required="required" placeholder="Issue Title">
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
                                 <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.issueTitle.$error.required">Issue title is required!</span>
@@ -24,7 +24,7 @@
                             <label for="edit-issue-description" class="col-md-2 control-label">Description</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" name="issueDescription" id="edit-issue-description"
-                                          data-ng-model="currentIssue.Description" required="required"
+                                          data-ng-model="issue.Description" required="required"
                                           placeholder="Issue Description"></textarea>
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
@@ -32,20 +32,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="edit-issue-available-projects" class="col-md-2 control-label">Project</label>
+                            <label for="available-projects" class="col-md-2 control-label">Project</label>
                             <div class="col-md-9">
-                                <select name="issueProject" data-ng-model="currentIssue.Project" id="edit-issue-available-projects"
-                                        class="form-control" data-ng-disabled="'disabled'" required="required">
-                                    <option value="{{currentIssue.Project.Id}}" selected="selected">{{currentIssue.Project.Name}}</option>
+                                <select name="issueProject" data-ng-model="issue.Project"
+                                        data-ng-disabled="true" id="available-projects" class="form-control" required="required">
+                                        <option value="{{issue.Project.Id}}" selected="selected">{{issue.Project.Name}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="edit-issue-assignee" class="col-md-2 control-label">Assignee</label>
                             <div class="col-md-9">
-                                <select name="assigneeId" data-ng-model="currentIssue.Assignee.Id" id="edit-issue-assignee"
+                                <select name="assigneeId" data-ng-model="issue.Assignee.Id" id="edit-issue-assignee"
                                         class="form-control" required="required">
-                                    <option value="currentIssue.Assignee.Id" selected="selected">{{currentIssue.Assignee.Username}}</option>
+                                    <option value="issue.Assignee.Id" selected="selected">{{issue.Assignee.Username}}</option>
                                     <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
                                 </select>
                             </div>
@@ -53,46 +53,23 @@
                                 <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.assigneeId.$error.required">Issue assignee is required!</span>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="edit-issue-priority" class="col-md-2 control-label">Priority</label>
                             <div class="col-md-9">
-                                <!-- TODO: Fix BUGGY behavior of issue priorities!-->
-                                <!--<!--data-ng-model="currentIssue.PriorityId" id="edit-issue-priority" class="form-control"-->
-                                <select name="priorityId"
-                                        data-ng-options="item as item.Name for item in currentIssue.AvailablePriorities track by item.Id"
-                                        data-ng-model="currentIssue.PriorityId" id="edit-issue-priority" class="form-control"
-                                        required="required">
-                                    <!--<option value="currentIssue.Priority.Id" selected="selected">{{currentIssue.Priority.Name}}</option>
-                                    <option value="{{priority.Id}}" data-ng-repeat="priority in currentIssue.AvailablePriorities">{{priority.Name}}</option>-->
+                                <select name="prioritySelect" class="form-control inline-input-select" id="edit-issue-priority"
+                                        ng-options="priority as priority.Name for priority in priorities"
+                                        ng-model="issue.priority">
                                 </select>
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
                                 <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.priorityId.$error.required">Issue priority is required!</span>
                             </div>
                         </div>
-
-                        <!--<div class="form-group">
-                            <label for="edit-issue-priority" class="col-md-2 control-label">Priority</label>
-                            <div class="col-md-9">
-                                &lt;!&ndash; TODO: Fix BUGGY behavior of issue priorities!&ndash;&gt;
-                                <select name="priorityId" data-ng-model="currentIssue.Priority.Id" id="edit-issue-priority" class="form-control"
-                                        required="required">
-                                    <option value="currentIssue.OldPriority.Id" selected="selected">{{currentIssue.OldPriority.Name}}</option>
-                                    <option value="{{priority.Id}}" data-ng-repeat="priority in currentIssue.AvailablePriorities">{{priority.Name}}</option>
-                                </select>
-                                <span>{{currentIssue.OldPriority.Name}}</span><br>
-                                <span>{{currentIssue.OldPriority.Id}}</span>
-                            </div>
-                        </div>-->
-
-                        <!---->
-                        <!---->
                         <div class="form-group">
                             <label for="edit-issue-duedate" class="col-md-2 control-label">Due Date</label>
                             <div class="col-md-9">
                                 <input type="date" name="issueDueDate" class="form-control" id="edit-issue-duedate"
-                                       data-ng-model="currentIssue.DueDate" data-ng-required="required">
+                                       data-ng-model="issue.DueDate" data-ng-required="required">
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
                                 <span class="error" data-ng-show="editIssueForm.$dirty && editIssueForm.issueDueDate.$error.required">Issue due date is required!</span>
@@ -101,10 +78,36 @@
                         <div class="form-group">
                             <label for="edit-issue-labels" class="col-md-2 control-label">Labels</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="edit-issue-labels" data-ng-model="currentIssue.LabelsAsString"
-                                       data-ng-required="required" placeholder="Labels">
+                                <div class="col-md-8">
+                                    <input type="text" id="edit-issue-labels" class="form-control" ng-model="labelToBeAdded" ng-change="getLabels()"
+                                           ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-success" ng-click="addLabel(labelToBeAdded)">Add Label</button>
+                                </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Labels hint:</label>
+                            <div class="col-md-9" ng-if="labelToBeAdded != ''">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in labels | limitTo: 10 track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                    <!--<a ng-click="removeLabel(label)"><i
+                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>-->
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Added Labels:</label>
+                            <div class="col-md-9">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in issue.Labels track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                    <a ng-click="removeLabel(label)"><i
+                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                </span>
+                            </div>
                         <div class="form-group">
                             <div class="col-md-9 col-md-offset-2">
                                 <button id="button-edit-issue"

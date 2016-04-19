@@ -123,13 +123,9 @@
 
                 $scope.addNewComment = function(comment) {
                     usSpinnerService.spin('spinner-1');
-                    var newComment = {
-                        Text: comment
-                    };
-                    issuesService.addComment(newComment, $route.current.params.id)
+                    issuesService.addComment(comment, $route.current.params.id)
                         .then(function(response) {
                             getComments();
-                            $scope.commentText = '';
                             notifyService.showInfo('Comment added successfully');
                             usSpinnerService.stop('spinner-1');
                         }, function(error) {

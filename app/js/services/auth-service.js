@@ -8,9 +8,10 @@
             '$cookies',
             'BASE_URL',
             'TOKEN_TYPE',
+            'TOKEN_KEY',
             'identity',
-            function ($http, $q, $cookies, BASE_URL, TOKEN_TYPE, identity) {
-                var TOKEN_KEY = 'authentication'; // cookie key
+            function ($http, $q, $cookies, BASE_URL, TOKEN_TYPE, TOKEN_KEY, identity) {
+                //var TOKEN_KEY = 'authentication'; // cookie key
 
                 function loginUser(userData) {
                     var deferred = $q.defer();
@@ -79,13 +80,20 @@
                     return !!$cookies.get(TOKEN_KEY);
                 }
 
+                function isAdmin() {
+                    return identity.getUser()
+                        .then(function(user) {
+                            return user.isAdmin;
+                        });
+                }
+
                 return {
                     login: loginUser,
                     register: registerUser,
                     logout: logout,
                     identity: getIdentity,
                     isAuthenticated: isAuthenticated,
-
+                    isAdmin: isAdmin,
                     // Old properties
                     getCurrentUser : function() {
                         return identity.getUser();

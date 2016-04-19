@@ -53,22 +53,19 @@
                 </div>
             </div>
         </div>
-        <!-- Check for project leader (same privileges as admin about issue)-->
-        <div class="row" data-ng-if="currentLoggedInUser.isAdmin ||
-             currentLoggedInUser.Id == issue.Assignee.Id ||
-             currentLoggedInUser.Id == issue.ProjectLeadId
-        ">
+        <!-- Check for project leader (same privileges as admin about issue) or assignee-->
+        <div class="row" data-ng-if="currentLoggedInUser.isAdmin || currentLoggedInUser.Id == issue.ProjectLeadId">
             <a href="#/issues/{{issue.Id}}/edit" class="btn btn-primary">Edit</a>
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1">
         <div class="page-header"><h3 class="text-center">Available Statuses</h3></div>
         <!-- TODO: Change look of available statuses -->
-        <ul data-ng-if="issue.AvailableStatuses.length">
+        <ul id="statuses-list" data-ng-if="issue.AvailableStatuses.length">
             <li data-ng-repeat="status in issue.AvailableStatuses">
                 <span>-----{{status.Name}}</span>
-                <!-- TODO: Add check for project leader (same privileges as admin about issue) and for assignee-->
-                <button data-ng-if="currentLoggedInUser.isAdmin" class="btn btn-primary"
+                <button data-ng-if="currentLoggedInUser.isAdmin || currentLoggedInUser.Id == issue.Assignee.Id ||
+                        currentLoggedInUser.Id == issue.ProjectLeadId" class="btn btn-success"
                         data-ng-click="changeStatus(status.Id)">Change</button>
             </li>
         </ul>
@@ -77,6 +74,5 @@
 </div>
 <br>
 <div data-comment-directive></div>
-<div data-add-comment-directive data-ng-if="currentLoggedInUser.isAdmin ||
-             currentLoggedInUser.Id == issue.Assignee.Id ||
+<div data-add-comment-directive data-ng-if="currentLoggedInUser.Id == issue.Assignee.Id ||
              currentLoggedInUser.Id == issue.ProjectLeadId"></div>

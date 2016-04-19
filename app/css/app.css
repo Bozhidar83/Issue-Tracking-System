@@ -155,6 +155,11 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     height: 16px;
 }
 
+/*Issue page*/
+#statuses-list li {
+    list-style-type: none;
+}
+
 /* Button and link effects */
 /* Float Shadow */
 .hvr-float-shadow {

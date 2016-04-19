@@ -6,12 +6,20 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
+                <div class="col-md-12 text-center"><h3>Personal Info</h3></div>
                 <div class="col-xs-10 col-md-2 thumbnail">
                     <img ng-if="currentLoggedInUser.ProfileImage" data-ng-src="currentLoggedInUser.ProfileImage" alt="profile-image" class="profile-image">
                     <img ng-if="!currentLoggedInUser.ProfileImage" data-ng-src="../img/default-no-profile-pic.jpg" alt="profile-image" class="profile-image">
                 </div>
-                <div class="col-md-3">
-                    Username: {{currentLoggedInUser.Username}}
+                <div class="col-md-6">
+                    <div class="col-md-12">
+                        <div class="col-md-3 text-right">
+                            <label for="username">Username:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <span id="username">{{currentLoggedInUser.Username}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -20,7 +28,7 @@
     <div class="row">
         <!-- Navigation box for logged in normal users (not admins) -->
         <div ng-if="authService.isAuthenticated()" class="col-md-2 box">
-            <h2>Navigation</h2>
+            <h2>Manage Account</h2>
             <ul class="sidebar-menu">
                 <li><a href="#/profile/password">Edit Password</a></li>
             </ul>

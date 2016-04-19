@@ -52,6 +52,7 @@
                 function waitForLogin() {
                     identity.getUser()
                         .then(function(user) {
+                            //debugger;
                             $scope.currentLoggedInUser = user;
                         });
                 }

@@ -4,12 +4,13 @@
             '$scope',
             '$location',
             '$routeParams',
+            '$route',
             'issuesService',
             'projectsService',
             'notifyService',
             'labelsService',
             'usSpinnerService',
-            function($scope, $location, $routeParams, issuesService, projectsService, notifyService, labelsService, usSpinnerService) {
+            function($scope, $location, $routeParams, $route, issuesService, projectsService, notifyService, labelsService, usSpinnerService) {
                 $scope.issue = {
                     Labels: []
                 };
@@ -104,6 +105,21 @@
                 };
                 // TODO: Call function only when editing issue! Not when add new one.
                 $scope.getIssueById();
+
+                $scope.changeStatus = function (statusId) {
+                    //debugger;
+                    usSpinnerService.spin('spinner-1');
+                    issuesService.changeStatus($routeParams.id, statusId)
+                        .then(function(response) {
+                            $route.reload();
+                            //$location.path('#/issues/' + $routeParams.id);
+                            notifyService.showInfo('Issue status changed successfully!');
+                            usSpinnerService.stop('spinner-1');
+                        }, function(error) {
+                            notifyService.showError('Cannot change status!', error.message);
+                            usSpinnerService.stop('spinner-1');
+                        });
+                };
             }
         ])
 })();

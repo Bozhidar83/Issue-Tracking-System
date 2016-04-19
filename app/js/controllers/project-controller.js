@@ -42,7 +42,7 @@
 
                 $scope.createNewProject = function(project) {
                     usSpinnerService.spin('spinner-1');
-                    //debugger;
+
                     // Set priorities in accepted from back-end form
                     var reformattedPriorities = project.Priorities.split(',').map(function(priority) {
                         return {
@@ -50,7 +50,7 @@
                         }
                     });
                     project.Priorities = reformattedPriorities;
-                    //debugger;
+
                     projectsService.createProject(project)
                         .then(function(response) {
                             usSpinnerService.stop('spinner-1');
@@ -67,42 +67,26 @@
                     projectsService.getProjectById($routeParams.id)
                         .then(function(project) {
                             //debugger;
-                            var labels = project.Labels;
-                            var i = 0;
-                            if (labels.length > 0 ) {
-                                var labelsAsString = '';
-                                for (i = 0; i < labels.length; i++) {
-                                    if (i < labels.length - 1) {
-                                        labelsAsString += labels[i].Name + ',';
-                                    } else {
-                                        labelsAsString += labels[i].Name;
-                                    }
-                                }
-                            }
-                            project.Labels = labelsAsString;
-                            project.LabelsAsArray = labels;
-                            
-                            var priorities = project.Priorities;
-                            var prioritiesAsString = '';
-                            for (i = 0; i < priorities.length; i++) {
-                                if (i < priorities.length - 1) {
-                                    prioritiesAsString += priorities[i].Name + ',';
-                                } else {
-                                    prioritiesAsString += priorities[i].Name;
-                                }
+                            $scope.project = project;
 
-                            }
-                            project.Priorities = prioritiesAsString;
+                            /*$scope.project.editedLabels = $scope.project.Labels.map(function(label) {
+                                return label.Name;
+                            });*/
+
+                            $scope.project.PrioritiesArr = $scope.project.Priorities.map(function(priority) {
+                                return priority.Name;
+                            });
+
+                            $scope.project.projectPriorities = $scope.project.PrioritiesArr.join(',');
 
                             // Get project issues
-                            project.Issues = [];
+                            $scope.project.Issues = [];
                             projectsService.getProjectIssuesById(project.Id)
                                 .then(function(projectIssues) {
-                                    project.Issues = projectIssues;
+                                    $scope.project.Issues = projectIssues;
+                                    usSpinnerService.stop('spinner-1');
                                 });
                             //debugger;
-                            usSpinnerService.stop('spinner-1');
-                            $scope.currentProject = project;
                         });
                 }
 
@@ -110,32 +94,19 @@
                     usSpinnerService.spin('spinner-1');
                     //debugger;
                     // set priorities
-                    var priorities = project.Priorities.split(',');
-                    project.priorities = [];
-                    delete project.Priorities;
-                    var i = 0;
-                    for (i = 0; i < priorities.length; i++) {
-                        project.priorities[i] = {
-                            Name: priorities[i]
+                    project.Priorities = project.projectPriorities.split(',').map(function(priority) {
+                        return {
+                            Name: priority.trim()
                         };
-                    }
+                    });
 
-                    // set labels
-                    if (project.Labels) {
-                        var labels = project.Labels.split(',');
-                        delete project.Labels;
-                        project.labels = [];
-                        for (i = 0; i < labels.length; i++) {
-                            project.labels[i] = {
-                                Name: labels[i]
-                            };
-                        }
-                    }
+                    /*project.Labels = $scope.project.editedLabels.map(function(label) {
+                        return {
+                            Name: label
+                        };
+                    });*/
 
-                    if (!project.hasOwnProperty('LeadId') && project.hasOwnProperty('Lead')) {
-                        project.LeadId = project.Lead.Id;
-                        delete project.Lead;
-                    }
+                    project.LeadId = project.Lead.Id;
 
                     //debugger;
                     projectsService.updateProject(project, $routeParams.id)
@@ -145,7 +116,7 @@
                             $location.path('#/projects');
                         }, function(error) {
                             usSpinnerService.stop('spinner-1');
-                            notifyService.showError('Project cannot be edited!' + error);
+                            notifyService.showError('Project cannot be edited!', error.message);
                         })
                 };
 

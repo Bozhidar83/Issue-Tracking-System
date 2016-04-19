@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1 class="alert-warning">{{currentProject.Name}}</h1>
+    <h1 class="alert-warning">{{project.Name}}</h1>
 </div>
 <div class="row">
     <div class="col-md-4">
@@ -9,43 +9,44 @@
                 <div class="panel-body project-page">
                     <div class="row">
                         <label for="project-page-name">Name: </label>
-                        <span id="project-page-name">{{currentProject.Name}}</span>
+                        <span id="project-page-name">{{project.Name}}</span>
                     </div>
                     <div class="row">
                         <label for="project-page-name">Project Key: </label>
-                        <span id="project-page-project-key">{{currentProject.ProjectKey}}</span>
+                        <span id="project-page-project-key">{{project.ProjectKey}}</span>
                     </div>
                     <div class="row">
                         <label for="project-page-description">Description: </label>
-                        <span id="project-page-description">{{currentProject.Description}}</span>
+                        <span id="project-page-description">{{project.Description}}</span>
                     </div>
                     <div class="row">
                         <label for="project-page-name">Leader: </label>
-                        <span id="project-page-leader">{{currentProject.Lead.Username}}</span>
+                        <span id="project-page-leader">{{project.Lead.Username}}</span>
                     </div>
                     <div class="row">
                         <label>Labels: </label>
                         <span class="project-page-labels label label-info"
-                              data-ng-if="currentProject.LabelsAsArray"
-                              ng-repeat="label in currentProject.LabelsAsArray">{{label.Name}}&nbsp;</span>
-                        <span data-ng-if="!currentProject.Labels">No labels available</span>
+                              data-ng-if="project.Labels.length"
+                              data-ng-repeat="label in project.Labels track by $index">{{label.Name}}&nbsp;</span>
+                        <span data-ng-if="!project.Labels.length">No labels available</span>
                     </div>
                     <div class="row">
                         <label for="project-page-priorities">Priorities: </label>
-                        <span id="project-page-priorities">{{currentProject.Priorities}}</span>
+                        <!--<span id="project-page-priorities" data-ng-repeat="priority in project.PrioritiesArr track by $index">{{priority}}</span>-->
+                        <span id="project-page-priorities" data-nd-model="project.projectPriorities">{{project.projectPriorities}}</span>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
-            <a href="#/projects/{{currentProject.Id}}/edit" class="btn btn-primary">Edit</a>
-            <a href="#/projects/{{currentProject.Id}}/add-issue" data-ng-click="open()" class="btn btn-primary">Add Issue</a>
+            <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>
+            <a href="#/projects/{{project.Id}}/add-issue" data-ng-click="open()" class="btn btn-primary">Add Issue</a>
         </div>
     </div>
     <div class="col-md-7 col-md-offset-1">
         <div class="page-header"><h3 class="text-center">Project Issues</h3></div>
-        <div class="text-center" data-ng-if="!currentProject.Issues.length">No issues added to the project.</div>
-        <div data-ng-if="currentProject.Issues.length">
+        <div class="text-center" data-ng-if="!project.Issues.length">No issues added to the project.</div>
+        <div data-ng-if="project.Issues.length">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -56,7 +57,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="issue in currentProject.Issues">
+                <tr data-ng-repeat="issue in project.Issues">
                     <td>
                         <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                     </td>

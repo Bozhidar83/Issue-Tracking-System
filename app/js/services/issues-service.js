@@ -58,11 +58,25 @@
                     return deferred.promise;
                 }
 
+                function changeStatus(issueId, statusId) {
+                    var deferred = $q.defer();
+
+                    $http.put(BASE_URL + 'issues/' + issueId + '/changestatus?statusId=' + statusId, {headers:{'ContentType':'application/x-www-form-urlencoded'}})
+                        .then(function(response) {
+                            deferred.resolve(response.data);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 return {
                     createIssue: createIssue,
                     getIssueById: getIssueById,
                     updateIssue: updateIssue,
-                    getUserRelatedIssues: getUserRelatedIssues
+                    getUserRelatedIssues: getUserRelatedIssues,
+                    changeStatus: changeStatus
                 }
             }
         ])

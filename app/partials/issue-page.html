@@ -64,8 +64,9 @@
         <ul data-ng-if="issue.AvailableStatuses.length">
             <li data-ng-repeat="status in issue.AvailableStatuses">
                 <span>-----{{status.Name}}</span>
-                <!-- TODO: Add check for project leader (same privileges as admin about issue)-->
-                <button data-ng-if="currentLoggedInUser.isAdmin" class="btn btn-primary">Change</button>
+                <!-- TODO: Add check for project leader (same privileges as admin about issue) and for assignee-->
+                <button data-ng-if="currentLoggedInUser.isAdmin" class="btn btn-primary"
+                        data-ng-click="changeStatus(status.Id)">Change</button>
             </li>
         </ul>
         <p data-ng-if="!issue.AvailableStatuses.length">No currently available statuses</p>

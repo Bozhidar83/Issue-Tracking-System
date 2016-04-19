@@ -1,9 +1,7 @@
 <div class="container">
-
     <div class="page-header">
         <h1>Update Project</h1>
     </div>
-
     <form class="form-horizontal" name="editProjectForm">
         <fieldset>
             <div class="col-md-8 col-md-offset-2">
@@ -16,7 +14,7 @@
                             <label for="edit-project-name" class="col-md-2 control-label">Name</label>
                             <div class="col-md-9">
                                 <input type="text" name="projectName" class="form-control" id="edit-project-name"
-                                       data-ng-model="currentProject.Name" required="required" placeholder="Project Name">
+                                       data-ng-model="project.Name" required="required" placeholder="Project Name">
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
                                 <span class="error" data-ng-show="editProjectForm.$dirty && editProjectForm.projectName.$error.required">Project name is required!</span>
@@ -26,7 +24,7 @@
                             <label for="edit-project-description" class="col-md-2 control-label">Description</label>
                             <div class="col-md-9">
                                 <textarea class="form-control" name="description" id="edit-project-description"
-                                          data-ng-model="currentProject.Description" required="required"
+                                          data-ng-model="project.Description" required="required"
                                           placeholder="Project Description"></textarea>
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
@@ -37,16 +35,16 @@
                             <label for="project-edit-project-key" class="col-md-2 control-label">Project Key</label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" id="project-edit-project-key"
-                                       data-ng-model="currentProject.ProjectKey" data-ng-disabled="true"
+                                       data-ng-model="project.ProjectKey" data-ng-disabled="true"
                                        required="required" placeholder="Project Key">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="edit-project-leader" class="col-md-2 control-label">Leader</label>
                             <div class="col-md-9">
-                                <select name="leadId" data-ng-model="currentProject.Lead.Id" id="edit-project-leader"
+                                <select name="leadId" data-ng-model="project.Lead.Id" id="edit-project-leader"
                                         class="form-control" required="required">
-                                    <option value="currentProject.Lead.Id" selected="selected">{{currentProject.Lead.Name}}</option>
+                                    <option value="project.Lead.Id" selected="selected">{{project.Lead.Name}}</option>
                                     <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
                                 </select>
                             </div>
@@ -58,7 +56,7 @@
                             <label for="edit-project-priorities" class="col-md-2 control-label">Priorities</label>
                             <div class="col-md-9">
                                 <input type="text" name="priorities" class="form-control" id="edit-project-priorities"
-                                       data-ng-model="currentProject.Priorities" required="required" placeholder="Priorities">
+                                       data-ng-model="project.projectPriorities" required="required" placeholder="Priorities">
                                 <p class="text-left small">(separated by comma)</p>
                             </div>
                             <div class="col-md-9 col-md-offset-2 text-left">
@@ -66,10 +64,36 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="edit-project-labels" class="col-md-2 control-label">Labels</label>
+                            <label for="project-labels" class="col-md-2 control-label">Labels</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="edit-project-labels"
-                                       data-ng-model="currentProject.Labels" placeholder="Labels">
+                                <div class="col-md-8">
+                                    <input type="text" name="projectLabel" id="project-labels" data-ng-change="getLabels()" data-ng-model="labelToBeAdded"
+                                           ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}" autocomplete="off">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-success" data-ng-click="addLabel(labelToBeAdded)"
+                                            data-ng-disabled="editProjectForm.projectLabel.$pristine || labelToBeAdded == ''">Add Label</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Labels hint:</label>
+                            <div class="col-md-9" ng-if="labelToBeAdded != ''">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in labels | limitTo: 10 track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Added Labels:</label>
+                            <div class="col-md-9">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in project.Labels track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                    <a ng-click="removeLabel(label)"><i
+                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -78,7 +102,7 @@
                                         data-ng-disabled="editProjectForm.$invalid ||
                                         editProjectForm.projectName.$invalid ||
                                         editProjectForm.$pristine"
-                                        data-ng-click="editProject(currentProject)"
+                                        data-ng-click="editProject(project)"
                                         class="btn btn-primary">Update Project</button>
                             </div>
                         </div>

@@ -83,7 +83,8 @@
                                            ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}">
                                 </div>
                                 <div class="col-md-4">
-                                    <button class="btn btn-success" ng-click="addLabel(labelToBeAdded)">Add Label</button>
+                                    <button class="btn btn-success" ng-click="addLabel(labelToBeAdded)"
+                                            data-ng-disabled="editIssueForm.label.$pristine || labelToBeAdded == ''">Add Label</button>
                                 </div>
                             </div>
                         </div>

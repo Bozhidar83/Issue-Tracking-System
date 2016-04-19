@@ -53,8 +53,11 @@
                 </div>
             </div>
         </div>
-        <!-- TODO: Add check for project leader (same privileges as admin about issue)-->
-        <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
+        <!-- Check for project leader (same privileges as admin about issue)-->
+        <div class="row" data-ng-if="currentLoggedInUser.isAdmin ||
+             currentLoggedInUser.Id == issue.Assignee.Id ||
+             currentLoggedInUser.Id == issue.ProjectLeadId
+        ">
             <a href="#/issues/{{issue.Id}}/edit" class="btn btn-primary">Edit</a>
         </div>
     </div>
@@ -72,3 +75,8 @@
         <p data-ng-if="!issue.AvailableStatuses.length">No currently available statuses</p>
     </div>
 </div>
+<br>
+<div data-comment-directive></div>
+<div data-add-comment-directive data-ng-if="currentLoggedInUser.isAdmin ||
+             currentLoggedInUser.Id == issue.Assignee.Id ||
+             currentLoggedInUser.Id == issue.ProjectLeadId"></div>

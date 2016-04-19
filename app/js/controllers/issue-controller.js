@@ -89,8 +89,9 @@
                             // Get issue's project priorities
                             projectsService.getProjectById(issue.Project.Id)
                                 .then(function(issueProject) {
+                                    //debugger;
                                     $scope.priorities = issueProject.Priorities;
-
+                                    $scope.issue.ProjectLeadId = issueProject.Lead.Id;
                                     $scope.issue.priority = $scope.priorities.filter(function (priority) {
                                         return priority.Id === $scope.issue.Priority.Id;
                                     })[0];
@@ -107,7 +108,6 @@
                 $scope.getIssueById();
 
                 $scope.changeStatus = function (statusId) {
-                    //debugger;
                     usSpinnerService.spin('spinner-1');
                     issuesService.changeStatus($routeParams.id, statusId)
                         .then(function(response) {
@@ -120,6 +120,34 @@
                             usSpinnerService.stop('spinner-1');
                         });
                 };
+
+                $scope.addNewComment = function(comment) {
+                    usSpinnerService.spin('spinner-1');
+                    var newComment = {
+                        Text: comment
+                    };
+                    issuesService.addComment(newComment, $route.current.params.id)
+                        .then(function(response) {
+                            getComments();
+                            $scope.commentText = '';
+                            notifyService.showInfo('Comment added successfully');
+                            usSpinnerService.stop('spinner-1');
+                        }, function(error) {
+                            notifyService.showError('Cannot add comment!', error.message);
+                            usSpinnerService.stop('spinner-1');
+                        });
+                };
+
+                function getComments() {
+                    usSpinnerService.spin('spinner-1');
+                    issuesService.getComments($route.current.params.id)
+                        .then(function(issueComments) {
+                            $scope.comments = issueComments;
+                            usSpinnerService.stop('spinner-1');
+                        });
+                }
+
+                getComments();
             }
         ])
 })();

@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
+        <div class="row" data-ng-if="currentLoggedInUser.isAdmin || currentLoggedInUser.Id == project.Lead.Id">
             <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>
             <a href="#/projects/{{project.Id}}/add-issue" data-ng-click="open()" class="btn btn-primary">Add Issue</a>
         </div>

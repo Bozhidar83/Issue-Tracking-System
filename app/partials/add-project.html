@@ -1,9 +1,7 @@
 <div class="container">
-
     <div class="page-header">
         <h1>Add Project</h1>
     </div>
-
     <form class="form-horizontal" name="addNewProjectForm">
         <fieldset>
             <div class="col-md-8 col-md-offset-2">
@@ -61,7 +59,33 @@
                         <div class="form-group">
                             <label for="project-labels" class="col-md-2 control-label">Labels</label>
                             <div class="col-md-9">
-                                <input type="text" class="form-control" id="project-labels" data-ng-model="project.Labels" placeholder="Labels">
+                                <div class="col-md-8">
+                                    <input type="text" id="project-labels" data-ng-change="getLabels()" data-ng-model="labelToBeAdded"
+                                           ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}">
+                                </div>
+                                <div class="col-md-4">
+                                    <button class="btn btn-success" data-ng-click="addLabel(labelToBeAdded)">Add Label</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Labels hint:</label>
+                            <div class="col-md-9" ng-if="labelToBeAdded != ''">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in labels | limitTo: 10 track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Added Labels:</label>
+                            <div class="col-md-9">
+                                <span class="tag label label-info inline-block-span"
+                                      data-ng-repeat="label in project.Labels track by $index">
+                                    <span class="text-span">{{label.Name}}</span>
+                                    <a ng-click="removeLabel(label)"><i
+                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group">
@@ -79,27 +103,3 @@
         </fieldset>
     </form>
 </div>
-<!--
-<div> &lt;!&ndash;ng-controller="ModalDemoCtrl"&ndash;&gt;
-    <script type="text/ng-template" id="add-project.html">
-        <div class="modal-header">
-            <h3 class="modal-title">I'm a modal!</h3>
-        </div>
-        <div class="modal-body">
-            <ul>
-                <li ng-repeat="item in items">
-                    <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                </li>
-            </ul>
-            Selected: <b>{{ selected.item }}</b>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
-
-    <button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
-    <button type="button" class="btn btn-default" ng-click="open('lg')">Large modal</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-</div>-->

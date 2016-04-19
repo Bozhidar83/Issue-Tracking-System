@@ -36,12 +36,13 @@
                 $scope.userProjects = [];
                 $scope.userProjectsParams = {
                     'startPage': 1,
-                    'pageSize': PAGE_SIZE
+                    'pageSize': PAGE_SIZE * 2
                 };
                 $scope.getUserRelatedProjects = function() {
                         usSpinnerService.spin('spinner-1');
                         projectsService.getUserAffiliatedProjects($scope.userProjectsParams)
                             .then(function(projects) {
+                                //debugger;
                                 usSpinnerService.stop('spinner-1');
                                 $scope.userProjects = projects;
                             }, function(error) {

@@ -7,39 +7,49 @@
             '$location',
             '$routeParams',
             '$timeout',
-            /*'$uibModal',*/
             'projectsService',
+            'labelsService',
             'userProfileService',
             'notifyService',
             'usSpinnerService',
             'PAGE_SIZE',
-            function ProjectController($scope, $location, $routeParams, $timeout, /*$uibModal,*/ projectsService, userProfileService, notifyService, usSpinnerService, PAGE_SIZE) {
+            function ProjectController($scope, $location, $routeParams, $timeout, projectsService, labelsService, userProfileService, notifyService, usSpinnerService, PAGE_SIZE) {
+                $scope.project = {
+                    Labels: []
+                };
+
+                $scope.getLabels = function() {
+                    var params = {
+                        filter: $scope.labelToBeAdded ? $scope.labelToBeAdded : ''
+                    };
+                    labelsService.getLabels(params)
+                        .then(function(response) {
+                            $scope.labels = response;
+                        });
+                };
+
+                $scope.addLabel = function(label) {
+                    $scope.project.Labels.push({Name: label});
+                    $scope.labelToBeAdded = '';
+                    notifyService.showInfo('Label added successfully')
+                };
+
+                $scope.removeLabel = function(label) {
+                    var indexOfTheLabel = $scope.project.Labels.indexOf(label);
+                    $scope.project.Labels.splice(indexOfTheLabel, 1);
+                    notifyService.showInfo('Label removed successfully');
+                };
+
                 $scope.createNewProject = function(project) {
                     usSpinnerService.spin('spinner-1');
                     //debugger;
                     // Set priorities in accepted from back-end form
-                    var priorities = project.Priorities.split(',');
-                    project.priorities = [];
-                    delete project.Priorities;
-                    var i = 0;
-                    for (i = 0; i < priorities.length; i++) {
-                        project.priorities[i] = {
-                            Name: priorities[i]
-                        };
-                    }
-
-                    // Set labels in accepted from back-end form
-                    if (project.Labels) {
-                        var labels = project.Labels.split(',');
-                        delete project.Labels;
-                        project.labels = [];
-                        for (i = 0; i < labels.length; i++) {
-                            project.labels[i] = {
-                                Name: labels[i]
-                            };
+                    var reformattedPriorities = project.Priorities.split(',').map(function(priority) {
+                        return {
+                            Name: priority.trim()
                         }
-                    }
-
+                    });
+                    project.Priorities = reformattedPriorities;
                     //debugger;
                     projectsService.createProject(project)
                         .then(function(response) {
@@ -157,53 +167,4 @@
                 $scope.getProjects();
             }
         ]);
-
-
-    // TEST MODAL WINDOW
-    /*angular.module('issueTrackingSystemApp').controller('ModalDemoCtrl', function ($scope, $uibModal) {
-
-        $scope.items = ['item1', 'item2', 'item3'];
-
-        $scope.animationsEnabled = true;
-
-        $scope.open = function (size) {
-
-            var modalInstance = $uibModal.open({
-                animation: $scope.animationsEnabled,
-                templateUrl: 'myModalContent.html',
-                controller: 'ModalInstanceCtrl',
-                size: size,
-                resolve: {
-                    items: function () {
-                        return $scope.items;
-                    }
-                }
-            });
-
-            modalInstance.result
-                .then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            });
-        };
-    });*/
-
-// Please note that $uibModalInstance represents a modal window (instance) dependency.
-// It is not the same as the $uibModal service used above.
-
-    /*angular.module('issueTrackingSystemApp')
-        .controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, items) {
-
-        $scope.items = items;
-        $scope.selected = {
-            item: $scope.items[0]
-        };
-
-        $scope.ok = function () {
-            $uibModalInstance.close($scope.selected.item);
-        };
-
-        $scope.cancel = function () {
-            $uibModalInstance.dismiss('cancel');
-        };
-    });*/
 })();

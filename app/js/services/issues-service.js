@@ -25,7 +25,6 @@
                     //debugger;
                     $http.get(BASE_URL + 'issues/' + id)
                         .then(function(response) {
-                            //debugger;
                             deferred.resolve(response.data);
                         }, function(error) {
                             deferred.reject(error);

@@ -34,7 +34,7 @@
 
                 $scope.addLabel = function(label) {
                     //debugger;
-                    $scope.issue.Labels.push({ Name: label});
+                    $scope.issue.Labels.push({Name: label});
                     $scope.labelToBeAdded = '';
                     notifyService.showInfo('Label added successfully');
                 };
@@ -81,6 +81,7 @@
                         .then(function(issue) {
                             //debugger;
                             $scope.issue = issue;
+
                             // Parse issue due date
                             $scope.issue.DueDate = new Date($scope.issue.DueDate);
 

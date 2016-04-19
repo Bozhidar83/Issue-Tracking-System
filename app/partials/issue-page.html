@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1 class="alert-success">{{currentIssue.Title}}</h1>
+    <h1 class="alert-success">{{issue.Title}}</h1>
 </div>
 <div class="row">
     <div class="col-md-7">
@@ -9,64 +9,65 @@
                 <div class="panel-body issue-page">
                     <div class="row">
                         <label for="issue-page-title">Title: </label>
-                        <span id="issue-page-title">{{currentIssue.Title}}</span>
+                        <span id="issue-page-title">{{issue.Title}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-description">Description: </label>
-                        <span id="issue-page-description">{{currentIssue.Description}}</span>
+                        <span id="issue-page-description">{{issue.Description}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-issue-key">Issue Key: </label>
-                        <span id="issue-page-issue-key">{{currentIssue.IssueKey}}</span>
+                        <span id="issue-page-issue-key">{{issue.IssueKey}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-assignee">Assignee: </label>
-                        <span id="issue-page-assignee">{{currentIssue.Assignee.Username}}</span>
+                        <span id="issue-page-assignee">{{issue.Assignee.Username}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-priority">Priority: </label>
-                        <span id="issue-page-priority">{{currentIssue.Priority.Name}}</span>
+                        <span id="issue-page-priority">{{issue.Priority.Name}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-duedate">Due Date: </label>
-                        <span id="issue-page-duedate">{{currentIssue.DueDate | date: 'dd/MM/yyyy'}}</span>
+                        <span id="issue-page-duedate">{{issue.DueDate | date: 'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-author">Author: </label>
-                        <span id="issue-page-author">{{currentIssue.Author.Username}}</span>
+                        <span id="issue-page-author">{{issue.Author.Username}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-project">Project: </label>
-                        <span id="issue-page-project">{{currentIssue.Project.Name}}</span>
+                        <span id="issue-page-project">{{issue.Project.Name}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-status">Status: </label>
-                        <span id="issue-page-status">{{currentIssue.Status.Name}}</span>
+                        <span id="issue-page-status">{{issue.Status.Name}}</span>
                     </div>
                     <div class="row">
                         <label>Labels: </label>
                         <span class="issue-page-labels label label-info"
-                              data-ng-if="currentIssue.Labels.length"
-                              data-ng-repeat="label in currentIssue.Labels">{{label.Name}}&nbsp;</span>
-                        <span data-ng-if="!currentIssue.Labels.length">No labels available</span>
+                              data-ng-if="issue.Labels.length"
+                              data-ng-repeat="label in issue.Labels">{{label.Name}}&nbsp;</span>
+                        <span data-ng-if="!issue.Labels.length">No labels available</span>
                     </div>
                 </div>
             </div>
         </div>
         <!-- TODO: Add check for project leader (same privileges as admin about issue)-->
         <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
-            <a href="#/issues/{{currentIssue.Id}}/edit" class="btn btn-primary">Edit</a>
+            <a href="#/issues/{{issue.Id}}/edit" class="btn btn-primary">Edit</a>
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1">
         <div class="page-header"><h3 class="text-center">Available Statuses</h3></div>
         <!-- TODO: Change look of available statuses -->
-        <ul>
-            <li data-ng-repeat="status in currentIssue.AvailableStatuses">
+        <ul data-ng-if="issue.AvailableStatuses.length">
+            <li data-ng-repeat="status in issue.AvailableStatuses">
                 <span>-----{{status.Name}}</span>
                 <!-- TODO: Add check for project leader (same privileges as admin about issue)-->
                 <button data-ng-if="currentLoggedInUser.isAdmin" class="btn btn-primary">Change</button>
             </li>
         </ul>
+        <p data-ng-if="!issue.AvailableStatuses.length">No currently available statuses</p>
     </div>
 </div>

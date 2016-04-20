@@ -197,8 +197,27 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 }
 
 #search-dashboard {
-    background-color: #beff06;
+    background-color: #75ff03;
 }
+
+/*#search-container #search-dashboard {
+    color: white;
+}*/
+
+/*::-webkit-input-placeholder { !* WebKit, Blink, Edge *!
+    color: white;
+}
+:-moz-placeholder { !* Mozilla Firefox 4 to 18 *!
+    color:white;
+    opacity:1;
+}
+::-moz-placeholder { !* Mozilla Firefox 19+ *!
+    color: white;
+    opacity: 1;
+}
+:-ms-input-placeholder { !* Internet Explorer 10-11 *!
+    color:white;
+}*/
 
 /* Projects page*/
 #all-projects thead {

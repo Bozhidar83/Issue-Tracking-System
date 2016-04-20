@@ -6,6 +6,8 @@
 body {
     margin-top: 60px;
     margin-bottom: 40px;
+    background-image: url("../img/app-background/photoshop_texture_3.jpg");
+    color: white;
 }
 
 footer {
@@ -13,6 +15,23 @@ footer {
     height: 40px;
     bottom: 0;
     width: 100%;
+    color: slategray;
+}
+
+footer > div {
+    background: darkblue;
+}
+
+legend {
+    color: white;
+}
+
+.text-gray {
+    color: slategray;
+}
+
+thead {
+    color: slategray;
 }
 
 .error {
@@ -21,6 +40,7 @@ footer {
 
 #app-header {
     text-align: center;
+    border: none;
 }
 
 a {
@@ -64,7 +84,7 @@ a#site-logo:hover {
 .box {
     /*width: 100%;*/
     display: block;
-    background: #A9D18E;
+    background: skyblue;
     border: #507E32 1px solid;
     margin: 15px 0;
     padding: 10px;
@@ -153,17 +173,31 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 
 .hover {
     cursor: pointer;
+    font-weight: bold;
 }
 
 .hover:hover {
     color: #66512c;
-    font-weight: bold;
     text-decoration: underline;
 }
 
 #search-container {
     margin: 0 0 15px 0;
     height: 20px;
+}
+
+.issues-table tbody tr:nth-child(even) {
+    /*color: slategray;*/
+    background: #eeaaff;
+}
+
+.issues-table tbody tr:nth-child(odd) {
+    /*color: slategray;*/
+    color: slategray;
+}
+
+#search-dashboard {
+    background-color: #beff06;
 }
 
 /* Projects page*/
@@ -187,6 +221,11 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     list-style-type: none;
 }
 
+/*Comments*/
+#add-comment {
+    margin-top: 10px;
+}
+
 /*Back to Top*/
 .back-to-top {
     position: fixed;
@@ -202,6 +241,7 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 
 .back-to-top:hover {
     background-color: rgba(135, 135, 135, 0.50);
+    color: #c0671a;
 }
 
 /* Button and link effects */

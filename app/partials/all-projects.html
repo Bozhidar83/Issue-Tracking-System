@@ -18,7 +18,7 @@
                             <th data-ng-if="currentLoggedInUser.isAdmin" class="col-md-2 text-center">Update/Add Issue</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-gray">
                         <tr data-ng-repeat="project in allProjects">
                             <td><a href="#/projects/{{project.Id}}" title="View project details">{{project.Name}}</a></td>
                             <td title="Project Key">{{project.ProjectKey}}</td>

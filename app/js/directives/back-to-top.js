@@ -10,7 +10,6 @@
                     template: '<a href="#" class="back-to-top">Back to Top</a>',
                     link: function(scope, el, attr) {
                         angular.element(document).ready(function () {
-                            //scope.$slider = $(el).slider(options);
                             var offset = 220;
                             var duration = 500;
                             jQuery(window).scroll(function() {

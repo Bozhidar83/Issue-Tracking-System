@@ -136,7 +136,29 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 }
 
 .panel-body.dashboard a:hover {
-    background-color: #7f9905;
+    background-color: lightcyan;
+}
+
+#order-options-issues {
+    border: 1px solid gold;
+    border-radius: 10px;
+}
+
+.sortorder:after {
+    content: '\25b2';
+}
+.sortorder.reverse:after {
+    content: '\25bc';
+}
+
+.hover {
+    cursor: pointer;
+}
+
+.hover:hover {
+    color: #66512c;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 /* Projects page*/
@@ -158,6 +180,23 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 /*Issue page*/
 #statuses-list li {
     list-style-type: none;
+}
+
+/*Back to Top*/
+.back-to-top {
+    position: fixed;
+    bottom: 4em;
+    right: 0px;
+    text-decoration: none;
+    color: #000000;
+    background-color: rgba(235, 235, 235, 0.80);
+    font-size: 12px;
+    padding: 1em;
+    display: none;
+}
+
+.back-to-top:hover {
+    background-color: rgba(135, 135, 135, 0.50);
 }
 
 /* Button and link effects */

@@ -16,6 +16,14 @@
                     'startPage': 1,
                     'pageSize': PAGE_SIZE
                 };
+
+                $scope.predicate = 'Title';
+                $scope.reverse = true;
+                $scope.order = function(predicate) {
+                    $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                    $scope.predicate = predicate;
+                };
+
                 $scope.getAllUserRelatedIssues = function() {
                     usSpinnerService.spin('spinner-1');
                     //debugger;

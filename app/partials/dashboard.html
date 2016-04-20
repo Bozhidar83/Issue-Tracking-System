@@ -22,23 +22,43 @@
         </div>
         <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
             <a href="#/projects" class="btn btn-primary">View All Projects</a>
-            <a href="#/projects/add" data-ng-click="open('lg')" class="btn btn-primary">Add New Project</a>
+            <a href="#/projects/add" data-ng-click="open()" class="btn btn-primary">Add New Project</a>
         </div>
     </div>
     <div class="col-md-7 col-md-offset-1">
         <div class="page-header"><h1>Assigned Issues</h1></div>
+        <!--<div class="panel panel-danger">
+            <div class="col-md-6">
+                <h4>Filter options</h4>
+                <div class="panel-body">
+                    By Title:
+                </div>
+            </div>
+        </div>-->
         <div>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Project</th>
-                        <th>Due Date</th>
+                        <td class="hover" ng-click="order('Title')">
+                            Title
+                            <span class="sortorder" ng-show="predicate === 'Title'" ng-class="{reverse:reverse}"></span>
+                        </td>
+                        <td class="hover" ng-click="order('Description')">
+                            Description
+                            <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
+                        </td>
+                        <td class="hover" ng-click="order('Project.Name')">
+                            Project
+                            <span class="sortorder" ng-show="predicate === 'Project.Name'" ng-class="{reverse:reverse}"></span>
+                        </td>
+                        <td class="hover" ng-click="order('DueDate')">
+                            Due Date
+                            <span class="sortorder" ng-show="predicate === 'DueDate'" ng-class="{reverse:reverse}"></span>
+                        </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="issue in userRelatedIssues.Issues">
+                    <tr data-ng-repeat="issue in userRelatedIssues.Issues | orderBy:predicate:reverse">
                         <td>
                             <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                         </td>
@@ -59,3 +79,4 @@
         </div>
     </div>
 </div>
+<div data-back-to-top></div>

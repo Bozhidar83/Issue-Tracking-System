@@ -11,8 +11,6 @@
             'TOKEN_KEY',
             'identity',
             function ($http, $q, $cookies, BASE_URL, TOKEN_TYPE, TOKEN_KEY, identity) {
-                //var TOKEN_KEY = 'authentication'; // cookie key
-
                 function loginUser(userData) {
                     var deferred = $q.defer();
 

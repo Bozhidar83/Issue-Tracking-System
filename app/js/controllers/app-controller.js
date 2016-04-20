@@ -20,7 +20,9 @@
                         userProfileService.getAllUsers()
                             .then(function(users) {
                                 //debugger;
-                                $scope.allUsers = users;
+                                $scope.allUsers = users.sort(function(a, b) {
+                                    return a.Username.localeCompare(b.Username);
+                                });
                             });
                     }
                 }

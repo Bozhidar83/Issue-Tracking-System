@@ -15,7 +15,7 @@
                             <th class="col-md-2 text-center">Project Key</th>
                             <th class="col-md-4 text-center">Description</th>
                             <th class="col-md-2 text-center">Project Leader</th>
-                            <th class="col-md-2 text-center">Update/Add Issue</th>
+                            <th data-ng-if="currentLoggedInUser.isAdmin" class="col-md-2 text-center">Update/Add Issue</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,7 +24,7 @@
                             <td title="Project Key">{{project.ProjectKey}}</td>
                             <td class="all-projects-description" title="Project Description">{{project.Description}}</td>
                             <td title="Project Leader">{{project.Lead.Username}}</td>
-                            <td>
+                            <td data-ng-if="currentLoggedInUser.isAdmin">
                                 <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>
                                 <a href="#/projects/{{project.Id}}/add-issue" class="btn btn-primary">Add Issue</a>
                             </td>

@@ -161,6 +161,11 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     text-decoration: underline;
 }
 
+#search-container {
+    margin: 0 0 15px 0;
+    height: 20px;
+}
+
 /* Projects page*/
 #all-projects thead {
     background-color: greenyellow;

@@ -13,7 +13,8 @@
                 <a href="#/" class="hvr-underline-from-left hvr-grow">Home</a>
             </li>
             <li>
-                <a href="http://softuni-issue-tracker.azurewebsites.net/help" class="hvr-underline-from-left hvr-grow">Help</a>
+                <a href="http://softuni-issue-tracker.azurewebsites.net/help" data-ng-if="currentLoggedInUser.isAdmin"
+                   class="hvr-underline-from-left hvr-grow">Help</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" ng-if="!authService.isAuthenticated()">

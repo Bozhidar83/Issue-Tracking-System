@@ -8,7 +8,10 @@
             <!--<div affiliated-projects></div>-->
             <div class="page-header"><h1>Affiliated Projects</h1></div>
             <div class="panel panel-default">
-                <div class="panel-body dashboard" data-ng-repeat="project in userProjects track by $index">
+                <div class="page-header" id="search-container">
+                    <input type="text" data-ng-model="Name" class="form-control" placeholder="Filter by project name...">
+                </div>
+                <div class="panel-body dashboard" data-ng-repeat="project in userProjects | filter: {Name: Name} track by $index">
                     <a href="#/projects/{{project.Id}}" title="View Project Details">{{project.Name}}</a>
                 </div>
                 <!--<div class="text-center">
@@ -32,6 +35,8 @@
                 <h4>Filter options</h4>
                 <div class="panel-body">
                     By Title:
+                    <input type="text" data-ng-model="Title">
+                    {{Title}}
                 </div>
             </div>
         </div>-->

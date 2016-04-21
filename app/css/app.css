@@ -73,7 +73,7 @@ a#site-logo:hover {
 }
 
 #button-login, #button-register, #button-edit-password,
-#button-add-project, #button-add-issue, #button-make-admin,
+button.add-project, #button-add-issue, #button-make-admin,
 #button-edit-issue {
     width: 100%;
 }
@@ -169,7 +169,7 @@ ul.pagination-control {
 }
 
 /*Add Project Page*/
-#add-project-form div div {
+.project-form div div {
     margin-left: 0px;
 }
 

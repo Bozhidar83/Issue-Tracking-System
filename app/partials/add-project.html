@@ -9,7 +9,7 @@
                     <div class="panel-heading">
                         <h4 class="text-center">New Project<span class="fa fa-edit pull-right bigicon"></span></h4>
                     </div>
-                    <div id="add-project-form" class="panel-body text-center text-gray">
+                    <div class="panel-body text-center text-gray project-form">
                         <div class="form-group">
                             <label for="project-name" class="col-md-2 control-label">Name</label>
                             <div class="col-md-9">
@@ -95,12 +95,11 @@
                         <div class="form-group">
                            <!-- <div class="col-md-2"></div>-->
                             <div class="col-md-9 col-md-push-2">
-                                <button id="button-add-project"
+                                <button class="add-project btn btn-primary"
                                         data-ng-if="currentLoggedInUser.isAdmin"
                                         data-ng-disabled="addNewProjectForm.$invalid ||
                                         addNewProjectForm.projectName.$invalid"
-                                        data-ng-click="createNewProject(project)"
-                                        class="btn btn-primary">Create Project</button>
+                                        data-ng-click="createNewProject(project)">Create Project</button>
                             </div>
                         </div>
                     </div>

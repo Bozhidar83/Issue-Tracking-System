@@ -37,7 +37,9 @@
                     </div>
                     <div class="row">
                         <label for="issue-page-project">Project: </label>
-                        <span id="issue-page-project">{{issue.Project.Name}}</span>
+                        <span id="issue-page-project">
+                            <a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a>
+                        </span>
                     </div>
                     <div class="row">
                         <label for="issue-page-status">Status: </label>

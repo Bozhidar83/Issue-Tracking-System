@@ -77,6 +77,9 @@
                 };
 
                 $scope.getIssueById = function() {
+                    if ($route.current.$$route.originalPath.indexOf('add-issue') > -1) {
+                        return;
+                    }
                     usSpinnerService.spin('spinner-1');
                     issuesService.getIssueById($routeParams.id)
                         .then(function(issue) {
@@ -104,7 +107,7 @@
                             usSpinnerService.stop('spinner-1');
                         });
                 };
-                // TODO: Call function only when editing issue! Not when add new one.
+
                 $scope.getIssueById();
 
                 $scope.changeStatus = function (statusId) {

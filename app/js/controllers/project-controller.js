@@ -18,6 +18,12 @@
                     Labels: []
                 };
 
+                $scope.project.Issues = [];
+                $scope.projectIssuesParams = {
+                    'currentPage': 0,
+                    'pageSize': PAGE_SIZE
+                };
+
                 $scope.getLabels = function() {
                     var params = {
                         filter: $scope.labelToBeAdded ? $scope.labelToBeAdded : ''
@@ -66,30 +72,37 @@
                     usSpinnerService.spin('spinner-1');
                     projectsService.getProjectById($routeParams.id)
                         .then(function(project) {
-                            //debugger;
                             $scope.project = project;
-
-                            /*$scope.project.editedLabels = $scope.project.Labels.map(function(label) {
-                                return label.Name;
-                            });*/
-
                             $scope.project.PrioritiesArr = $scope.project.Priorities.map(function(priority) {
                                 return priority.Name;
                             });
-
                             $scope.project.projectPriorities = $scope.project.PrioritiesArr.join(',');
+                            $scope.getProjectIssues();
 
-                            // Get project issues
-                            $scope.project.Issues = [];
-                            projectsService.getProjectIssuesById(project.Id)
+                            // IMPORTANT! DO NOT DELETE!
+                            /*projectsService.getProjectIssuesById(project.Id)
                                 .then(function(projectIssues) {
                                     $scope.project.Issues = projectIssues;
                                     usSpinnerService.stop('spinner-1');
-                                });
-                            //debugger;
+                                });*/
                         });
                 }
 
+                // Get all project issues
+                $scope.getProjectIssues = function() {
+                    usSpinnerService.spin('spinner-1');
+                    projectsService.getProjectIssuesById($routeParams.id)
+                        .then(function(projectIssues) {
+                            $scope.project.Issues = projectIssues;
+                            $scope.allProjectIssues = projectIssues.length;
+                            $scope.numberOfPages = function() {
+                                return Math.ceil($scope.allProjectIssues / $scope.projectIssuesParams.pageSize);
+                            };
+                            usSpinnerService.stop('spinner-1');
+                        });
+                };
+
+                // Edit project
                 $scope.editProject = function(project) {
                     usSpinnerService.spin('spinner-1');
                     //debugger;
@@ -99,12 +112,6 @@
                             Name: priority.trim()
                         };
                     });
-
-                    /*project.Labels = $scope.project.editedLabels.map(function(label) {
-                        return {
-                            Name: label
-                        };
-                    });*/
 
                     project.LeadId = project.Lead.Id;
 

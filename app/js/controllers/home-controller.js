@@ -44,7 +44,7 @@
                 $scope.userProjects = [];
                 $scope.userProjectsParams = {
                     'startPage': 1,
-                    'pageSize': PAGE_SIZE * 2
+                    'pageSize': PAGE_SIZE
                 };
                 $scope.getUserRelatedProjects = function() {
                         usSpinnerService.spin('spinner-1');

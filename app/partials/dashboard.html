@@ -23,7 +23,7 @@
                 <!--<div pagination-directive></div>-->
             </div>
         </div>
-        <div class="row" data-ng-if="currentLoggedInUser.isAdmin">
+        <div class="row" id="dashboard-buttons" data-ng-if="currentLoggedInUser.isAdmin">
             <a href="#/projects" class="btn btn-primary">View All Projects</a>
             <a href="#/projects/add" data-ng-click="open()" class="btn btn-primary">Add New Project</a>
         </div>

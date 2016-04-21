@@ -3,6 +3,10 @@
     src: url('../fonts/custom/DESTROY_.ttf');
 }
 
+html {
+    overflow-y: scroll;
+}
+
 body {
     margin-top: 60px;
     margin-bottom: 40px;
@@ -15,7 +19,7 @@ footer {
     height: 40px;
     bottom: 0;
     width: 100%;
-    color: slategray;
+    color: #902c6f;
 }
 
 footer > div {
@@ -66,7 +70,6 @@ a {
 
 a#site-logo:hover {
     text-decoration: none;
-    /*color: blueviolet;*/
 }
 
 #button-login, #button-register, #button-edit-password,
@@ -144,6 +147,33 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     width: 100%;
 }
 
+/*Custom pagination*/
+/*.paginationclass{
+
+    margin: 19px 28px;
+}
+.paginationclass span{
+    margin-left:15px;
+    display:inline-block;
+}*/
+.pagination-control li{
+    display: inline-block;
+}
+.pagination-control.btn.btn-warning button{
+    font-size: 12px;
+    margin-top: -26px;
+    cursor:pointer;
+
+}
+.pagination{
+    margin:5px 12px !important;
+}
+
+/*Home - Visitors*/
+.jumbotron {
+    background: transparent !important
+}
+
 /*Dashboard projects panel*/
 .panel-body.dashboard {
     padding: 0;
@@ -197,7 +227,15 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 }
 
 #search-dashboard {
-    background-color: #75ff03;
+    background-color: #faff04;
+}
+
+#dashboard-buttons {
+    margin-bottom: 30px;
+}
+
+.panel-body div {
+    margin-left: 15px;
 }
 
 /*#search-container #search-dashboard {

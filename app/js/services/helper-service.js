@@ -8,8 +8,13 @@
                     return Math.ceil(totalItems / pageSize);
                 }
 
+                function parseDate(dateAsString) {
+                    return new Date(dateAsString);
+                }
+
                 return {
-                    numberOfPages: numberOfPages
+                    numberOfPages: numberOfPages,
+                    parseDate: parseDate
                 }
             }
         ])

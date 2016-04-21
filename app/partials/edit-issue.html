@@ -81,7 +81,8 @@
                                 <div class="col-md-9">
                                     <input type="text" id="edit-issue-labels" class="form-control"
                                            data-ng-model="labelToBeAdded" ng-change="getLabels()"
-                                           data-ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}">
+                                           data-ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}"
+                                           placeholder="Add new label...">
                                 </div>
                                 <div class="col-md-3">
                                     <button class="btn btn-success" data-ng-click="addLabel(labelToBeAdded)"
@@ -96,8 +97,6 @@
                                 <span class="tag label label-info inline-block-span"
                                       data-ng-repeat="label in labels | limitTo: 10 track by $index">
                                     <span class="text-span">{{label.Name}}</span>
-                                    <!--<a ng-click="removeLabel(label)"><i
-                                            class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>-->
                                 </span>
                             </div>
                         </div>

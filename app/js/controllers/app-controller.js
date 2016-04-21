@@ -14,6 +14,13 @@
                 // Put the authService in the $scope to make it accessible from all screens
                 $scope.authService = authService;
 
+                $scope.predicate = 'Title';
+                 $scope.reverse = true;
+                 $scope.order = function(predicate) {
+                 $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                 $scope.predicate = predicate;
+                 };
+
                 // To choose from drop down when create new project or add new issue
                 function getAllUsers () {
                     if (authService.isAuthenticated()) {

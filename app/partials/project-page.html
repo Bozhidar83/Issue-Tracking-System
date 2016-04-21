@@ -49,16 +49,33 @@
         <div data-ng-if="project.Issues.length" class="issues-table">
             <table class="table table-striped">
                 <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Due Date</th>
-                    <th>Assignee</th>
-                </tr>
+                    <tr>
+                        <td class="hover" ng-click="order('Title')">
+                            Title
+                            <span class="sortorder" ng-show="predicate === 'Title'" ng-class="{reverse:reverse}"></span>
+                        </td>
+                        <td class="hover" ng-click="order('Description')">
+                            Description
+                            <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
+                        </td>
+                        <td class="hover" ng-click="order('DueDate')">
+                            Due Date
+                            <span class="sortorder" ng-show="predicate === 'DueDate'" ng-class="{reverse:reverse}"></span>
+                        </td>
+                        <td class="hover" ng-click="order('Assignee.Username')">
+                            Project
+                            <span class="sortorder" ng-show="predicate === 'Assignee.Username'" ng-class="{reverse:reverse}"></span>
+                        </td>
+                        <!--<th>Title</th>
+                        <th>Description</th>-->
+                        <!--<th>Due Date</th>-->
+                        <!--<th>Assignee</th>-->
+                    </tr>
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="issue in project.Issues |
-                        pagination: projectIssuesParams.currentPage * projectIssuesParams.pageSize | limitTo: projectIssuesParams.pageSize">
+                        pagination: projectIssuesParams.currentPage * projectIssuesParams.pageSize | limitTo: projectIssuesParams.pageSize |
+                        orderBy:predicate:reverse">
                         <td>
                             <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                         </td>

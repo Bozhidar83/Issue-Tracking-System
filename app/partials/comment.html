@@ -13,6 +13,11 @@
                     {{comment.Text}}
                 </div>
             </div>
+            <div data-ng-if="!comments.length">
+                <div class="panel-body">
+                    <p>No comments</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

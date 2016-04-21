@@ -28,6 +28,10 @@
                         }, function(error) {
                             notifyService.showError('Cannot grant "Admin" privileges!', error)
                         });
+                };
+
+                $scope.notAvailableFeature = function() {
+                    notifyService.showInfo('Not Available Feature');
                 }
             }
         ])

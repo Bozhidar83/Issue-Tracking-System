@@ -9,13 +9,13 @@
                     <div class="panel-heading">
                         <h4 class="text-center">New Issue<span class="fa fa-edit pull-right bigicon"></span></h4>
                     </div>
-                    <div class="panel-body text-center text-gray">
+                    <div class="panel-body text-center text-gray issue-form">
                         <div class="form-group">
                             <label for="issue-title" class="col-md-2 control-label">Title</label>
                             <div class="col-md-9">
                                 <input type="text" name="issueTitle" class="form-control" id="issue-title" data-ng-model="issue.Title" required="required" placeholder="Issue Title">
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueTitle.$error.required">Issue title is required!</span>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                             <div class="col-md-9">
                                 <textarea class="form-control" name="issueDescription" id="issue-description" data-ng-model="issue.Description" required="required" placeholder="Issue Description"></textarea>
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueDescription.$error.required">Issue description is required!</span>
                             </div>
                         </div>
@@ -38,7 +38,7 @@
                                     <option value="">-- Select Project --</option>
                                 </select>
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueProject.$error.required">Issue project is required!</span>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                                     <option value="{{user.Id}}" data-ng-repeat="user in allUsers">{{user.Username}}</option>
                                 </select>
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.assigneeId.$error.required">Issue assignee is required!</span>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                         ng-model="issue.priority">
                                 </select>
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.priorityId.$error.required">Issue priority is required!</span>
                             </div>
                         </div>
@@ -75,26 +75,29 @@
                             <div class="col-md-9">
                                 <input type="date" name="issueDueDate" class="form-control" id="issue-duedate" data-ng-model="issue.DueDate" required="required">
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewIssueForm.$dirty && addNewIssueForm.issueDueDate.$error.required">Issue due date is required!</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="addLabel">Add label:</label>
+                            <label class="col-md-2 control-label" for="addLabel">Add label</label>
                             <div class="col-md-9">
-                                <div class="col-md-8">
-                                    <input type="text" name="label" id="addLabel" class="form-control" data-ng-model="labelToBeAdded" data-ng-change="getLabels()"
-                                           ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}">
+                                <div class="col-md-9">
+                                    <input type="text" name="label" id="addLabel" class="form-control"
+                                           data-ng-model="labelToBeAdded" data-ng-change="getLabels()"
+                                           ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}"
+                                           autocomplete="off">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <button class="btn btn-success" data-ng-click="addLabel(labelToBeAdded)"
                                             data-ng-disabled="addNewIssueForm.label.$pristine || labelToBeAdded == ''">Add Label</button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Labels hint:</label>
-                            <div class="col-md-9" ng-if="labelToBeAdded != ''">
+                            <!--<label class="col-md-2 control-label">Labels hint:</label>-->
+                            <div class="col-md-9 col-md-push-2 text-left" ng-if="labelToBeAdded != ''">
+                                <span class="small">Hints: </span>
                                 <span class="tag label label-info inline-block-span"
                                       data-ng-repeat="label in labels | limitTo: 10 track by $index">
                                     <span class="text-span">{{label.Name}}</span>
@@ -102,8 +105,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Added Labels:</label>
-                            <div class="col-md-9">
+                            <label class="col-md-2 control-label">Labels</label>
+                            <div class="col-md-9 text-left">
                                 <span class="tag label label-info inline-block-span"
                                       data-ng-repeat="label in issue.Labels track by $index">
                                     <span class="text-span">{{label.Name}}</span>
@@ -113,7 +116,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-9 col-md-offset-2">
+                            <div class="col-md-9 col-md-push-2">
                                 <button id="button-add-issue"
                                         data-ng-disabled="addNewIssueForm.$invalid ||
                                         addNewIssueForm.$dirty &&

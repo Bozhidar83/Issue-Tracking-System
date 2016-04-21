@@ -11,13 +11,47 @@
                     <img ng-if="currentLoggedInUser.ProfileImage" data-ng-src="currentLoggedInUser.ProfileImage" alt="profile-image" class="profile-image">
                     <img ng-if="!currentLoggedInUser.ProfileImage" data-ng-src="../img/default-no-profile-pic.jpg" alt="profile-image" class="profile-image">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="user-profile-details">
                     <div class="col-md-12">
                         <div class="col-md-3 text-right">
                             <label for="username">Username:</label>
                         </div>
                         <div class="col-md-5">
                             <span id="username">{{currentLoggedInUser.Username}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3 text-right">
+                            <label for="role">Role:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <span id="role">{{currentLoggedInUser.isAdmin ? 'Admin' : 'User'}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3 text-right">
+                            <label>GitHub:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <span class="github" data-ng-if="currentLoggedInUser.Github">{{currentLoggedInUser.Github}}</span>
+                            <span class="github" data-ng-if="!currentLoggedInUser.Github">Not specified</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3 text-right">
+                            <label>LinkedIn:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <span class="linkedin" data-ng-if="currentLoggedInUser.LinkedIn">{{currentLoggedInUser.LinkedIn}}</span>
+                            <span class="linkedin" data-ng-if="!currentLoggedInUser.LinkedIn">Not specified</span>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-3 text-right">
+                            <label for="email">Email:</label>
+                        </div>
+                        <div class="col-md-5">
+                            <span id="email">{{currentLoggedInUser.Username}}</span>
                         </div>
                     </div>
                 </div>
@@ -31,6 +65,9 @@
             <h2>Manage Account</h2>
             <ul class="sidebar-menu">
                 <li><a href="#/profile/password">Edit Password</a></li>
+                <li><a href="#/profile">Share GitHub Profile</a></li>
+                <li><a href="#/profile">Share LinkedIn Profile</a></li>
+                <li><a href="#/profile">Edit Email</a></li>
             </ul>
         </div>
         <!-- Navigation box for logged in admins -->

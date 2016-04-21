@@ -142,9 +142,13 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     color: #1c381c;
 }
 
-/*Profile Image*/
+/*Profile*/
 .profile-image img {
     width: 100%;
+}
+
+#user-profile-details div div {
+    margin-left: 0;
 }
 
 /*Custom pagination*/
@@ -227,7 +231,7 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 }
 
 #search-dashboard {
-    background-color: #faff04;
+    background-color: #f3e1ff;
 }
 
 #dashboard-buttons {
@@ -276,6 +280,10 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 /*Issue page*/
 #statuses-list li {
     list-style-type: none;
+}
+
+#comments-container div {
+    margin-left: 0;
 }
 
 /*Comments*/

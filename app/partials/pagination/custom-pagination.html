@@ -1,16 +1,16 @@
-<div class="pagination-div text-center" ng-show="project.Issues.length">
+<div class="pagination-div text-center" ng-show="customPagingParams.collection.length">
     <ul class="pagination-control">
         <li>
-            <button type="button" class="btn btn-warning" ng-disabled="projectIssuesParams.currentPage == 0"
-                    ng-click="projectIssuesParams.currentPage = projectIssuesParams.currentPage - 1">PREV</button>
+            <button type="button" class="btn btn-warning" ng-disabled="customPagingParams.currentPage == 0"
+                    ng-click="customPagingParams.currentPage = customPagingParams.currentPage - 1">PREV</button>
         </li>
         <li>
-            <span>Page {{projectIssuesParams.currentPage + 1}} of {{numberOfPages()}}</span>
+            <span>Page {{customPagingParams.currentPage + 1}} of {{customPagingParams.numberOfPages}}</span>
         </li>
         <li>
             <button type="button" class="btn btn-warning"
-                    ng-disabled="projectIssuesParams.currentPage >= project.Issues.length / projectIssuesParams.pageSize - 1"
-                    ng-click="projectIssuesParams.currentPage = projectIssuesParams.currentPage + 1">NEXT</button>
+                    ng-disabled="customPagingParams.currentPage >= customPagingParams.collection.length / customPagingParams.pageSize - 1"
+                    ng-click="customPagingParams.currentPage = customPagingParams.currentPage + 1">NEXT</button>
         </li>
     </ul>
 </div>

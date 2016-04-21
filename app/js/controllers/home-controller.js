@@ -9,20 +9,14 @@
             'notifyService',
             'authService',
             'usSpinnerService',
+            'helperService',
             'PAGE_SIZE',
-            function HomeController($scope, projectsService, issuesService, notifyService, authService, usSpinnerService, PAGE_SIZE) {
+            function HomeController($scope, projectsService, issuesService, notifyService, authService, usSpinnerService, helperService, PAGE_SIZE) {
                 // Get all user related issues
                 $scope.issuesParams = {
                     'startPage': 1,
                     'pageSize': PAGE_SIZE
                 };
-
-                /*$scope.predicate = 'Title';
-                $scope.reverse = true;
-                $scope.order = function(predicate) {
-                    $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-                    $scope.predicate = predicate;
-                };*/
 
                 $scope.getAllUserRelatedIssues = function() {
                     usSpinnerService.spin('spinner-1');
@@ -53,6 +47,8 @@
                                 //debugger;
                                 usSpinnerService.stop('spinner-1');
                                 $scope.userProjects = projects;
+                                $scope.customPagingParams.collection = projects;
+                                $scope.customPagingParams.numberOfPages = helperService.numberOfPages(projects.length, PAGE_SIZE);
                             }, function(error) {
                                 usSpinnerService.stop('spinner-1');
                             });

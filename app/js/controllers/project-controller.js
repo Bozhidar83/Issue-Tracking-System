@@ -12,17 +12,14 @@
             'userProfileService',
             'notifyService',
             'usSpinnerService',
+            'helperService',
             'PAGE_SIZE',
-            function ProjectController($scope, $location, $routeParams, $timeout, projectsService, labelsService, userProfileService, notifyService, usSpinnerService, PAGE_SIZE) {
+            function ProjectController($scope, $location, $routeParams, $timeout, projectsService, labelsService, userProfileService, notifyService, usSpinnerService, helperService, PAGE_SIZE) {
                 $scope.project = {
                     Labels: []
                 };
 
                 $scope.project.Issues = [];
-                $scope.projectIssuesParams = {
-                    'currentPage': 0,
-                    'pageSize': PAGE_SIZE
-                };
 
                 $scope.getLabels = function() {
                     var params = {
@@ -78,7 +75,7 @@
                             });
                             $scope.project.projectPriorities = $scope.project.PrioritiesArr.join(',');
                             $scope.getProjectIssues();
-
+                            //debugger;
                             // IMPORTANT! DO NOT DELETE!
                             /*projectsService.getProjectIssuesById(project.Id)
                                 .then(function(projectIssues) {
@@ -94,10 +91,9 @@
                     projectsService.getProjectIssuesById($routeParams.id)
                         .then(function(projectIssues) {
                             $scope.project.Issues = projectIssues;
-                            $scope.allProjectIssues = projectIssues.length;
-                            $scope.numberOfPages = function() {
-                                return Math.ceil($scope.allProjectIssues / $scope.projectIssuesParams.pageSize);
-                            };
+                            $scope.customPagingParams.collection = projectIssues;
+                            $scope.customPagingParams.numberOfPages = helperService.numberOfPages(projectIssues.length, PAGE_SIZE);
+
                             usSpinnerService.stop('spinner-1');
                         });
                 };

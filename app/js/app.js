@@ -147,5 +147,6 @@
         .constant('TOKEN_TYPE', 'Bearer ')
         .constant('TOKEN_KEY', 'authentication')
         .constant('PAGE_SIZE', 5)
+        .constant('CURRENT_PAGE', 0)
         .constant('_', window._);
 })();

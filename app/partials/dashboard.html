@@ -7,20 +7,33 @@
         <div class="row">
             <!--<div affiliated-projects></div>-->
             <div class="page-header"><h1>Affiliated Projects</h1></div>
+            <div class="row">
+                <div class="col-md-3" id="dashboard-pagination-option-title"><h4>Pagination</h4></div>
+                <div class="switch col-md-3">
+                    <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" data-ng-model="pagingOption">
+                    <label for="cmn-toggle-1"></label>
+                </div>
+                <div class="col-md-6" data-ng-if="pagingOption">
+                    <p><span class="small">(switch off for full search)</span></p>
+                </div>
+            </div>
             <div class="panel panel-default">
                 <div class="page-header" id="search-container">
-                    <input type="text" data-ng-model="Name" id="search-dashboard" class="form-control" placeholder="Filter by project name...">
+                    <input type="text" data-ng-model="Name" id="search-dashboard" class="form-control" placeholder="Search by project name...">
                 </div>
-                <div class="panel-body dashboard" data-ng-repeat="project in userProjects | filter: {Name: Name} track by $index">
+                <div class="panel-body dashboard" data-ng-if="!pagingOption" data-ng-repeat="project in userProjects | filter: {Name: Name} track by $index">
                     <a href="#/projects/{{project.Id}}" title="View Project Details">{{project.Name}}</a>
                 </div>
-                <!--<div class="text-center">
-                    <pagination pagination-id="pagination-affiliated-projects" total-items="allIssues" ng-model="issuesParams.startPage"
-                                items-per-page="issuesParams.pageSize" ng-change="getUserRelatedIssues()"
-                                max-size="3" boundary-links="true">
-                    </pagination>
-                </div>-->
-                <!--<div pagination-directive></div>-->
+                <div>
+                    <div class="panel-body dashboard" data-ng-if="pagingOption"
+                         data-ng-repeat="project in userProjects |
+                         pagination: customPagingParams.currentPage * customPagingParams.pageSize |
+                         limitTo: customPagingParams.pageSize |
+                         filter: {Name: Name} track by $index">
+                        <a href="#/projects/{{project.Id}}" title="View Project Details">{{project.Name}}</a>
+                    </div>
+                    <div id="dashboard-projects-pagination" data-ng-if="pagingOption" data-custom-pagination></div>
+                </div>
             </div>
         </div>
         <div class="row" id="dashboard-buttons" data-ng-if="currentLoggedInUser.isAdmin">

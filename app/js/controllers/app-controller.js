@@ -10,7 +10,9 @@
             'projectsService',
             'identity',
             'notifyService',
-            function AppController($scope, $location, authService, userProfileService, projectsService, identity, notifyService) {
+            'PAGE_SIZE',
+            'CURRENT_PAGE',
+            function AppController($scope, $location, authService, userProfileService, projectsService, identity, notifyService, PAGE_SIZE, CURRENT_PAGE) {
                 // Put the authService in the $scope to make it accessible from all screens
                 $scope.authService = authService;
 
@@ -20,6 +22,13 @@
                  $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
                  $scope.predicate = predicate;
                  };
+
+                $scope.customPagingParams = {
+                    pageSize: PAGE_SIZE,
+                    currentPage: CURRENT_PAGE,
+                    collection: [],
+                    numberOfPages: 0
+                };
 
                 // To choose from drop down when create new project or add new issue
                 function getAllUsers () {

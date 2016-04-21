@@ -151,15 +151,6 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     margin-left: 0;
 }
 
-/*Custom pagination*/
-/*.paginationclass{
-
-    margin: 19px 28px;
-}
-.paginationclass span{
-    margin-left:15px;
-    display:inline-block;
-}*/
 .pagination-control li{
     display: inline-block;
 }
@@ -242,24 +233,14 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     margin-left: 15px;
 }
 
-/*#search-container #search-dashboard {
-    color: white;
-}*/
+#dashboard-projects-pagination span {
+    color: slategray;
+}
 
-/*::-webkit-input-placeholder { !* WebKit, Blink, Edge *!
-    color: white;
+#dashboard-pagination-option-title {
+    vertical-align: text-top;
+    top: -5px;
 }
-:-moz-placeholder { !* Mozilla Firefox 4 to 18 *!
-    color:white;
-    opacity:1;
-}
-::-moz-placeholder { !* Mozilla Firefox 19+ *!
-    color: white;
-    opacity: 1;
-}
-:-ms-input-placeholder { !* Internet Explorer 10-11 *!
-    color:white;
-}*/
 
 /* Projects page*/
 #all-projects thead {
@@ -275,6 +256,11 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     display: inline-block;
     margin-right: 10px;
     height: 16px;
+}
+
+/*Project page*/
+td.issue-description-project-page {
+    max-width: 210px;
 }
 
 /*Issue page*/
@@ -448,7 +434,53 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     right: 0;
 }
 
+/*Pagination switch button*/
+.cmn-toggle {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+}
+.cmn-toggle + label {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
 
-
-
+input.cmn-toggle-round + label {
+    padding: 2px;
+    width: 80px;
+    height: 30px;
+    background-color: #dddddd;
+    border-radius: 60px;
+}
+input.cmn-toggle-round + label:before,
+input.cmn-toggle-round + label:after {
+    display: block;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    bottom: 1px;
+    content: "";
+}
+input.cmn-toggle-round + label:before {
+    right: 1px;
+    background-color: #f1f1f1;
+    border-radius: 60px;
+    transition: background 0.4s;
+}
+input.cmn-toggle-round + label:after {
+    width: 28px;
+    background-color: #fff;
+    border-radius: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: margin 0.4s;
+}
+input.cmn-toggle-round:checked + label:before {
+    background-color: #8ce196;
+}
+input.cmn-toggle-round:checked + label:after {
+    margin-left: 50px;
+}
 

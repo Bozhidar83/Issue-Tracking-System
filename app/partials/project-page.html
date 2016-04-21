@@ -54,7 +54,7 @@
                             Title
                             <span class="sortorder" ng-show="predicate === 'Title'" ng-class="{reverse:reverse}"></span>
                         </td>
-                        <td class="hover" ng-click="order('Description')">
+                        <td class="hover issue-description-project-page" ng-click="order('Description')">
                             Description
                             <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
                         </td>
@@ -66,20 +66,16 @@
                             Project
                             <span class="sortorder" ng-show="predicate === 'Assignee.Username'" ng-class="{reverse:reverse}"></span>
                         </td>
-                        <!--<th>Title</th>
-                        <th>Description</th>-->
-                        <!--<th>Due Date</th>-->
-                        <!--<th>Assignee</th>-->
                     </tr>
                 </thead>
                 <tbody>
                     <tr data-ng-repeat="issue in project.Issues |
-                        pagination: projectIssuesParams.currentPage * projectIssuesParams.pageSize | limitTo: projectIssuesParams.pageSize |
+                        pagination: customPagingParams.currentPage * customPagingParams.pageSize | limitTo: customPagingParams.pageSize |
                         orderBy:predicate:reverse">
                         <td>
                             <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
                         </td>
-                        <td>{{issue.Description}}</td>
+                        <td class="issue-description-project-page">{{issue.Description}}</td>
                         <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
                         <td>{{issue.Assignee.Username}}</td>
                     </tr>

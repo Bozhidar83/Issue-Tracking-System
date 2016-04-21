@@ -9,13 +9,13 @@
                     <div class="panel-heading">
                         <h4 class="text-center">New Project<span class="fa fa-edit pull-right bigicon"></span></h4>
                     </div>
-                    <div class="panel-body text-center text-gray">
+                    <div id="add-project-form" class="panel-body text-center text-gray">
                         <div class="form-group">
                             <label for="project-name" class="col-md-2 control-label">Name</label>
                             <div class="col-md-9">
                                 <input type="text" name="projectName" class="form-control" id="project-name" data-ng-model="project.Name" required="required" placeholder="Project Name">
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewProjectForm.$dirty && addNewProjectForm.projectName.$error.required">Project name is required!</span>
                             </div>
                         </div>
@@ -24,7 +24,7 @@
                             <div class="col-md-9">
                                 <textarea class="form-control" name="description" id="project-description" data-ng-model="project.Description" required="required" placeholder="Project Description"></textarea>
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewProjectForm.$dirty && addNewProjectForm.description.$error.required">Project description is required!</span>
                             </div>
                         </div>
@@ -33,7 +33,7 @@
                             <div class="col-md-9">
                                 <input type="text" name="projectKey" class="form-control" id="project-project-key" data-ng-model="project.ProjectKey" required="required" placeholder="Project Key">
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewProjectForm.$dirty && addNewProjectForm.projectKey.$error.required">Project key is required!</span>
                             </div>
                         </div>
@@ -52,26 +52,29 @@
                                 <input type="text" name="priorities" class="form-control" id="project-priorities" data-ng-model="project.Priorities" required="required" placeholder="Priorities">
                                 <p class="text-left small">(separated by comma)</p>
                             </div>
-                            <div class="col-md-9 col-md-offset-2 text-left">
+                            <div class="col-md-9 col-md-push-2 text-left">
                                 <span class="error" data-ng-show="addNewProjectForm.$dirty && addNewProjectForm.priorities.$error.required">Project priorities are required!</span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="project-labels" class="col-md-2 control-label">Labels</label>
-                            <div class="col-md-9">
-                                <div class="col-md-8">
-                                    <input type="text" name="projectLabel" id="project-labels" data-ng-change="getLabels()" data-ng-model="labelToBeAdded"
+                            <label for="project-labels" class="col-md-2 control-label">Add Label</label>
+                            <div class="col-md-9 text-left">
+                                <div class="col-md-9">
+                                    <input type="text" name="projectLabel" id="project-labels" class="form-control"
+                                           data-ng-change="getLabels()" data-ng-model="labelToBeAdded"
                                            ng-model-options="{updateOn: 'default', debounce: {default: 100, blur: 100}, getterSetter: true}">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <button class="btn btn-success" data-ng-click="addLabel(labelToBeAdded)"
                                             data-ng-disabled="addNewProjectForm.projectLabel.$pristine || labelToBeAdded == ''">Add Label</button>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Labels hint:</label>
-                            <div class="col-md-9" ng-if="labelToBeAdded != ''">
+                            <!--<label class="col-md-2 control-label">Labels hint:</label>-->
+                            <!--<div class="col-md-2"></div>-->
+                            <div class="col-md-9 col-md-push-2 text-left" data-ng-if="labelToBeAdded != ''">
+                                <span class="small">Hints: </span>
                                 <span class="tag label label-info inline-block-span"
                                       data-ng-repeat="label in labels | limitTo: 10 track by $index">
                                     <span class="text-span">{{label.Name}}</span>
@@ -79,18 +82,19 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-2 control-label">Added Labels:</label>
-                            <div class="col-md-9">
+                            <label class="col-md-2 control-label">Labels:</label>
+                            <div class="col-md-9 text-left">
                                 <span class="tag label label-info inline-block-span"
                                       data-ng-repeat="label in project.Labels track by $index">
                                     <span class="text-span">{{label.Name}}</span>
-                                    <a ng-click="removeLabel(label)"><i
+                                    <a data-ng-click="removeLabel(label)"><i
                                             class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-9 col-md-offset-2">
+                           <!-- <div class="col-md-2"></div>-->
+                            <div class="col-md-9 col-md-push-2">
                                 <button id="button-add-project"
                                         data-ng-if="currentLoggedInUser.isAdmin"
                                         data-ng-disabled="addNewProjectForm.$invalid ||

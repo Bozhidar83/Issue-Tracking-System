@@ -151,6 +151,10 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
     margin-left: 0;
 }
 
+ul.pagination-control {
+    padding: 0;
+}
+
 .pagination-control li{
     display: inline-block;
 }
@@ -162,6 +166,23 @@ ul.sidebar-menu li a, ul.sidebar-menu li a:focus {
 }
 .pagination{
     margin:5px 12px !important;
+}
+
+/*Add Project Page*/
+#add-project-form div div {
+    margin-left: 0px;
+}
+
+div div.col-md-9 div.col-md-9 {
+    padding: 0;
+}
+
+div div.col-md-9 div.col-md-3 {
+    padding-right: 0;
+}
+
+div div.col-md-9 div.col-md-3 button {
+    width: 100%;
 }
 
 /*Home - Visitors*/

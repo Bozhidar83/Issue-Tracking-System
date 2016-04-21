@@ -30,6 +30,8 @@
                     numberOfPages: 0
                 };
 
+                $scope.labelToBeAdded = '';
+
                 // To choose from drop down when create new project or add new issue
                 function getAllUsers () {
                     if (authService.isAuthenticated()) {

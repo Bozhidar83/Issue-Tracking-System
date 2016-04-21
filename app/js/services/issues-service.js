@@ -35,8 +35,9 @@
                 function updateIssue(issue, id) {
                     var deferred = $q.defer();
 
-                    $http.put(BASE_URL + '/' + id, issue, {headers:{'ContentType':'application/x-www-form-urlencoded'}})
+                    $http.put(BASE_URL + 'issues/' + id, issue, {headers:{'ContentType':'application/x-www-form-urlencoded'}})
                         .then(function(response) {
+                            //debugger;
                             deferred.resolve(response);
                         }, function(error) {
                             deferred.reject(error);

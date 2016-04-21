@@ -110,7 +110,7 @@
                                 <span class="tag label label-info inline-block-span"
                                       data-ng-repeat="label in issue.Labels track by $index">
                                     <span class="text-span">{{label.Name}}</span>
-                                    <a ng-click="removeLabel(label)"><i
+                                    <a data-ng-click="removeLabel(label)"><i
                                             class="remove glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
                                 </span>
                             </div>

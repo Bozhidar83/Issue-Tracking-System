@@ -64,9 +64,13 @@
 
                 // EDIT ISSUE
                 $scope.editIssue = function(issue) {
+                    //debugger;
                     usSpinnerService.spin('spinner-1');
+                    issue.AssigneeId = issue.Assignee.Id;
+                    issue.PriorityId = issue.Priority.Id;
                     issuesService.updateIssue(issue, $routeParams.id)
                         .then(function(response) {
+                            //debugger;
                             usSpinnerService.stop('spinner-1');
                             notifyService.showInfo('Issue "' + issue.Title + '" edited successfully');
                             $location.path('#/issues/' + $routeParams.id);

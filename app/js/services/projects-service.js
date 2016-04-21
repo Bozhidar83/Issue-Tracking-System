@@ -10,7 +10,7 @@
             'BASE_URL',
             '_',
             function ProjectService($http, $q, authService, issuesService, BASE_URL, _) {
-                var MAX_USER_ISSUES = 10000000;
+                var MAX_ITEMS = 10000000;
                 function getAllProjects() {
                     var deferred = $q.defer();
 
@@ -93,7 +93,7 @@
                 function getProjectsByLeaderId(leaderId, params) {
                     var deferred = $q.defer();
                     //debugger;
-                    $http.get(BASE_URL + 'projects?filter=Lead.Id="'+ leaderId + '"&pageSize=' + params.pageSize + '&pageNumber=' + params.startPage)
+                    $http.get(BASE_URL + 'projects?filter=Lead.Id="'+ leaderId + '"&pageSize=' + MAX_ITEMS + '&pageNumber=' + params.startPage)
                         .then(function(response) {
                             //debugger;
                             deferred.resolve(response.data);
@@ -118,7 +118,7 @@
                                     // Get all projects in which current user has assigned issue
                                     var issuesParams = {
                                         'startPage': 1,
-                                        'pageSize': MAX_USER_ISSUES
+                                        'pageSize': MAX_ITEMS
                                     };
                                     //debugger;
                                     issuesService.getUserRelatedIssues(issuesParams)

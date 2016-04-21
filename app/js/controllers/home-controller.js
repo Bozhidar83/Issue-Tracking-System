@@ -11,12 +11,16 @@
             'usSpinnerService',
             'helperService',
             'PAGE_SIZE',
-            function HomeController($scope, projectsService, issuesService, notifyService, authService, usSpinnerService, helperService, PAGE_SIZE) {
+            'CURRENT_PAGE',
+            function HomeController($scope, projectsService, issuesService, notifyService, authService, usSpinnerService, helperService, PAGE_SIZE, CURRENT_PAGE) {
                 // Get all user related issues
                 $scope.issuesParams = {
                     'startPage': 1,
                     'pageSize': PAGE_SIZE
                 };
+
+                // Reset current page
+                $scope.customPagingParams.currentPage = CURRENT_PAGE;
 
                 $scope.getAllUserRelatedIssues = function() {
                     usSpinnerService.spin('spinner-1');

@@ -14,10 +14,14 @@
             'usSpinnerService',
             'helperService',
             'PAGE_SIZE',
-            function ProjectController($scope, $location, $routeParams, $timeout, projectsService, labelsService, userProfileService, notifyService, usSpinnerService, helperService, PAGE_SIZE) {
+            'CURRENT_PAGE',
+            function ProjectController($scope, $location, $routeParams, $timeout, projectsService, labelsService, userProfileService, notifyService, usSpinnerService, helperService, PAGE_SIZE, CURRENT_PAGE) {
                 $scope.project = {
                     Labels: []
                 };
+
+                // Reset current page
+                $scope.customPagingParams.currentPage = CURRENT_PAGE;
 
                 $scope.project.Issues = [];
 

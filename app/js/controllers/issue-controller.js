@@ -93,7 +93,6 @@
 
                             // Parse issue due date
                             $scope.issue.DueDate = helperService.parseDate($scope.issue.DueDate);
-                            //$scope.issue.DueDate = new Date($scope.issue.DueDate);
 
                             // Get issue's project priorities
                             projectsService.getProjectById(issue.Project.Id)

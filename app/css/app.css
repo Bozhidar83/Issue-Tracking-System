@@ -247,7 +247,20 @@ div div.col-md-9 div.col-md-3 button {
 }
 
 #dashboard-buttons {
-    margin-bottom: 30px;
+    margin: 0 0 30px 0;
+
+}
+
+#dashboard-buttons div {
+    padding: 0;
+}
+
+#dashboard-buttons > div:first-child {
+    padding-right: 5px;
+}
+
+#dashboard-buttons > div:last-child {
+    padding-left: 5px;
 }
 
 .panel-body div {
@@ -261,6 +274,10 @@ div div.col-md-9 div.col-md-3 button {
 #dashboard-pagination-option-title {
     vertical-align: text-top;
     top: -5px;
+}
+
+a.dashboard-buttons {
+    width: 100%;
 }
 
 /* Projects page*/
@@ -287,10 +304,15 @@ td.issue-description-project-page {
 /*Issue page*/
 #statuses-list li {
     list-style-type: none;
+    margin-bottom: 20px;
 }
 
 #comments-container div {
     margin-left: 0;
+}
+
+.edit-issue-button {
+    width: 50%;
 }
 
 /*Comments*/

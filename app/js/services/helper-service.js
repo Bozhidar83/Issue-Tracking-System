@@ -12,9 +12,20 @@
                     return new Date(dateAsString);
                 }
 
+                function generateProjectKey(projectName) {
+                    var projectKey = '';
+                    var separateNameParts = projectName.split(' ');
+                    separateNameParts.forEach(function(item) {
+                        projectKey += item.slice(0,1).toUpperCase();
+                    });
+
+                    return projectKey;
+                }
+
                 return {
                     numberOfPages: numberOfPages,
-                    parseDate: parseDate
+                    parseDate: parseDate,
+                    generateProjectKey: generateProjectKey
                 }
             }
         ])

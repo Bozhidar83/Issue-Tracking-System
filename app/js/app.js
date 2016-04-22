@@ -136,7 +136,9 @@
         }
     }
 
-    angular.module('issueTrackingSystemApp', ['ngRoute', 'ngCookies', 'ui.bootstrap.pagination', 'angularSpinner'])
+    angular.module('issueTrackingSystemApp', ['ngRoute', 'ngCookies', 'ui.bootstrap.pagination', 'angularSpinner']);
+
+    angular.module('issueTrackingSystemApp')
         .config(['$routeProvider', '$httpProvider',/*'routeResolversProvider',*/ config]);
 
     angular.module('issueTrackingSystemApp')

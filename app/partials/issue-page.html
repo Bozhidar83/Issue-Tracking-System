@@ -57,7 +57,7 @@
         </div>
         <!-- Check for project leader (same privileges as admin about issue) or assignee-->
         <div class="row" data-ng-if="currentLoggedInUser.isAdmin || currentLoggedInUser.Id == issue.ProjectLeadId">
-            <a href="#/issues/{{issue.Id}}/edit" class="btn btn-primary">Edit</a>
+            <a href="#/issues/{{issue.Id}}/edit" class="btn btn-primary edit-issue-button">Edit Issue</a>
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1">
@@ -65,7 +65,7 @@
         <!-- TODO: Change look of available statuses -->
         <ul id="statuses-list" data-ng-if="issue.AvailableStatuses.length">
             <li data-ng-repeat="status in issue.AvailableStatuses">
-                <span>-----{{status.Name}}</span>
+                <span>----- {{status.Name}}</span>
                 <button data-ng-if="currentLoggedInUser.isAdmin || currentLoggedInUser.Id == issue.Assignee.Id ||
                         currentLoggedInUser.Id == issue.ProjectLeadId" class="btn btn-success"
                         data-ng-click="changeStatus(status.Id)">Change</button>

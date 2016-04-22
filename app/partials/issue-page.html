@@ -9,23 +9,23 @@
                 <div class="panel-body issue-page">
                     <div class="row">
                         <label for="issue-page-title">Title: </label>
-                        <span id="issue-page-title">{{issue.Title}}</span>
+                        <span id="issue-page-title" class="wordwrap">{{issue.Title}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-description">Description: </label>
-                        <span id="issue-page-description">{{issue.Description}}</span>
+                        <span id="issue-page-description" class="wordwrap">{{issue.Description}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-issue-key">Issue Key: </label>
-                        <span id="issue-page-issue-key">{{issue.IssueKey}}</span>
+                        <span id="issue-page-issue-key" class="wordwrap">{{issue.IssueKey}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-assignee">Assignee: </label>
-                        <span id="issue-page-assignee">{{issue.Assignee.Username}}</span>
+                        <span id="issue-page-assignee" class="wordwrap">{{issue.Assignee.Username}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-priority">Priority: </label>
-                        <span id="issue-page-priority">{{issue.Priority.Name}}</span>
+                        <span id="issue-page-priority" class="wordwrap">{{issue.Priority.Name}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-duedate">Due Date: </label>
@@ -33,7 +33,7 @@
                     </div>
                     <div class="row">
                         <label for="issue-page-author">Author: </label>
-                        <span id="issue-page-author">{{issue.Author.Username}}</span>
+                        <span id="issue-page-author" class="wordwrap">{{issue.Author.Username}}</span>
                     </div>
                     <div class="row">
                         <label for="issue-page-project">Project: </label>
@@ -62,7 +62,6 @@
     </div>
     <div class="col-md-4 col-md-offset-1">
         <div class="page-header"><h3 class="text-center">Available Statuses</h3></div>
-        <!-- TODO: Change look of available statuses -->
         <ul id="statuses-list" data-ng-if="issue.AvailableStatuses.length">
             <li data-ng-repeat="status in issue.AvailableStatuses">
                 <span>----- {{status.Name}}</span>

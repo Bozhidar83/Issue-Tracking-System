@@ -108,20 +108,20 @@
                         pagination: customPagingParams.currentPage * customPagingParams.pageSize | limitTo: customPagingParams.pageSize |
                         orderBy:predicate:reverse">
                         <td>
-                            <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                            <a href="#/issues/{{issue.Id}}" class="project-page-wordwrap">{{issue.Title}}</a>
                         </td>
-                        <td class="issue-description-project-page">{{issue.Description}}</td>
+                        <td class="issue-description-project-page project-page-wordwrap">{{issue.Description}}</td>
                         <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{issue.Assignee.Username}}</td>
+                        <td class="wordwrap">{{issue.Assignee.Username}}</td>
                     </tr>
                     <tr data-ng-if="!pagingOption" data-ng-repeat="issue in project.Issues |
                         orderBy:predicate:reverse">
                         <td>
-                            <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                            <a href="#/issues/{{issue.Id}}" class="wordwrap">{{issue.Title}}</a>
                         </td>
-                        <td class="issue-description-project-page">{{issue.Description}}</td>
+                        <td class="issue-description-project-page wordwrap">{{issue.Description}}</td>
                         <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
-                        <td>{{issue.Assignee.Username}}</td>
+                        <td class="wordwrap">{{issue.Assignee.Username}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -154,21 +154,21 @@
                 <tr data-ng-if="!pagingOption" data-ng-repeat="issue in allFilteredIssues |
                     orderBy:predicate:reverse">
                     <td>
-                        <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                        <a href="#/issues/{{issue.Id}}" class="project-page-wordwrap">{{issue.Title}}</a>
                     </td>
-                    <td class="issue-description-project-page">{{issue.Description}}</td>
+                    <td class="issue-description-project-page project-page-wordwrap">{{issue.Description}}</td>
                     <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{issue.Assignee.Username}}</td>
+                    <td class="wordwrap">{{issue.Assignee.Username}}</td>
                 </tr>
                 <tr data-ng-if="pagingOption" data-ng-repeat="issue in allFilteredIssues |
                     pagination: customPagingParams.currentPage * customPagingParams.pageSize | limitTo: customPagingParams.pageSize |
                     orderBy:predicate:reverse">
                     <td>
-                        <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                        <a href="#/issues/{{issue.Id}}" class="wordwrap">{{issue.Title}}</a>
                     </td>
-                    <td class="issue-description-project-page">{{issue.Description}}</td>
+                    <td class="issue-description-project-page wordwrap">{{issue.Description}}</td>
                     <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{issue.Assignee.Username}}</td>
+                    <td class="wordwrap">{{issue.Assignee.Username}}</td>
                 </tr>
                 </tbody>
             </table>

@@ -281,7 +281,7 @@ a.dashboard-buttons, a.project-page-buttons {
     background-color: greenyellow;
 }
 
-.all-projects-description {
+.all-projects-wordwrap, .project-page-wordwrap, .wordwrap {
     word-break: break-all;
     word-wrap: break-word;
 }

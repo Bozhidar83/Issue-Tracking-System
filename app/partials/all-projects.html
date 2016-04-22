@@ -20,10 +20,10 @@
                     </thead>
                     <tbody class="text-gray">
                         <tr data-ng-repeat="project in allProjects">
-                            <td><a href="#/projects/{{project.Id}}" title="View project details">{{project.Name}}</a></td>
-                            <td title="Project Key">{{project.ProjectKey}}</td>
-                            <td class="all-projects-description" title="Project Description">{{project.Description}}</td>
-                            <td title="Project Leader">{{project.Lead.Username}}</td>
+                            <td><a href="#/projects/{{project.Id}}" title="View project details" class="all-projects-wordwrap">{{project.Name}}</a></td>
+                            <td title="Project Key" class="wordwrap">{{project.ProjectKey}}</td>
+                            <td class="all-projects-wordwrap" title="Project Description">{{project.Description}}</td>
+                            <td title="Project Leader" class="wordwrap">{{project.Lead.Username}}</td>
                             <td data-ng-if="currentLoggedInUser.isAdmin">
                                 <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>
                                 <a href="#/projects/{{project.Id}}/add-issue" class="btn btn-primary">Add Issue</a>

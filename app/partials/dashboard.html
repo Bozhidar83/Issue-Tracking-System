@@ -23,7 +23,7 @@
                 </div>
                 <div data-ng-if="!userProjects.length" class="text-gray">No affiliated projects</div>
                 <div class="panel-body dashboard" data-ng-if="!pagingOption" data-ng-repeat="project in userProjects | filter: {Name: Name} track by $index">
-                    <a href="#/projects/{{project.Id}}" title="View Project Details">{{project.Name}}</a>
+                    <a href="#/projects/{{project.Id}}" title="View Project Details" class="wordwrap">{{project.Name}}</a>
                 </div>
                 <div>
                     <div class="panel-body dashboard" data-ng-if="pagingOption"
@@ -31,7 +31,7 @@
                          pagination: customPagingParams.currentPage * customPagingParams.pageSize |
                          limitTo: customPagingParams.pageSize |
                          filter: {Name: Name} track by $index">
-                        <a href="#/projects/{{project.Id}}" title="View Project Details">{{project.Name}}</a>
+                        <a href="#/projects/{{project.Id}}" title="View Project Details" class="wordwrap">{{project.Name}}</a>
                     </div>
                     <div id="dashboard-projects-pagination" data-ng-if="pagingOption" data-custom-pagination></div>
                 </div>
@@ -74,11 +74,11 @@
                 <tbody>
                     <tr data-ng-repeat="issue in userRelatedIssues.Issues | orderBy:predicate:reverse">
                         <td>
-                            <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                            <a href="#/issues/{{issue.Id}}" class="wordwrap">{{issue.Title}}</a>
                         </td>
-                        <td>{{issue.Description}}</td>
+                        <td class="wordwrap">{{issue.Description}}</td>
                         <td>
-                            <a href="#/projects/{{issue.Project.Id}}">{{issue.Project.Name}}</a>
+                            <a href="#/projects/{{issue.Project.Id}}" class="wordwrap">{{issue.Project.Name}}</a>
                         </td>
                         <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
                     </tr>

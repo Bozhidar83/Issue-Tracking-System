@@ -81,8 +81,8 @@
                     } else {
                         queryString += filter.year ? 'DueDate.Year == ' + filter.year : '';
                     }
-                    var test = queryString;
-                    //debugger;
+                    /*var test = queryString;
+                    //debugger;*/
 
                     $http.get(BASE_URL + 'issues/' + queryString + '&pageSize=' + MAX_ISSUES + '&pageNumber=1')
                         .then(function(response) {

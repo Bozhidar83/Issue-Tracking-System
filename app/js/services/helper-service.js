@@ -22,10 +22,17 @@
                     return projectKey;
                 }
 
+                function objectToArray(obj) {
+                    return Object.properties(obj).map(function (key) {
+                            return obj[key];
+                        });
+                }
+
                 return {
                     numberOfPages: numberOfPages,
                     parseDate: parseDate,
-                    generateProjectKey: generateProjectKey
+                    generateProjectKey: generateProjectKey,
+                    objectToArray: objectToArray
                 }
             }
         ])

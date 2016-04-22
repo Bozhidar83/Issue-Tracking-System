@@ -5,8 +5,9 @@
         .factory('issuesService', [
             '$http',
             '$q',
+            'helperService',
             'BASE_URL',
-            function($http, $q, BASE_URL) {
+            function($http, $q, helperService, BASE_URL) {
                 function createIssue(issue) {
                     var deferred = $q.defer();
 
@@ -59,6 +60,41 @@
                     return deferred.promise;
                 }
 
+                function getAllIssues(filter) {
+                    var MAX_ISSUES = 100000;
+                    var deferred = $q.defer();
+
+                    var queryString = '?filter=';
+                    queryString += filter.status ? 'Status.Name == "' + filter.status + '"' : '';
+                    if (filter.status) {
+                        queryString += filter.day ? 'and DueDate.Day == ' + filter.day : '';
+                    } else {
+                        queryString += filter.day ? 'DueDate.Day == ' + filter.day : '';
+                    }
+                    if (filter.status || filter.day) {
+                        queryString += filter.month ? 'and DueDate.Month == ' + filter.month : '';
+                    } else {
+                        queryString += filter.month ? 'DueDate.Month == ' + filter.month : '';
+                    }
+                    if (filter.status || filter.day || filter.month) {
+                        queryString += filter.year ? 'and DueDate.Year == ' + filter.year : '';
+                    } else {
+                        queryString += filter.year ? 'DueDate.Year == ' + filter.year : '';
+                    }
+                    var test = queryString;
+                    //debugger;
+
+                    $http.get(BASE_URL + 'issues/' + queryString + '&pageSize=' + MAX_ISSUES + '&pageNumber=1')
+                        .then(function(response) {
+                            //debugger;
+                            deferred.resolve(response.data);
+                        }, function(error) {
+                            deferred.reject(error);
+                        });
+
+                    return deferred.promise;
+                }
+
                 function changeStatus(issueId, statusId) {
                     var deferred = $q.defer();
 
@@ -103,6 +139,7 @@
                     getIssueById: getIssueById,
                     updateIssue: updateIssue,
                     getUserRelatedIssues: getUserRelatedIssues,
+                    getAllIssues: getAllIssues,
                     changeStatus: changeStatus,
                     addComment: addComment,
                     getComments: getComments

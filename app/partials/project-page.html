@@ -49,8 +49,50 @@
     </div>
     <div class="col-md-7 col-md-offset-1">
         <div class="page-header"><h3 class="text-center">Project Issues</h3></div>
-        <div class="text-center" data-ng-if="!project.Issues.length">No issues added to the project.</div>
-        <div data-ng-if="project.Issues.length" class="issues-table">
+        <div class="row">
+            <!--WORK HERE-->
+            <!--Filtering options-->
+            <!--Switch Paging-->
+            <div class="col-md-3">
+                <div class="row" id="project-pagination-option-title"><h5>Pagination</h5></div>
+                <div class="switch row">
+                    <input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox" data-ng-model="pagingOption">
+                    <label for="cmn-toggle-1"></label>
+                </div>
+            </div>
+            <!--View All Issues-->
+            <!--<div class="col-md-3">
+                <div class="row" id="project-view-all-option-title"><h5>Pagination</h5></div>
+                <div class="switch row">
+                    <input id="cmn-toggle-2" class="cmn-toggle cmn-toggle-round" type="checkbox" data-ng-model="pagingOption">
+                    <label for="cmn-toggle-1"></label>
+                </div>
+            </div>-->
+            <!--<div option-view-all option="pagingOption"></div>
+            {{pagingOption}}-->
+            <div class="col-md-9">
+                <div option-view-all option="viewAllOption"></div> <!--data-ng-click="project.Issues = allIssues"-->
+                {{viewAllOption}}
+                <div data-ng-if="viewAllOption">
+                    <label for="status">By status</label>
+                    <select name="status" id="status" data-ng-model="issueFilter.status" style="color: darkgray">
+                        <option value="Open">Open</option>
+                        <option value="InProgres">InProgress</option>
+                        <option value="StoppedProgress">StoppedProgress</option>
+                        <option value="Closed">Closed</option>
+                    </select>{{issueFilter.status}}
+                    <label >By day</label>
+                    <input type="number" data-ng-model="issueFilter.day" style="color: darkgray"><br>
+                    <label >By month</label>
+                    <input type="number" data-ng-model="issueFilter.month" style="color: darkgray"><br>
+                    <label >By year</label>
+                    <input type="number" data-ng-model="issueFilter.year" style="color: darkgray"><br>
+                    <button class="btn btn-primary" data-ng-click="filterIssues(issueFilter)">Filter</button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" data-ng-if="!project.Issues.length && !allFilteredIssues.length">No issues added to the project.</div>
+        <div data-ng-if="project.Issues.length && !viewAllOption" class="issues-table">
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -67,13 +109,13 @@
                             <span class="sortorder" ng-show="predicate === 'DueDate'" ng-class="{reverse:reverse}"></span>
                         </td>
                         <td class="hover" ng-click="order('Assignee.Username')">
-                            Project
+                            Assignee
                             <span class="sortorder" ng-show="predicate === 'Assignee.Username'" ng-class="{reverse:reverse}"></span>
                         </td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="issue in project.Issues |
+                    <tr data-ng-if="pagingOption" data-ng-repeat="issue in project.Issues |
                         pagination: customPagingParams.currentPage * customPagingParams.pageSize | limitTo: customPagingParams.pageSize |
                         orderBy:predicate:reverse">
                         <td>
@@ -83,9 +125,85 @@
                         <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
                         <td>{{issue.Assignee.Username}}</td>
                     </tr>
+                    <tr data-ng-if="!pagingOption" data-ng-repeat="issue in project.Issues |
+                        orderBy:predicate:reverse">
+                        <td>
+                            <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                        </td>
+                        <td class="issue-description-project-page">{{issue.Description}}</td>
+                        <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{issue.Assignee.Username}}</td>
+                    </tr>
+                <!--All issues-->
+                    <!--<tr data-ng-if="!pagingOption" data-ng-repeat="issue in allFilteredIssues |
+                        orderBy:predicate:reverse">
+                        <td>
+                            <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                        </td>
+                        <td class="issue-description-project-page">{{issue.Description}}</td>
+                        <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{issue.Assignee.Username}}</td>
+                    </tr>
+                    <tr data-ng-if="pagingOption" data-ng-repeat="issue in allFilteredIssues |
+                        pagination: customPagingParams.currentPage * customPagingParams.pageSize | limitTo: customPagingParams.pageSize |
+                        orderBy:predicate:reverse">
+                        <td>
+                            <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                        </td>
+                        <td class="issue-description-project-page">{{issue.Description}}</td>
+                        <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{issue.Assignee.Username}}</td>
+                    </tr>-->
                 </tbody>
             </table>
-            <div data-custom-pagination></div>
+            <div data-ng-if="pagingOption" data-custom-pagination></div>
+        </div>
+        <div data-ng-if="allFilteredIssues.length && viewAllOption" class="issues-table">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td class="hover" ng-click="order('Title')">
+                        Title
+                        <span class="sortorder" ng-show="predicate === 'Title'" ng-class="{reverse:reverse}"></span>
+                    </td>
+                    <td class="hover issue-description-project-page" ng-click="order('Description')">
+                        Description
+                        <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
+                    </td>
+                    <td class="hover" ng-click="order('DueDate')">
+                        Due Date
+                        <span class="sortorder" ng-show="predicate === 'DueDate'" ng-class="{reverse:reverse}"></span>
+                    </td>
+                    <td class="hover" ng-click="order('Assignee.Username')">
+                        Assignee
+                        <span class="sortorder" ng-show="predicate === 'Assignee.Username'" ng-class="{reverse:reverse}"></span>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <!--All issues-->
+                <tr data-ng-if="!pagingOption" data-ng-repeat="issue in allFilteredIssues |
+                    orderBy:predicate:reverse">
+                    <td>
+                        <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                    </td>
+                    <td class="issue-description-project-page">{{issue.Description}}</td>
+                    <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{issue.Assignee.Username}}</td>
+                </tr>
+                <tr data-ng-if="pagingOption" data-ng-repeat="issue in allFilteredIssues |
+                    pagination: customPagingParams.currentPage * customPagingParams.pageSize | limitTo: customPagingParams.pageSize |
+                    orderBy:predicate:reverse">
+                    <td>
+                        <a href="#/issues/{{issue.Id}}">{{issue.Title}}</a>
+                    </td>
+                    <td class="issue-description-project-page">{{issue.Description}}</td>
+                    <td>{{issue.DueDate | date: 'dd/MM/yyyy'}}</td>
+                    <td>{{issue.Assignee.Username}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <div data-ng-if="pagingOption" data-custom-pagination></div>
         </div>
     </div>
 </div>

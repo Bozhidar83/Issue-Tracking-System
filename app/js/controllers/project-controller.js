@@ -13,9 +13,10 @@
             'notifyService',
             'usSpinnerService',
             'helperService',
+            'issuesService',
             'PAGE_SIZE',
             'CURRENT_PAGE',
-            function ProjectController($scope, $location, $routeParams, $timeout, projectsService, labelsService, userProfileService, notifyService, usSpinnerService, helperService, PAGE_SIZE, CURRENT_PAGE) {
+            function ProjectController($scope, $location, $routeParams, $timeout, projectsService, labelsService, userProfileService, notifyService, usSpinnerService, helperService, issuesService, PAGE_SIZE, CURRENT_PAGE) {
                 $scope.project = {
                     Labels: []
                 };
@@ -79,13 +80,6 @@
                             });
                             $scope.project.projectPriorities = $scope.project.PrioritiesArr.join(',');
                             $scope.getProjectIssues();
-                            //debugger;
-                            // IMPORTANT! DO NOT DELETE!
-                            /*projectsService.getProjectIssuesById(project.Id)
-                                .then(function(projectIssues) {
-                                    $scope.project.Issues = projectIssues;
-                                    usSpinnerService.stop('spinner-1');
-                                });*/
                         });
                 }
 
@@ -143,6 +137,19 @@
                 };
 
                 $scope.getProjects();
+
+                $scope.filterIssues = function(issueFilter) {
+                    //debugger;
+                    issuesService.getAllIssues(issueFilter)
+                        .then(function(issues) {
+                            debugger;
+                            //$scope.allFilteredIssues = issues;
+                            $scope.allFilteredIssues = issues.Issues;
+                            $scope.customPagingParams.collection = issues.Issues;
+                            $scope.customPagingParams.numberOfPages = helperService.numberOfPages(issues.Issues.length, PAGE_SIZE);
+                            //debugger;
+                        });
+                }
             }
         ]);
 })();

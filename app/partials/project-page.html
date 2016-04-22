@@ -38,9 +38,13 @@
                 </div>
             </div>
         </div>
-        <div class="row" data-ng-if="currentLoggedInUser.isAdmin || currentLoggedInUser.Id == project.Lead.Id">
-            <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary">Edit</a>
-            <a href="#/projects/{{project.Id}}/add-issue" data-ng-click="open()" class="btn btn-primary">Add Issue</a>
+        <div class="row group-buttons" data-ng-if="currentLoggedInUser.isAdmin || currentLoggedInUser.Id == project.Lead.Id">
+            <div class="col-md-6">
+                <a href="#/projects/{{project.Id}}/edit" class="btn btn-primary project-page-buttons">Edit Project</a>
+            </div>
+            <div class="col-md-6">
+                <a href="#/projects/{{project.Id}}/add-issue" class="btn btn-primary project-page-buttons">Add Issue</a>
+            </div>
         </div>
     </div>
     <div class="col-md-7 col-md-offset-1">

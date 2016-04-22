@@ -246,20 +246,20 @@ div div.col-md-9 div.col-md-3 button {
     background-color: #f3e1ff;
 }
 
-#dashboard-buttons {
+div.group-buttons {
     margin: 0 0 30px 0;
 
 }
 
-#dashboard-buttons div {
+div.group-buttons div {
     padding: 0;
 }
 
-#dashboard-buttons > div:first-child {
+div.group-buttons > div:first-child {
     padding-right: 5px;
 }
 
-#dashboard-buttons > div:last-child {
+div.group-buttons > div:last-child {
     padding-left: 5px;
 }
 
@@ -276,7 +276,7 @@ div div.col-md-9 div.col-md-3 button {
     top: -5px;
 }
 
-a.dashboard-buttons {
+a.dashboard-buttons, a.project-page-buttons {
     width: 100%;
 }
 
@@ -294,6 +294,10 @@ a.dashboard-buttons {
     display: inline-block;
     margin-right: 10px;
     height: 16px;
+}
+
+.back-link-container {
+    margin-left: 15px;
 }
 
 /*Project page*/

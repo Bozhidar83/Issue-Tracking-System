@@ -1,7 +1,7 @@
 (function() {
     "use strict";
 
-    function config($routeProvider, $httpProvider/*, routeResolversProvider*/) {
+    function config($routeProvider, $httpProvider) {
         //var routeResolveChecks = routeResolversProvider.$get();
         $routeProvider
             .when('/', {
@@ -10,7 +10,6 @@
                 access: {
                     requiresAuthentication: false
                 }
-                //resolve: routeResolveChecks.home
             })
             .when('/register', {
                 templateUrl: 'partials/register.html',
@@ -101,24 +100,15 @@
                     requiresAdminOrLead: true
                 }
             })
-
             .otherwise({redirectTo: '/'});
 
         $httpProvider.interceptors.push('authHttpResponseInterceptor');
     }
 
     function run($rootScope, $location, $http, $cookies, authService, notifyService, TOKEN_TYPE, TOKEN_KEY) {
-        // TODO: Redirect when user trying to reach unavailable resource
-        /*$rootScope.$on('$routeChangeError', function (ev, current, previous, rejection) {
-            if (rejection === 'not authorized') {
-                notifier.warning('Please log into your account first!');
-                $location.path('/');
-            }
-        });*/
-
         $rootScope.$on('$routeChangeStart', function(event, next) {
             if (next.access && next.access.requiresAuthentication && !authService.isAuthenticated()) {
-                debugger;
+
                 $location.path('/');
             } else if (next.access && next.access.requiresAdmin && !authService.isAdmin()) {
                 $location.path('/');
@@ -139,7 +129,7 @@
     angular.module('issueTrackingSystemApp', ['ngRoute', 'ngCookies', 'ui.bootstrap.pagination', 'angularSpinner']);
 
     angular.module('issueTrackingSystemApp')
-        .config(['$routeProvider', '$httpProvider',/*'routeResolversProvider',*/ config]);
+        .config(['$routeProvider', '$httpProvider', config]);
 
     angular.module('issueTrackingSystemApp')
         .run(['$rootScope', '$location', '$http', '$cookies', 'authService', 'notifyService', 'TOKEN_TYPE', 'TOKEN_KEY', run]);

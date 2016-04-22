@@ -42,10 +42,10 @@
                     if (authService.isAuthenticated()) {
                         userProfileService.getAllUsers()
                             .then(function(users) {
+                                usSpinnerService.stop('spinner-1');
                                 $scope.allUsers = users.sort(function(a, b) {
                                     return a.Username.localeCompare(b.Username);
                                 });
-                                usSpinnerService.stop('spinner-1');
                             });
                     }
                 }

@@ -13,7 +13,6 @@
             'PAGE_SIZE',
             'CURRENT_PAGE',
             function HomeController($scope, projectsService, issuesService, notifyService, authService, usSpinnerService, helperService, PAGE_SIZE, CURRENT_PAGE) {
-                // Get all user related issues
                 $scope.issuesParams = {
                     'startPage': 1,
                     'pageSize': PAGE_SIZE
@@ -24,10 +23,8 @@
 
                 $scope.getAllUserRelatedIssues = function() {
                     usSpinnerService.spin('spinner-1');
-                    //debugger;
                     issuesService.getUserRelatedIssues($scope.issuesParams)
                         .then(function(userIssues) {
-                            //debugger;
                             usSpinnerService.stop('spinner-1');
                             $scope.userRelatedIssues = userIssues;
                             $scope.allIssues = userIssues.TotalPages * $scope.issuesParams.pageSize;
@@ -48,7 +45,6 @@
                         usSpinnerService.spin('spinner-1');
                         projectsService.getUserAffiliatedProjects($scope.userProjectsParams)
                             .then(function(projects) {
-                                //debugger;
                                 usSpinnerService.stop('spinner-1');
                                 $scope.userProjects = projects;
                                 $scope.customPagingParams.collection = projects;

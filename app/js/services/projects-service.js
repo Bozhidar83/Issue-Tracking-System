@@ -92,10 +92,10 @@
 
                 function getProjectsByLeaderId(leaderId, params) {
                     var deferred = $q.defer();
-                    //debugger;
+
                     $http.get(BASE_URL + 'projects?filter=Lead.Id="'+ leaderId + '"&pageSize=' + MAX_ITEMS + '&pageNumber=' + params.startPage)
                         .then(function(response) {
-                            //debugger;
+
                             deferred.resolve(response.data);
                         }, function(error) {
                             deferred.reject(error);
@@ -111,7 +111,7 @@
                         .then(function(user) {
                             getProjectsByLeaderId(user.Id, params)
                                 .then(function(projects) {
-                                    //debugger;
+
                                     var userProjectsInRoleLeader = projects.Projects;
                                     userProjectsInRoleLeader = _.uniqBy(userProjectsInRoleLeader, 'Id');
 
@@ -120,10 +120,9 @@
                                         'startPage': 1,
                                         'pageSize': MAX_ITEMS
                                     };
-                                    //debugger;
+
                                     issuesService.getUserRelatedIssues(issuesParams)
                                         .then(function(issues) {
-                                            //debugger;
                                             var userRelatedProjectsByAssignedIssues = issues.Issues.map(function (issue) {
                                                 return issue.Project;
                                             });

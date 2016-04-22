@@ -24,27 +24,31 @@
                 };
 
                 $scope.getLabels = function() {
+                    usSpinnerService.spin('spinner-1');
                     var params = {
                         filter: $scope.labelToBeAdded ? $scope.labelToBeAdded : ''
                     };
                     labelsService.getLabels(params)
                         .then(function (labelsFromSystem) {
-                            //debugger;
                             $scope.labels = labelsFromSystem;
+                            usSpinnerService.stop('spinner-1');
                         });
                 };
 
                 $scope.addLabel = function(label) {
-                    //debugger;
+                    usSpinnerService.spin('spinner-1');
                     $scope.issue.Labels.push({Name: label});
                     $scope.labelToBeAdded = '';
                     notifyService.showInfo('Label added successfully');
+                    usSpinnerService.stop('spinner-1');
                 };
 
                 $scope.removeLabel = function (label) {
+                    usSpinnerService.spin('spinner-1');
                     var indexOfLabelForRemove = $scope.issue.Labels.indexOf(label);
                     $scope.issue.Labels.splice(indexOfLabelForRemove, 1);
                     notifyService.showInfo('Label removed successfully');
+                    usSpinnerService.stop('spinner-1');
                 };
 
                 $scope.createNewIssue = function(issue) {
@@ -63,15 +67,12 @@
                     })
                 };
 
-                // EDIT ISSUE
                 $scope.editIssue = function(issue) {
-                    //debugger;
                     usSpinnerService.spin('spinner-1');
                     issue.AssigneeId = issue.Assignee.Id;
                     issue.PriorityId = issue.Priority.Id;
                     issuesService.updateIssue(issue, $routeParams.id)
                         .then(function(response) {
-                            //debugger;
                             usSpinnerService.stop('spinner-1');
                             notifyService.showInfo('Issue "' + issue.Title + '" edited successfully');
                             $location.path('#/issues/' + $routeParams.id);
@@ -107,8 +108,6 @@
                                     usSpinnerService.stop('spinner-1');
                                 });
                         }, function(error) {
-                            // TODO: Global error handling
-                            //debugger;
                             usSpinnerService.stop('spinner-1');
                         });
                 };
@@ -120,7 +119,6 @@
                     issuesService.changeStatus($routeParams.id, statusId)
                         .then(function(response) {
                             $route.reload();
-                            //$location.path('#/issues/' + $routeParams.id);
                             notifyService.showInfo('Issue status changed successfully!');
                             usSpinnerService.stop('spinner-1');
                         }, function(error) {

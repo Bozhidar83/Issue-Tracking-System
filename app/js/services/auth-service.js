@@ -23,12 +23,11 @@
                             expirationDate.setHours(expirationDate.getHours() + 72);
 
                             $cookies.put(TOKEN_KEY, tokenValue, { expires: expirationDate });
-                            //debugger;
+
                             $http.defaults.headers.common.Authorization = TOKEN_TYPE + tokenValue;
 
                             getIdentity()
                                 .then(function () {
-                                    //debugger;
                                     deferred.resolve(response);
                             });
 
@@ -44,7 +43,6 @@
 
                     $http.post(BASE_URL + 'api/Account/Register', userData)
                         .then(function(response) {
-                            //sessionStorage['currentUser'] = JSON.stringify(response.config.data.email);
                             deferred.resolve(response.config.data);
                         }, function(error) {
                             deferred.reject(error);
@@ -54,7 +52,6 @@
                 }
 
                 function logout() {
-                    //delete sessionStorage['currentUser'];
                     $cookies.remove(TOKEN_KEY);
                     $http.defaults.headers.common.Authorization = null;
                     identity.removeUser();
@@ -91,15 +88,7 @@
                     logout: logout,
                     identity: getIdentity,
                     isAuthenticated: isAuthenticated,
-                    isAdmin: isAdmin,
-                    // Old properties
-                    getCurrentUser : function() {
-                        return identity.getUser();
-                        /*var userObject = sessionStorage['currentUser'];
-                        if (userObject) {
-                            return JSON.parse(userObject);
-                        }*/
-                    }
+                    isAdmin: isAdmin
                 }
             }]
         );

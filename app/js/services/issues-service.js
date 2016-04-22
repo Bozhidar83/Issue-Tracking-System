@@ -5,9 +5,8 @@
         .factory('issuesService', [
             '$http',
             '$q',
-            'helperService',
             'BASE_URL',
-            function($http, $q, helperService, BASE_URL) {
+            function($http, $q, BASE_URL) {
                 function createIssue(issue) {
                     var deferred = $q.defer();
 

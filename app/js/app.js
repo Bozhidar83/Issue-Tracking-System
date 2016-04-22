@@ -52,7 +52,8 @@
                 access: {
                     requiresAuthentication: true,
                     requiresAdmin: true
-                }
+                },
+                secure: true
             })
             .when('/projects/add', {
                 templateUrl: 'partials/add-project.html',
@@ -106,13 +107,53 @@
     }
 
     function run($rootScope, $location, $http, $cookies, authService, notifyService, TOKEN_TYPE, TOKEN_KEY) {
-        $rootScope.$on('$routeChangeStart', function(event, next) {
+        /*$rootScope.$on('$routeChangeStart', function(event, next) {
             if (next.access && next.access.requiresAuthentication && !authService.isAuthenticated()) {
-
+                debugger;
                 $location.path('/');
             } else if (next.access && next.access.requiresAdmin && !authService.isAdmin()) {
                 $location.path('/');
                 notifyService.showError('You are not allowed to perform action!');
+            }
+        });*/
+
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+            //debugger;
+            if (next && next.$$route && next.$$route.originalPath == '/login' && !next.$$route.access.requiresAuthentication) {
+                //debugger;
+                if (authService.isAuthenticated()) {
+                    $rootScope.$evalAsync(function () {
+                        $location.path('#/');
+                        notifyService.showError('You are already logged in');
+                    });
+                }
+            } else if(next && next.$$route && next.$$route.originalPath == '/register' && !next.$$route.access.requiresAuthentication) {
+                if (authService.isAuthenticated()) {
+                    $rootScope.$evalAsync(function () {
+                        $location.path('#/');
+                        notifyService.showError('You are already registered');
+                    });
+                }
+            } else if(next && next.$$route && (next.$$route.originalPath == '/profile' || next.$$route.originalPath == '/profile/password' ||
+                        next.$$route.originalPath == '/projects' || next.$$route.originalPath == '/projects/add' ||
+                        next.$$route.originalPath == '/projects/:id/edit' || next.$$route.originalPath == '/projects/:id' ||
+                        next.$$route.originalPath == '/projects/:id/add-issue' || next.$$route.originalPath == '/issues/:id' ||
+                        next.$$route.originalPath == '/issues/:id/edit') && next.$$route.access.requiresAuthentication) {
+                if (!authService.isAuthenticated()) {
+                    $rootScope.$evalAsync(function () {
+                        $location.path('#/');
+                        notifyService.showError('Please, Register first, or Login');
+                    });
+                }
+            } else if(next && next.$$route && (next.$$route.originalPath == '/projects' || next.$$route.originalPath == '/projects/add') &&
+                        next.$$route.access.requiresAdmin) {
+                //debugger;
+                if (!authService.isAdmin()) {
+                    $rootScope.$evalAsync(function () {
+                        $location.path('#/');
+                        notifyService.showError('You are not allowed to perform action!');
+                    });
+                }
             }
         });
 

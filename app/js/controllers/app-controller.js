@@ -18,11 +18,11 @@
                 $scope.authService = authService;
 
                 $scope.predicate = 'DueDate';
-                 $scope.reverse = true;
-                 $scope.order = function(predicate) {
-                 $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
-                 $scope.predicate = predicate;
-                 };
+                $scope.reverse = true;
+                $scope.order = function(predicate) {
+                    $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+                    $scope.predicate = predicate;
+                };
 
                 $scope.resetPagingParams = function() {
                     $scope.customPagingParams = {

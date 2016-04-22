@@ -21,7 +21,7 @@
                     Labels: []
                 };
 
-                // Reset current page
+                // Reset current page when use custom paging
                 $scope.customPagingParams.currentPage = CURRENT_PAGE;
 
                 $scope.project.Issues = [];
@@ -52,7 +52,6 @@
                     $scope.project.Labels.splice(indexOfTheLabel, 1);
                     notifyService.showInfo('Label removed successfully');
                     usSpinnerService.stop('spinner-1');
-
                 };
 
                 $scope.createNewProject = function(project) {
@@ -154,7 +153,6 @@
                             $scope.allFilteredIssues = issues.Issues;
                             $scope.customPagingParams.collection = issues.Issues;
                             $scope.customPagingParams.numberOfPages = helperService.numberOfPages(issues.Issues.length, PAGE_SIZE);
-
                             usSpinnerService.stop('spinner-1');
                         });
                 };
@@ -168,7 +166,6 @@
                     }
 
                     usSpinnerService.stop('spinner-1');
-                    //pagingOption && !viewAllOption ? getProjectIssues() : false;
                 };
 
                 $scope.switchPaging = function() {
@@ -179,7 +176,6 @@
                     }
 
                     usSpinnerService.stop('spinner-1');
-                    //!viewAllOption ? resetPagingParams() : false; !viewAllOption ? getProjectIssues():false
                 }
             }
         ]);

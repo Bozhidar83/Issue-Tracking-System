@@ -85,7 +85,6 @@ button.add-project, #button-add-issue, #button-make-admin,
 
 /*Profile sidebar*/
 .box {
-    /*width: 100%;*/
     display: block;
     background: skyblue;
     border: #507E32 1px solid;
@@ -170,7 +169,7 @@ ul.pagination-control {
 
 /*Add Project Page*/
 .project-form div div, .issue-form div div {
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 div div.col-md-9 div.col-md-9 {
@@ -233,12 +232,10 @@ div div.col-md-9 div.col-md-3 button {
 }
 
 .issues-table tbody tr:nth-child(even) {
-    /*color: slategray;*/
     background: #eeaaff;
 }
 
 .issues-table tbody tr:nth-child(odd) {
-    /*color: slategray;*/
     color: slategray;
 }
 
@@ -248,7 +245,6 @@ div div.col-md-9 div.col-md-3 button {
 
 div.group-buttons {
     margin: 0 0 30px 0;
-
 }
 
 div.group-buttons div {
@@ -481,7 +477,7 @@ td.issue-description-project-page {
     right: 0;
 }
 
-input[type='number']:first-of-type {
+#filter-section input[type='number'], #filter-section button {
     margin-top: 20px;
 }
 

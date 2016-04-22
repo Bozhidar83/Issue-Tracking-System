@@ -21,6 +21,7 @@
                 <div class="page-header" id="search-container">
                     <input type="text" data-ng-model="Name" id="search-dashboard" class="form-control" placeholder="Search by project name...">
                 </div>
+                <div data-ng-if="!userProjects.length" class="text-gray">No affiliated projects</div>
                 <div class="panel-body dashboard" data-ng-if="!pagingOption" data-ng-repeat="project in userProjects | filter: {Name: Name} track by $index">
                     <a href="#/projects/{{project.Id}}" title="View Project Details">{{project.Name}}</a>
                 </div>
@@ -47,17 +48,8 @@
     </div>
     <div class="col-md-7 col-md-offset-1">
         <div class="page-header"><h1>Assigned Issues</h1></div>
-        <!--<div class="panel panel-danger">
-            <div class="col-md-6">
-                <h4>Filter options</h4>
-                <div class="panel-body">
-                    By Title:
-                    <input type="text" data-ng-model="Title">
-                    {{Title}}
-                </div>
-            </div>
-        </div>-->
-        <div class="issues-table">
+        <div data-ng-if="!userRelatedIssues.Issues.length">No issues assigned</div>
+        <div class="issues-table" data-ng-if="userRelatedIssues.Issues.length">
             <table class="table table-striped">
                 <thead>
                     <tr>

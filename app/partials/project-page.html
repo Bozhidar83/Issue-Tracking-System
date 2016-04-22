@@ -63,18 +63,18 @@
                     <div option-view-all option="viewAllOption" data-ng-click="switchIssueFilter()"></div>
                 </div>
                 <div class="col-md-8">
-                    <div data-ng-if="viewAllOption">
+                    <div data-ng-if="viewAllOption" id="filter-section" class="text-gray">
                         <label class="control-label" for="status">Filters</label>
-                        <select name="status" id="status" class="form-control issue-filter" data-ng-model="issueFilter.status" style="color: darkgray">
+                        <select name="status" id="status" class="form-control issue-filter" data-ng-model="issueFilter.status">
                             <option value="">Select status</option>
                             <option value="Open">Open</option>
                             <option value="InProgres">InProgress</option>
                             <option value="StoppedProgress">StoppedProgress</option>
                             <option value="Closed">Closed</option>
                         </select>
-                        <input type="number" class="form-control issue-filter" data-ng-model="issueFilter.day" placeholder="By day" style="color: darkgray"><br>
-                        <input type="number" class="form-control issue-filter" data-ng-model="issueFilter.month" placeholder="By month" style="color: darkgray"><br>
-                        <input type="number" class="form-control issue-filter" data-ng-model="issueFilter.year" style="color: darkgray" placeholder="By year"><br>
+                        <input type="number" class="form-control issue-filter" data-ng-model="issueFilter.day" placeholder="By day">
+                        <input type="number" class="form-control issue-filter" data-ng-model="issueFilter.month" placeholder="By month">
+                        <input type="number" class="form-control issue-filter" data-ng-model="issueFilter.year" placeholder="By year">
                         <button class="btn btn-primary form-control" data-ng-click="filterIssues(issueFilter)">Filter</button>
                     </div>
                 </div>
@@ -85,21 +85,21 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <td class="hover" ng-click="order('Title')">
+                        <td class="hover" data-ng-click="order('Title')">
                             Title
-                            <span class="sortorder" ng-show="predicate === 'Title'" ng-class="{reverse:reverse}"></span>
+                            <span class="sortorder" data-ng-show="predicate === 'Title'" data-ng-class="{reverse:reverse}"></span>
                         </td>
-                        <td class="hover issue-description-project-page" ng-click="order('Description')">
+                        <td class="hover issue-description-project-page" data-ng-click="order('Description')">
                             Description
-                            <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
+                            <span class="sortorder" data-ng-show="predicate === 'Description'" data-ng-class="{reverse:reverse}"></span>
                         </td>
-                        <td class="hover" ng-click="order('DueDate')">
+                        <td class="hover" data-ng-click="order('DueDate')">
                             Due Date
-                            <span class="sortorder" ng-show="predicate === 'DueDate'" ng-class="{reverse:reverse}"></span>
+                            <span class="sortorder" data-ng-show="predicate === 'DueDate'" data-ng-class="{reverse:reverse}"></span>
                         </td>
-                        <td class="hover" ng-click="order('Assignee.Username')">
+                        <td class="hover" data-ng-click="order('Assignee.Username')">
                             Assignee
-                            <span class="sortorder" ng-show="predicate === 'Assignee.Username'" ng-class="{reverse:reverse}"></span>
+                            <span class="sortorder" data-ng-show="predicate === 'Assignee.Username'" data-ng-class="{reverse:reverse}"></span>
                         </td>
                     </tr>
                 </thead>
@@ -131,21 +131,21 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <td class="hover" ng-click="order('Title')">
+                    <td class="hover" data-ng-click="order('Title')">
                         Title
-                        <span class="sortorder" ng-show="predicate === 'Title'" ng-class="{reverse:reverse}"></span>
+                        <span class="sortorder" data-ng-show="predicate === 'Title'" data-ng-class="{reverse:reverse}"></span>
                     </td>
-                    <td class="hover issue-description-project-page" ng-click="order('Description')">
+                    <td class="hover issue-description-project-page" data-ng-click="order('Description')">
                         Description
-                        <span class="sortorder" ng-show="predicate === 'Description'" ng-class="{reverse:reverse}"></span>
+                        <span class="sortorder" data-ng-show="predicate === 'Description'" data-ng-class="{reverse:reverse}"></span>
                     </td>
-                    <td class="hover" ng-click="order('DueDate')">
+                    <td class="hover" data-ng-click="order('DueDate')">
                         Due Date
-                        <span class="sortorder" ng-show="predicate === 'DueDate'" ng-class="{reverse:reverse}"></span>
+                        <span class="sortorder" data-ng-show="predicate === 'DueDate'" data-ng-class="{reverse:reverse}"></span>
                     </td>
-                    <td class="hover" ng-click="order('Assignee.Username')">
+                    <td class="hover" data-ng-click="order('Assignee.Username')">
                         Assignee
-                        <span class="sortorder" ng-show="predicate === 'Assignee.Username'" ng-class="{reverse:reverse}"></span>
+                        <span class="sortorder" data-ng-show="predicate === 'Assignee.Username'" data-ng-class="{reverse:reverse}"></span>
                     </td>
                 </tr>
                 </thead>

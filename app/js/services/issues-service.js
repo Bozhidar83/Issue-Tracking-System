@@ -23,13 +23,13 @@
 
                 function getIssueById(id) {
                     var deferred = $q.defer();
-                    //debugger;
                     $http.get(BASE_URL + 'issues/' + id)
                         .then(function(response) {
                             deferred.resolve(response.data);
                         }, function(error) {
                             deferred.reject(error);
                         });
+
                     return deferred.promise;
                 }
 
@@ -38,7 +38,6 @@
 
                     $http.put(BASE_URL + 'issues/' + id, issue, {headers:{'ContentType':'application/x-www-form-urlencoded'}})
                         .then(function(response) {
-                            //debugger;
                             deferred.resolve(response);
                         }, function(error) {
                             deferred.reject(error);
@@ -81,12 +80,9 @@
                     } else {
                         queryString += filter.year ? 'DueDate.Year == ' + filter.year : '';
                     }
-                    /*var test = queryString;
-                    //debugger;*/
 
                     $http.get(BASE_URL + 'issues/' + queryString + '&pageSize=' + MAX_ISSUES + '&pageNumber=1')
                         .then(function(response) {
-                            //debugger;
                             deferred.resolve(response.data);
                         }, function(error) {
                             deferred.reject(error);

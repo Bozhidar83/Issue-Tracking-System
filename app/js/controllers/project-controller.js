@@ -27,25 +27,32 @@
                 $scope.project.Issues = [];
 
                 $scope.getLabels = function() {
+                    usSpinnerService.spin('spinner-1');
                     var params = {
                         filter: $scope.labelToBeAdded ? $scope.labelToBeAdded : ''
                     };
                     labelsService.getLabels(params)
                         .then(function(response) {
                             $scope.labels = response;
+                            usSpinnerService.stop('spinner-1');
                         });
                 };
 
                 $scope.addLabel = function(label) {
+                    usSpinnerService.spin('spinner-1');
                     $scope.project.Labels.push({Name: label});
                     $scope.labelToBeAdded = '';
-                    notifyService.showInfo('Label added successfully')
+                    notifyService.showInfo('Label added successfully');
+                    usSpinnerService.stop('spinner-1');
                 };
 
                 $scope.removeLabel = function(label) {
+                    usSpinnerService.spin('spinner-1');
                     var indexOfTheLabel = $scope.project.Labels.indexOf(label);
                     $scope.project.Labels.splice(indexOfTheLabel, 1);
                     notifyService.showInfo('Label removed successfully');
+                    usSpinnerService.stop('spinner-1');
+
                 };
 
                 $scope.createNewProject = function(project) {
@@ -80,6 +87,7 @@
                             });
                             $scope.project.projectPriorities = $scope.project.PrioritiesArr.join(',');
                             $scope.getProjectIssues();
+                            usSpinnerService.stop('spinner-1');
                         });
                 }
 
@@ -124,22 +132,27 @@
                 // Paging on 'All Projects' page
                 $scope.projectParams = {
                     'startPage': 1,
-                    'pageSize': PAGE_SIZE //* 2 - 1
+                    'pageSize': PAGE_SIZE
                 };
 
                 $scope.getProjects = function() {
+                    usSpinnerService.spin('spinner-1');
                     projectsService.getProjectsWithPaging($scope.projectParams)
                         .then(function(data) {
                             //debugger;
                             $scope.totalProjects = data.TotalPages * $scope.projectParams.pageSize;
                             $scope.allProjects = data.Projects;
+                            usSpinnerService.stop('spinner-1');
                         });
                 };
 
                 $scope.getProjects();
 
+                //$scope.helperService = helperService;
                 $scope.filterIssues = function(issueFilter) {
                     //debugger;
+                    usSpinnerService.spin('spinner-1');
+                    $scope.resetPagingParams();
                     issuesService.getAllIssues(issueFilter)
                         .then(function(issues) {
                             debugger;
@@ -148,7 +161,31 @@
                             $scope.customPagingParams.collection = issues.Issues;
                             $scope.customPagingParams.numberOfPages = helperService.numberOfPages(issues.Issues.length, PAGE_SIZE);
                             //debugger;
+                            usSpinnerService.stop('spinner-1');
                         });
+                };
+
+                $scope.switchIssueFilter = function() {
+                    usSpinnerService.spin('spinner-1');
+                    $scope.resetPagingParams();
+                    $scope.allFilteredIssues = [];
+                    if ($scope.pagingOption && !$scope.viewAllOption) {
+                        $scope.getProjectIssues()
+                    }
+
+                    usSpinnerService.stop('spinner-1');
+                    //pagingOption && !viewAllOption ? getProjectIssues() : false;
+                };
+
+                $scope.switchPaging = function() {
+                    usSpinnerService.spin('spinner-1');
+                    if (!$scope.viewAllOption) {
+                        $scope.resetPagingParams();
+                        $scope.getProjectIssues();
+                    }
+
+                    usSpinnerService.stop('spinner-1');
+                    //!viewAllOption ? resetPagingParams() : false; !viewAllOption ? getProjectIssues():false
                 }
             }
         ]);

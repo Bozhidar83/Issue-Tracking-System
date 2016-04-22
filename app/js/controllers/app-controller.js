@@ -10,9 +10,10 @@
             'projectsService',
             'identity',
             'notifyService',
+            'usSpinnerService',
             'PAGE_SIZE',
             'CURRENT_PAGE',
-            function AppController($scope, $location, authService, userProfileService, projectsService, identity, notifyService, PAGE_SIZE, CURRENT_PAGE) {
+            function AppController($scope, $location, authService, userProfileService, projectsService, identity, notifyService, usSpinnerService, PAGE_SIZE, CURRENT_PAGE) {
                 // Put the authService in the $scope to make it accessible from all screens
                 $scope.authService = authService;
 
@@ -23,26 +24,28 @@
                  $scope.predicate = predicate;
                  };
 
-                $scope.customPagingParams = {
-                    pageSize: PAGE_SIZE,
-                    currentPage: CURRENT_PAGE,
-                    collection: [],
-                    numberOfPages: 0
+                $scope.resetPagingParams = function() {
+                    $scope.customPagingParams = {
+                        pageSize: PAGE_SIZE,
+                        currentPage: CURRENT_PAGE,
+                        collection: [],
+                        numberOfPages: 0
+                    };
                 };
+                $scope.resetPagingParams();
 
                 $scope.labelToBeAdded = '';
 
-                //$scope.viewAllOption = false;
-
                 // To choose from drop down when create new project or add new issue
                 function getAllUsers () {
+                    usSpinnerService.spin('spinner-1');
                     if (authService.isAuthenticated()) {
                         userProfileService.getAllUsers()
                             .then(function(users) {
-                                //debugger;
                                 $scope.allUsers = users.sort(function(a, b) {
                                     return a.Username.localeCompare(b.Username);
                                 });
+                                usSpinnerService.stop('spinner-1');
                             });
                     }
                 }
@@ -51,10 +54,12 @@
 
                 // Get all projects in the system
                 function getAllProjects() {
+                    usSpinnerService.spin('spinner-1');
                     if (authService.isAuthenticated()) {
                         projectsService.getAllProjects()
                             .then(function(allProjects) {
                                 $scope.allProjects = allProjects;
+                                usSpinnerService.stop('spinner-1');
                             });
                     }
                 }
@@ -74,7 +79,6 @@
                 function waitForLogin() {
                     identity.getUser()
                         .then(function(user) {
-                            //debugger;
                             $scope.currentLoggedInUser = user;
                         });
                 }

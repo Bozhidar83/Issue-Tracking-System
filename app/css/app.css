@@ -481,6 +481,10 @@ td.issue-description-project-page {
     right: 0;
 }
 
+input[type='number']:first-of-type {
+    margin-top: 20px;
+}
+
 /*Pagination switch button*/
 .cmn-toggle {
     position: absolute;

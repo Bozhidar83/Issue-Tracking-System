@@ -107,7 +107,7 @@
                 // Edit project
                 $scope.editProject = function(project) {
                     usSpinnerService.spin('spinner-1');
-                    //debugger;
+
                     // set priorities
                     project.Priorities = project.projectPriorities.split(',').map(function(priority) {
                         return {
@@ -117,7 +117,6 @@
 
                     project.LeadId = project.Lead.Id;
 
-                    //debugger;
                     projectsService.updateProject(project, $routeParams.id)
                         .then(function(response) {
                             usSpinnerService.stop('spinner-1');
@@ -139,7 +138,6 @@
                     usSpinnerService.spin('spinner-1');
                     projectsService.getProjectsWithPaging($scope.projectParams)
                         .then(function(data) {
-                            //debugger;
                             $scope.totalProjects = data.TotalPages * $scope.projectParams.pageSize;
                             $scope.allProjects = data.Projects;
                             usSpinnerService.stop('spinner-1');
@@ -148,19 +146,15 @@
 
                 $scope.getProjects();
 
-                //$scope.helperService = helperService;
                 $scope.filterIssues = function(issueFilter) {
-                    //debugger;
                     usSpinnerService.spin('spinner-1');
                     $scope.resetPagingParams();
                     issuesService.getAllIssues(issueFilter)
                         .then(function(issues) {
-                            debugger;
-                            //$scope.allFilteredIssues = issues;
                             $scope.allFilteredIssues = issues.Issues;
                             $scope.customPagingParams.collection = issues.Issues;
                             $scope.customPagingParams.numberOfPages = helperService.numberOfPages(issues.Issues.length, PAGE_SIZE);
-                            //debugger;
+
                             usSpinnerService.stop('spinner-1');
                         });
                 };

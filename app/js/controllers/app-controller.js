@@ -41,7 +41,7 @@
                     if (authService.isAuthenticated()) {
                         userProfileService.getAllUsers()
                             .then(function(users) {
-                                
+
                                 $scope.allUsers = users.sort(function(a, b) {
                                     return a.Username.localeCompare(b.Username);
                                 });

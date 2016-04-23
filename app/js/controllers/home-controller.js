@@ -33,7 +33,10 @@
                         });
                 };
 
-                $scope.getAllUserRelatedIssues();
+                if (authService.isAuthenticated()) {
+                    $scope.getAllUserRelatedIssues();
+                }
+                //$scope.getAllUserRelatedIssues();
 
                 // Get all user related projects
                 $scope.userProjects = [];
@@ -42,19 +45,22 @@
                     'pageSize': PAGE_SIZE
                 };
                 $scope.getUserRelatedProjects = function() {
-                        usSpinnerService.spin('spinner-1');
-                        projectsService.getUserAffiliatedProjects($scope.userProjectsParams)
-                            .then(function(projects) {
-                                usSpinnerService.stop('spinner-1');
-                                $scope.userProjects = projects;
-                                $scope.customPagingParams.collection = projects;
-                                $scope.customPagingParams.numberOfPages = helperService.numberOfPages(projects.length, PAGE_SIZE);
-                            }, function(error) {
-                                usSpinnerService.stop('spinner-1');
-                            });
+                    usSpinnerService.spin('spinner-1');
+                    projectsService.getUserAffiliatedProjects($scope.userProjectsParams)
+                        .then(function(projects) {
+                            usSpinnerService.stop('spinner-1');
+                            $scope.userProjects = projects;
+                            $scope.customPagingParams.collection = projects;
+                            $scope.customPagingParams.numberOfPages = helperService.numberOfPages(projects.length, PAGE_SIZE);
+                        }, function(error) {
+                            usSpinnerService.stop('spinner-1');
+                        });
                 };
 
-                $scope.getUserRelatedProjects();
+                if (authService.isAuthenticated()) {
+                    $scope.getUserRelatedProjects();
+                }
+                //$scope.getUserRelatedProjects();
             }
         ]);
 })();

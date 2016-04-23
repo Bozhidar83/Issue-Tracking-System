@@ -89,7 +89,6 @@
                     usSpinnerService.spin('spinner-1');
                     issuesService.getIssueById($routeParams.id)
                         .then(function(issue) {
-                            //debugger;
                             $scope.issue = issue;
 
                             // Parse issue due date
@@ -98,7 +97,6 @@
                             // Get issue's project priorities
                             projectsService.getProjectById(issue.Project.Id)
                                 .then(function(issueProject) {
-                                    //debugger;
                                     $scope.priorities = issueProject.Priorities;
                                     $scope.issue.ProjectLeadId = issueProject.Lead.Id;
                                     $scope.issue.priority = $scope.priorities.filter(function (priority) {

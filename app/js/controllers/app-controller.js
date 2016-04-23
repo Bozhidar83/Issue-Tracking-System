@@ -38,11 +38,10 @@
 
                 // To choose from drop down when create new project or add new issue
                 function getAllUsers () {
-                    usSpinnerService.spin('spinner-1');
                     if (authService.isAuthenticated()) {
                         userProfileService.getAllUsers()
                             .then(function(users) {
-                                usSpinnerService.stop('spinner-1');
+                                
                                 $scope.allUsers = users.sort(function(a, b) {
                                     return a.Username.localeCompare(b.Username);
                                 });
@@ -54,12 +53,12 @@
 
                 // Get all projects in the system
                 function getAllProjects() {
-                    usSpinnerService.spin('spinner-1');
                     if (authService.isAuthenticated()) {
                         projectsService.getAllProjects()
                             .then(function(allProjects) {
-                                $scope.allProjects = allProjects;
-                                usSpinnerService.stop('spinner-1');
+                                $scope.allProjects = allProjects.sort(function(a, b) {
+                                    return a.Id < b.Id;
+                                });
                             });
                     }
                 }
